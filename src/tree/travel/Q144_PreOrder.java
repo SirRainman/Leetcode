@@ -26,7 +26,7 @@ import java.util.List;
  * 链接：https://leetcode-cn.com/problems/binary-tree-preorder-traversal
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * */
-public class Q144_BinaryTreePreorderTraversal {
+public class Q144_PreOrder {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new LinkedList<>();
         preTravel(root, list);
@@ -71,6 +71,7 @@ public class Q144_BinaryTreePreorderTraversal {
     }
 
 
+    error;
     // TODO:什么是莫里斯遍历？？？？？
     class Solution {
         public List<Integer> preorderTraversal(TreeNode root) {

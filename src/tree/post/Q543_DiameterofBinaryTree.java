@@ -1,4 +1,4 @@
-package tree;
+package tree.post;
 
 
 import dataStructure.TreeNode;

@@ -1,4 +1,4 @@
-package tree;
+package tree.pre;
 
 import dataStructure.TreeNode;
 
@@ -46,20 +46,7 @@ public class Q617_MergeTwoBinaryTrees {
 
     // TODO:如果是用队列应该怎么做？？？？？？
     public TreeNode mergeTrees2(TreeNode t1, TreeNode t2) {
-//        Queue<TreeNode> queue = new LinkedList<>();
-//        queue.offer(t1);
-//        queue.offer(t2);
-//        TreeNode p, q;
-//        while (!queue.isEmpty()) {
-//            p = queue.poll();
-//            q = queue.poll();
-//
-//
-//            queue.offer(p.left);
-//            queue.offer(p.right);
-//            queue.offer(q.left);
-//            queue.offer(q.right);
-//        }
+
         return t1;
     }
 

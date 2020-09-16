@@ -1,4 +1,4 @@
-package tree;
+package tree.in.bst;
 
 import dataStructure.TreeNode;
 
@@ -49,18 +49,18 @@ public class Q501_FindModeinBinarySearchTree {
     }
 
     public void inOrder(TreeNode root) {
-        if(root == null) return;
+        if (root == null) return;
         inOrder(root.left);
-        if(pre != null && pre.val == root.val) {
+        if (pre != null && pre.val == root.val) {
             curCount++;
         } else {
             curCount = 1;
         }
-        if(curCount > maxCount) {
+        if (curCount > maxCount) {
             maxCount = curCount;
             resSize = 1;
-        } else if(curCount == maxCount) {
-            if(ans != null) {
+        } else if (curCount == maxCount) {
+            if (ans != null) {
                 ans[resSize] = root.val;
             }
             resSize++;
@@ -68,6 +68,4 @@ public class Q501_FindModeinBinarySearchTree {
         pre = root;
         inOrder(root.right);
     }
-
-    error;
 }

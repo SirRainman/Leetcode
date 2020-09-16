@@ -26,7 +26,7 @@ import java.util.List;
  * 链接：https://leetcode-cn.com/problems/binary-tree-postorder-traversal
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * */
-public class Q145_BinaryTreePostorderTraversal {
+public class Q145_PostOrder {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> list = new LinkedList<>();
         postTravel(root, list);
@@ -40,6 +40,7 @@ public class Q145_BinaryTreePostorderTraversal {
         list.add(root.val);
     }
 
+    error;
     // TODO:注意这种写法
     public List<Integer> postorderTraversal2(TreeNode root) {
         LinkedList<Integer> list = new LinkedList<>();
@@ -63,10 +64,9 @@ public class Q145_BinaryTreePostorderTraversal {
         Deque<TreeNode> stack = new LinkedList<TreeNode>();
         TreeNode p = root, pre = null;
         while (p != null || !stack.isEmpty()) {
-            if (p != null) {
+            while (p != null) {
                 stack.push(p);
                 p = p.left;
-                continue;
             }
             p = stack.peek();
             if (p.right != null && p.right != pre) {

@@ -34,8 +34,9 @@ import java.util.Queue;
  * 链接：https://leetcode-cn.com/problems/binary-tree-level-order-traversal
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * */
-public class Q102_BinaryTreeLevelOrderTraversal {
+public class Q102_LevelOrder {
     // TODO: linkedlist 和 Arraylist的区别？？？？
+    //  Summary ArrayList with ArrayDeque are preferable in many more use-cases than LinkedList.
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> lists = new LinkedList<>();
         if (root == null) return lists;

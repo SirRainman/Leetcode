@@ -1,4 +1,4 @@
-package tree;
+package tree.in.bst;
 
 import dataStructure.TreeNode;
 
@@ -48,6 +48,7 @@ public class Q653_TwoSumIV_InputisaBST {
         return findTarget(root.left, k) || findTarget(root.right, k);
     }
 
+    // TODO：注意如何在有序数组里找到两数之和
     public boolean findTarget3(TreeNode root, int k) {
         List<Integer> nums = new ArrayList<>();
         Deque<TreeNode> stack = new LinkedList<>();

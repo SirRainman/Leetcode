@@ -1,4 +1,4 @@
-package tree;
+package tree.post;
 
 
 import dataStructure.TreeNode;
@@ -35,7 +35,7 @@ public class Q111_MinimumDepthofBinaryTree {
         int l = minDepth(root.left);
         int r = minDepth(root.right);
         if( l > 0 && r > 0) return Math.min(l, r) + 1;
-        else return 1 + l + r;
+        return 1 + l + r;
     }
 
     public int minDepth2(TreeNode root) {
@@ -54,6 +54,6 @@ public class Q111_MinimumDepthofBinaryTree {
             }
             level++;
         }
-        return 0;
+        return level;
     }
 }

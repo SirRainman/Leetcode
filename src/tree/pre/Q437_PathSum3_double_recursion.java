@@ -1,4 +1,4 @@
-package tree;
+package tree.pre;
 
 import dataStructure.TreeNode;
 
@@ -36,7 +36,7 @@ import java.util.Queue;
  * 链接：https://leetcode-cn.com/problems/path-sum-iii
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q437_PathSum3 {
+public class Q437_PathSum3_double_recursion {
 
     public int pathSum(TreeNode root, int sum) {
         if (root == null) return 0;
@@ -49,6 +49,4 @@ public class Q437_PathSum3 {
         if (root.val == sum) path++;
         return path + pathSumWithRoot(root.left, sum - root.val) + pathSumWithRoot(root.right, sum - root.val);
     }
-
-    // TODO: 注意看题解，还有更巧妙的做法
 }

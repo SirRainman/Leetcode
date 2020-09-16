@@ -1,4 +1,6 @@
-package tree;
+package tree.in.bst;
+
+import dataStructure.TreeNode;
 
 /**
  * 给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。
@@ -23,5 +25,17 @@ package tree;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q109_ConvertSortedListtoBinarySearchTree {
-    error;
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return helper(nums, 0, nums.length - 1);
+    }
+
+    public TreeNode helper(int[] nums, int left, int right) {
+        if(left > right) return  null;
+
+        int mid = (left + right) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = helper(nums, left, mid-1);
+        root.right = helper(nums, mid+1, right);
+        return root;
+    }
 }
