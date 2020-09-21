@@ -40,6 +40,6 @@ package dataStructure.list;
  * 链接：https://leetcode-cn.com/problems/split-linked-list-in-parts
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q725_SplitLinkedListinParts {
-    error;
+public class UnsolvedQ725_SplitLinkedListinParts {
+
 }

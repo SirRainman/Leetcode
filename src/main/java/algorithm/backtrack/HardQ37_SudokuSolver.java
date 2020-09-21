@@ -1,4 +1,4 @@
-package dataStructure.array;
+package algorithm.backtrack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,7 @@ import java.util.List;
  * 链接：https://leetcode-cn.com/problems/sudoku-solver
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q37_SudokuSolver {
-    return error;
+public class HardQ37_SudokuSolver {
 
     private boolean[][] line = new boolean[10][10];
     private boolean[][] colum = new boolean[10][10];

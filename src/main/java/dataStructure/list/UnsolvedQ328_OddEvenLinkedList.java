@@ -11,6 +11,5 @@ package dataStructure.list;
  * 链接：https://leetcode-cn.com/problems/odd-even-linked-list
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。s
  */
-public class Q328_OddEvenLinkedList {
-    error;
+public class UnsolvedQ328_OddEvenLinkedList {
 }

@@ -16,7 +16,7 @@ import dataStructure.ListNode;
  * 链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q160_IntersectionofTwoLinkedLists {
+public class HardQ160_IntersectionofTwoLinkedLists {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if(headB == null || headA == null) return null;
         ListNode p = headA, q = headB;
@@ -26,6 +26,4 @@ public class Q160_IntersectionofTwoLinkedLists {
         }
         return p;
     }
-
-    error;
 }
