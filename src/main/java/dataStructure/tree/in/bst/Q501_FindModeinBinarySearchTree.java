@@ -31,41 +31,48 @@ import dataStructure.TreeNode;
 public class Q501_FindModeinBinarySearchTree {
 
     int[] ans;
-    int curCount = 0, maxCount = 0;
-    int resSize = 0;
+    int size = 0;
+    int count = 0;
+    int maxCount = 0;
     TreeNode pre = null;
 
     public int[] findMode(TreeNode root) {
-        // 第一遍确定共有几个众数
-        inOrder(root);
-        pre = null;
-        ans = new int[resSize];
-        curCount = 0;
-        resSize = 0;
-        // 第二遍往数组里面添加元素
+
+        // 第一遍确定 数组的大小 + 众数的个数
         inOrder(root);
 
+        ans = new int[size];
+        size = 0;
+        count = 0;
+        pre = null;
+
+        // 第二遍根据第一遍提供的众数的个数 往数组里填数
+        inOrder(root);
         return ans;
     }
 
     public void inOrder(TreeNode root) {
-        if (root == null) return;
+        if(root == null) return;
         inOrder(root.left);
-        if (pre != null && pre.val == root.val) {
-            curCount++;
-        } else {
-            curCount = 1;
+
+        if(pre != null && root.val == pre.val) {
+            count++;
+        } else{
+            count = 1;
         }
-        if (curCount > maxCount) {
-            maxCount = curCount;
-            resSize = 1;
-        } else if (curCount == maxCount) {
-            if (ans != null) {
-                ans[resSize] = root.val;
+
+        if(count > maxCount) {
+            maxCount = count;
+            // TODO: 更新众数的数目
+            size = 1;
+        } else if(count == maxCount) {
+            if(ans != null ) {
+                ans[size] = root.val;
             }
-            resSize++;
+            size++;
         }
         pre = root;
+
         inOrder(root.right);
     }
 }
