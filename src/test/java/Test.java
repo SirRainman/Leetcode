@@ -1,33 +1,53 @@
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class Test {
 
-    @org.junit.Test
-    public static void aaa(String[] args) {
-        maxSumRangeQuery(new int[] {1,2,3,4,5}, new int[][] {{1, 3}, {0, 1}});
+    public int minOperations(String[] logs) {
+        Deque<String> stack = new LinkedList<>();
+        for(String op : logs) {
+            if(op.equals("../")) {
+                // 判断是否在主目录
+                if(!stack.isEmpty()) {
+                    stack.pop();
+                }
+            } else if(op.equals("./")) {
+                // do nothing
+            } else {
+                // 进入子目录
+                stack.push(op);
+            }
+        }
+
+        return stack.size();
     }
-
-    public static int maxSumRangeQuery(int[] nums, int[][] requests) {
-        Arrays.sort(nums);
-        int[] times = new int[nums.length];
-        for(int i = 0; i < requests.length; i++) {
-            for(int j = requests[i][0]; j <= requests[i][1]; j++) {
-                times[j]++;
-                System.out.println();
+    public int minOperationsMaxProfit(int[] customers, int boardingCost, int runningCost) {
+        int profit = 0;
+        int waiting = 0;
+        for(int i = 0; i < customers.length; i++) {
+            int n = customers[i];
+            if(n + waiting >= 4) {
+                // 上四个人
+                waiting = n + waiting - 4;
+                profit = 4 * boardingCost - runningCost;
+            } else {
+                profit = (n + waiting) * boardingCost - runningCost;
+                waiting = 0;
             }
         }
-        Arrays.sort(times);
-        int sum = 0;
-        int p = nums.length-1;
-        for(int i = nums.length-1; i >= 0; i--) {
-            if(times[i] > 0) {
-                sum += times[i] * nums[p];
-                sum = sum % (10^9 + 7);
-                System.out.println(nums[p]);
-                p--;
-            }
+        // while(waiting > 0) {
+        //     if(waiting >= 4) {
+        //         profit = 4 * boardingCost - runningCost;
+        //         waiting -= 4;
+        //     } else {
+        //         profit = waiting * boardingCost - runningCost;
+        //     }
+        // }
+        if(waiting > 0) {
+            int times = (int) Math.ceil(waiting / 4);
+            profit = waiting * boardingCost - times * runningCost;
         }
-
-        return sum;
+        return profit > 0 ? profit : -1;
     }
 }
