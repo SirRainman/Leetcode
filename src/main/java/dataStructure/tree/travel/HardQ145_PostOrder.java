@@ -2,6 +2,7 @@ package dataStructure.tree.travel;
 
 import dataStructure.TreeNode;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,8 +40,9 @@ public class HardQ145_PostOrder {
         list.add(root.val);
     }
 
-    error;
-    // TODO:注意这种写法
+    // TODO:讨巧的做法
+    //  1.add 和 push的区别
+    //  2.poll 和pollLast的区别
     public List<Integer> postorderTraversal2(TreeNode root) {
         LinkedList<Integer> list = new LinkedList<>();
         if (root == null) return list;
@@ -56,7 +58,35 @@ public class HardQ145_PostOrder {
         return list;
     }
 
+    // TODO：讨巧的做法
+    //  一个元素入栈两次空间复杂度比较大
+    public List<Integer> postorderTraversal4(TreeNode root) {
+        List<Integer> output = new LinkedList<>();
+        if (root == null) return output;
+        Deque<TreeNode> stack = new LinkedList<TreeNode>();
+        TreeNode p = root;
+        while (p != null || !stack.isEmpty()) {
+            if(p != null) {
+                stack.push(p);
+                stack.push(p);
+                p = p.left;
+                continue;
+            }
+            p = stack.pop();
+            if(p == stack.peek()) {
+                p = p.right;
+            } else {
+                output.add(p.val);
+                p = null;
+            }
+        }
+
+        return output;
+    }
+
     // TODO： 这种非递归的重要
+    //  用pre记住曾经访问过的节点
+    //  有时候还是会忘记
     public List<Integer> postorderTraversal3(TreeNode root) {
         List<Integer> output = new LinkedList<>();
         if (root == null) return output;
@@ -84,29 +114,52 @@ public class HardQ145_PostOrder {
         return output;
     }
 
-    // TODO：一个元素入栈两次空间复杂度比较大
-    public List<Integer> postorderTraversal4(TreeNode root) {
-        List<Integer> output = new LinkedList<>();
-        if (root == null) return output;
-        Deque<TreeNode> stack = new LinkedList<TreeNode>();
-        TreeNode p = root;
-        while (p != null || !stack.isEmpty()) {
-            if(p != null) {
-                stack.push(p);
-                stack.push(p);
-                p = p.left;
-                continue;
+    // TODO：莫里斯遍历!!! 后续的莫里斯遍历太难了把
+    class Solution {
+        public List<Integer> postorderTraversal(TreeNode root) {
+            List<Integer> res = new ArrayList<Integer>();
+            if (root == null) {
+                return res;
             }
-            p = stack.pop();
-            if(p == stack.peek()) {
-                p = p.right;
-            } else {
-                output.add(p.val);
-                p = null;
+
+            TreeNode cur = root, pre = null;
+
+            while (cur != null) {
+                pre = cur.left;
+                if (pre != null) {
+                    while (pre.right != null && pre.right != cur) {
+                        pre = pre.right;
+                    }
+                    if (pre.right == null) {
+                        pre.right = cur;
+                        cur = cur.left;
+                        continue;
+                    } else {
+                        pre.right = null;
+                        addPath(res, cur.left);
+                    }
+                }
+                cur = cur.right;
             }
+            addPath(res, root);
+            return res;
         }
 
-        return output;
+        public void addPath(List<Integer> res, TreeNode node) {
+            int count = 0;
+            while (node != null) {
+                ++count;
+                res.add(node.val);
+                node = node.right;
+            }
+            int left = res.size() - count, right = res.size() - 1;
+            while (left < right) {
+                int temp = res.get(left);
+                res.set(left, res.get(right));
+                res.set(right, temp);
+                left++;
+                right--;
+            }
+        }
     }
-
 }

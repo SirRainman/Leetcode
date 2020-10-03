@@ -4,9 +4,9 @@ import dataStructure.ListNode;
 
 /**
  * 反转一个单链表。
- * <p>
+ *
  * 示例:
- * <p>
+ *
  * 输入: 1->2->3->4->5->NULL
  * 输出: 5->4->3->2->1->NULL
  */

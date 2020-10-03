@@ -62,29 +62,38 @@ public class HardQ94_InOrder {
         return list;
     }
 
-    error;
-    // TODO: 莫里斯遍历！！！
+    // TODO: 莫里斯遍历！！！ 利用叶子节点的未存储的空间，通过两次遍历节点完成遍历
     class Solution {
         public List<Integer> inorderTraversal(TreeNode root) {
-            List<Integer> res = new ArrayList<>();
-            TreeNode curr = root;
-            TreeNode pre;
-            while (curr != null) {
-                if (curr.left == null) {
-                    res.add(curr.val);
-                    curr = curr.right; // move to next right node
-                } else { // has a left subtree
-                    pre = curr.left;
-                    while (pre.right != null) { // find rightmost
-                        pre = pre.right;
+            List<Integer> res = new ArrayList<Integer>();
+            TreeNode predecessor = null;
+
+            while (root != null) {
+                if (root.left == null) {
+                    // 如果没有左孩子，则直接访问右孩子
+                    res.add(root.val);
+                    root = root.right;
+                } else {
+                    // predecessor 节点就是当前 root 节点向左走一步，然后一直向右走至无法走为止
+                    predecessor = root.left;
+                    while (predecessor.right != null && predecessor.right != root) {
+                        predecessor = predecessor.right;
                     }
-                    pre.right = curr; // put cur after the pre node
-                    TreeNode temp = curr; // store cur node
-                    curr = curr.left; // move cur to the top of the new dataStructure.tree
-                    temp.left = null; // original cur left be null, avoid infinite loops
+
+                    if (predecessor.right == null) { // 如果是第一次遍历到该节点
+                        // 让 predecessor 的右指针指向 root，继续遍历左子树
+                        predecessor.right = root;
+                        root = root.left;
+                    } else { // 第二次遍历到该节点，说明左子树已经访问完了，我们需要断开链接
+                        res.add(root.val);
+                        predecessor.right = null;
+                        root = root.right;
+                    }
                 }
+
             }
             return res;
         }
     }
+
 }
