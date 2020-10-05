@@ -10,8 +10,6 @@ import java.util.Queue;
 /**
  * 给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
  *
- *
- *
  * 示例：
  * 二叉树：[3,9,20,null,null,15,7],
  *
@@ -33,9 +31,8 @@ import java.util.Queue;
  * 链接：https://leetcode-cn.com/problems/binary-tree-level-order-traversal
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * */
-public class HardQ102_LevelOrder {
-    // TODO: linkedlist 和 Arraylist的区别？？？？
-    //  Summary ArrayList with ArrayDeque are preferable in many more use-cases than LinkedList.
+public class Q102_LevelOrder {
+    // TODO: linkedlist 和 Arraylist的区别？？？
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> lists = new LinkedList<>();
         if (root == null) return lists;

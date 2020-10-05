@@ -30,7 +30,7 @@ import java.util.Queue;
  * 链接：https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class HardQ103_BinaryTreeZigzagLevelOrderTraversal {
+public class MediumQ103_BinaryTreeZigzagLevelOrderTraversal {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
         if(root == null) return ans;
@@ -47,6 +47,7 @@ public class HardQ103_BinaryTreeZigzagLevelOrderTraversal {
             while(size-- > 0) {
                 cur = queue.poll();
                 // TODO:注意判断奇偶的方法
+                //  注意add 和 push 的区别！！！
                 if((level & 1) == 1) {
                     levelPath.add(cur.val);
                 } else {

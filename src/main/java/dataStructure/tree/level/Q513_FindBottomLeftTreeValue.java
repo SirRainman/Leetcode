@@ -41,6 +41,7 @@ import java.util.Queue;
  */
 public class Q513_FindBottomLeftTreeValue {
 
+    // TODO:不同的遍历顺序会得到意外好的效果
     public int findBottomLeftValue(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
@@ -75,5 +76,25 @@ public class Q513_FindBottomLeftTreeValue {
             }
         }
         return ans;
+    }
+
+    int l = 0, maxL = Integer.MIN_VALUE, ans = 0;
+    public int findBottomLeftValue3(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+
+    public void dfs(TreeNode root) {
+        if(root == null) return;
+        l++;
+        if(root.left == null && root.right == null) {
+            if(l > maxL) {
+                maxL = l;
+                ans = root.val;
+            }
+        }
+        dfs(root.left);
+        dfs(root.right);
+        l--;
     }
 }

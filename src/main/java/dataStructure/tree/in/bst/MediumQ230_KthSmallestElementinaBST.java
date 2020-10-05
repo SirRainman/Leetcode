@@ -20,17 +20,8 @@ import java.util.LinkedList;
  *   \
  *   2
  * 输出: 1
- * 示例 2:
  *
- * 输入: root = [5,3,6,2,4,null,null,1], k = 3
- *        5
- *       / \
- *      3   6
- *     / \
- *    2   4
- *   /
- *  1
- * 输出: 3
+ *
  * 进阶：
  * 如果二叉搜索树经常被修改（插入/删除操作）并且你需要频繁地查找第 k 小的值，你将如何优化kthSmallest函数？
  *
@@ -40,8 +31,9 @@ import java.util.LinkedList;
  * 链接：https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q230_KthSmallestElementinaBST {
+public class MediumQ230_KthSmallestElementinaBST {
 
+    // TODO：如果二叉搜索树经常被修改（插入/删除操作）并且你需要频繁地查找第 k 小的值，你将如何优化kthSmallest函数？
     public int kthSmallest(TreeNode root, int k) {
         Deque<TreeNode> stack = new LinkedList<TreeNode>();
         TreeNode p = root;

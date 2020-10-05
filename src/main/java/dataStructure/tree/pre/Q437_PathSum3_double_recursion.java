@@ -35,6 +35,7 @@ import dataStructure.TreeNode;
  */
 public class Q437_PathSum3_double_recursion {
 
+    // TODO：回溯思想，选择该元素，或者不选该元素
     public int pathSum(TreeNode root, int sum) {
         if (root == null) return 0;
         return pathSumWithRoot(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);

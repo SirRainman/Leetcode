@@ -50,11 +50,12 @@ public class HardQ105_ConstructTree_PreAndIn {
         return root;
     }
 
-    // TODO：注意这种迭代方法
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
+    // TODO：迭代方法太难了吧，我还没有掌握
+    public TreeNode buildTree2(int[] preorder, int[] inorder) {
         if (preorder == null || preorder.length == 0) {
             return null;
         }
+
         TreeNode root = new TreeNode(preorder[0]);
         Deque<TreeNode> stack = new LinkedList<TreeNode>();
         stack.push(root);

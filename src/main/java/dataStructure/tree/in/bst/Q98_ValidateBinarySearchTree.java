@@ -34,19 +34,11 @@ import dataStructure.TreeNode;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q98_ValidateBinarySearchTree {
-    error;
 
+    // TODO：二叉搜索树就是一个有序的列表，直接判断他是否是一个有序的列表就可以判定了
     TreeNode pre = null;
     public boolean isValidBST(TreeNode root) {
         if(root == null) return true;
-        // if(isValidBST(root.left)) {
-        //     if(pre == null && root.left == null) pre = root;
-        //     if(pre != null && root.val >= pre.val) {
-        //         pre = root;
-        //         return isValidBST(root.right);
-        //     }
-        // }
-        // return false;
         if(!isValidBST(root.left)) return false;
         if(pre != null && pre.val >= root.val) {
             return false;

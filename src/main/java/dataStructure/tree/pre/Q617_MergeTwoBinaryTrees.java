@@ -54,6 +54,7 @@ public class Q617_MergeTwoBinaryTrees {
     public TreeNode mergeTrees3(TreeNode t1, TreeNode t2) {
         if (t1 == null) return t2;
         Deque<TreeNode[]> stack = new LinkedList<TreeNode[]>();
+        // TODO：注意这种同时遍历两颗树的方法
         stack.push(new TreeNode[]{t1, t2});
         while (!stack.isEmpty()) {
             TreeNode[] t = stack.pop();

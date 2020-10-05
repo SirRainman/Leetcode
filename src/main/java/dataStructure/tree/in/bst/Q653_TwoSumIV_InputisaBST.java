@@ -20,20 +20,6 @@ import java.util.*;
  *
  * 输出: True
  *
- *
- * 案例 2:
- *
- * 输入:
- *     5
- *    / \
- *   3   6
- *  / \   \
- * 2   4   7
- *
- * Target = 28
- *
- * 输出: False
- *
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
@@ -74,7 +60,8 @@ public class Q653_TwoSumIV_InputisaBST {
     }
 
 
-    // TODO: 注意中序剪枝了
+    // TODO:这种写法想一下为什么？节省了空姐复杂度
+    //  注意中序剪枝了
     Deque<Integer> stack = new LinkedList<>();
     public boolean findTarget(TreeNode root, int k) {
         if(root == null) return false;

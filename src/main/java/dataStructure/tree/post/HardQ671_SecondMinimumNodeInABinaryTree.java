@@ -51,6 +51,4 @@ public class HardQ671_SecondMinimumNodeInABinaryTree {
         if(r == -1) return l;
         return Math.min(l, r);
     }
-    return error;
-
 }

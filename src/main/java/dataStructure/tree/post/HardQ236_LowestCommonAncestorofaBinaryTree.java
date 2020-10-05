@@ -45,7 +45,6 @@ public class HardQ236_LowestCommonAncestorofaBinaryTree {
         return root;
     }
 
-    return error;
     // TODO:怎么借助于存储父节点来求最近公共祖先
     Map<Integer, TreeNode> parent = new HashMap<Integer, TreeNode>();
     Set<Integer> visited = new HashSet<Integer>();

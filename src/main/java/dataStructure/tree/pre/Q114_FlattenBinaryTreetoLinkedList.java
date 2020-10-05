@@ -39,7 +39,7 @@ public class Q114_FlattenBinaryTreetoLinkedList {
         TreeNode cur = root, pre = null;
         stack.push(cur);
         while(cur != null || !stack.isEmpty()) {
-            cur = stack.poll();
+            cur = stack.pop();
             if(pre != null) {
                 pre.left = null;
                 pre.right = cur;

@@ -20,6 +20,9 @@ public class Q988_SmallestStringStartingFromLeaf {
         return ans;
     }
 
+    // TODO：
+    //  1.注意回溯的思想
+    //  2.注意为什么使用StringBuffer
     public void dfs(TreeNode root, StringBuffer path) {
         if(root == null) return;
         path.append((char)('a'+root.val));
