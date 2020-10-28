@@ -40,9 +40,13 @@ public class HardQ145_PostOrder {
         list.add(root.val);
     }
 
-    // TODO:讨巧的做法
-    //  1.add 和 push的区别
+    // TODO:讨巧的做法1
+    //  1.add 和 push offer 的区别
+    //      add offer加在了尾部
+    //      push加在了首部
     //  2.poll 和pollLast的区别
+    //      poll 从首部删除
+    //      pollLast从尾部删除
     public List<Integer> postorderTraversal2(TreeNode root) {
         LinkedList<Integer> list = new LinkedList<>();
         if (root == null) return list;
@@ -58,32 +62,6 @@ public class HardQ145_PostOrder {
         return list;
     }
 
-    // TODO：讨巧的做法
-    //  一个元素入栈两次空间复杂度比较大
-    public List<Integer> postorderTraversal4(TreeNode root) {
-        List<Integer> output = new LinkedList<>();
-        if (root == null) return output;
-        Deque<TreeNode> stack = new LinkedList<TreeNode>();
-        TreeNode p = root;
-        while (p != null || !stack.isEmpty()) {
-            if(p != null) {
-                stack.push(p);
-                stack.push(p);
-                p = p.left;
-                continue;
-            }
-            p = stack.pop();
-            if(p == stack.peek()) {
-                p = p.right;
-            } else {
-                output.add(p.val);
-                p = null;
-            }
-        }
-
-        return output;
-    }
-
     // TODO： 这种非递归的重要
     //  用pre记住曾经访问过的节点
     //  有时候还是会忘记
@@ -91,26 +69,22 @@ public class HardQ145_PostOrder {
         List<Integer> output = new LinkedList<>();
         if (root == null) return output;
         Deque<TreeNode> stack = new LinkedList<TreeNode>();
-        TreeNode p = root, pre = null;
-        while (p != null || !stack.isEmpty()) {
-            while (p != null) {
-                stack.push(p);
-                p = p.left;
+        TreeNode cur = root, pre = null;
+        while(cur != null || !stack.isEmpty()) {
+            while(cur != null) {
+                stack.push(cur);
+                cur = cur.left;
             }
-            p = stack.peek();
-            if (p.right != null && p.right != pre) {
-                p = p.right;
-                stack.push(p);
-                p = p.left;
+            cur = stack.peek();
+            if(cur.right != null && cur.right != pre) {
+                cur = cur.right;
             } else {
-                p = stack.pop();
-                output.add(p.val);
-                pre = p;
-                // TODO:不要忘了置为null
-                p = null;
+                output.add(cur.val);
+                stack.pop();
+                pre = cur;
+                cur = null;
             }
         }
-
         return output;
     }
 

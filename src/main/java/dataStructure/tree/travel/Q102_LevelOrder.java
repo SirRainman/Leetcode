@@ -33,6 +33,7 @@ import java.util.Queue;
  * */
 public class Q102_LevelOrder {
     // TODO: linkedlist 和 Arraylist的区别？？？
+    //  ArrayList的实现用的是数组，LinkedList是基于链表，ArrayList适合查找，LinkedList适合增删
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> lists = new LinkedList<>();
         if (root == null) return lists;

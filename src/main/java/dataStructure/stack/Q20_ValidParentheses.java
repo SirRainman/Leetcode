@@ -61,4 +61,42 @@ public class Q20_ValidParentheses {
     public static void main(String[] args) {
         System.out.println(new Q20_ValidParentheses().isValid("){"));
     }
+
+    public boolean backspaceCompare(String S, String T) {
+
+        Deque<Character> s1 = new LinkedList<>();
+        Deque<Character> s2 = new LinkedList<>();
+
+        for(int i = 0; i < S.length(); i++) {
+            if(S.charAt(i) != '#') {
+                s1.push(S.charAt(i));
+            } else {
+                if(!s1.isEmpty()) {
+                    s1.pop();
+                }
+            }
+        }
+
+        for(int i = 0; i < T.length(); i++) {
+            if(T.charAt(i) != '#') {
+                s2.push(T.charAt(i));
+            } else {
+                if(!s2.isEmpty()) {
+                    s2.pop();
+                }
+            }
+        }
+
+        if(s1.size() != s2.size()) {
+            return false;
+        } else {
+            while(!s1.isEmpty()) {
+                if(s1.pop() != s2.pop()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    }
 }

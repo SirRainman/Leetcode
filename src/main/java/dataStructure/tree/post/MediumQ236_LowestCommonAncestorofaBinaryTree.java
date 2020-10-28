@@ -35,7 +35,7 @@ import java.util.Set;
  * 链接：https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class HardQ236_LowestCommonAncestorofaBinaryTree {
+public class MediumQ236_LowestCommonAncestorofaBinaryTree {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null || root.val == p.val || root.val == q.val) return root;
         TreeNode left = lowestCommonAncestor(root.left, p, q);

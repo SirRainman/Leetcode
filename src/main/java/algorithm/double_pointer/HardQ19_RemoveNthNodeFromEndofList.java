@@ -1,4 +1,4 @@
-package dataStructure.list;
+package algorithm.double_pointer;
 
 import dataStructure.ListNode;
 

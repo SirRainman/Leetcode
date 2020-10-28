@@ -1,8 +1,10 @@
 package dataStructure.array;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -59,7 +61,6 @@ public class Q1_TwoSum {
                 map.put(nums[i], i);
             }
         }
-
         return indices;
     }
 

@@ -76,6 +76,7 @@ public class HardQ1192_CriticalConnectionsinaNetwork {
                     ans.add(Arrays.asList(cur, next));
                 }
             } else { // 如果访问过该邻居
+                // TODO: 为什么访问过该节点不去找next能访问到到最早节点，而是找next的访问时间
                 low[cur] = Math.min(low[cur], dfn[next]);
             }
         }

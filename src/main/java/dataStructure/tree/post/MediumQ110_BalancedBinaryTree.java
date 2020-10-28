@@ -37,7 +37,8 @@ import dataStructure.TreeNode;
  * 链接：https://leetcode-cn.com/problems/balanced-binary-tree
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * */
-public class HardQ110_BalancedBinaryTree {
+public class MediumQ110_BalancedBinaryTree {
+    // TODO:这个算法的时间复杂度是多少？？
     public boolean isBalanced(TreeNode root) {
         if (root == null) return true;
         return Math.abs(depth(root.left) - depth(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right);

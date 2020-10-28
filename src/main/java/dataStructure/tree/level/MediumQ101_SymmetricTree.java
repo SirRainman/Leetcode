@@ -35,17 +35,12 @@ import java.util.Queue;
  * 链接：https://leetcode-cn.com/problems/symmetric-tree
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q101_SymmetricTree {
+public class MediumQ101_SymmetricTree {
 
     public boolean compare(TreeNode left, TreeNode right) {
-        if(left == null) return right == null;
-        if(right == null) return left == null;
-        if (left.val != right.val) {
-            return false;
-        }
-        boolean outside = compare(left.left, right.right);
-        boolean inside = compare(left.right, right.left);
-        return outside && inside;
+        if(left == null) return right == null; // 都为空
+        if(right == null) return left == null; // 只要有一个不为空
+        return left.val == right.val && compare(left.left, right.right) && compare(left.right, right.left);
     }
 
     // TODO: 层次遍历判断二叉树是否对称
@@ -57,8 +52,14 @@ public class Q101_SymmetricTree {
         while (!queue.isEmpty()) {
             p = queue.poll();
             q = queue.poll();
-            if (p == null && q == null) continue;
-            if (p == null || q == null || p.val != q.val) return false;
+
+            if(p == null && q == null) {
+                continue;
+            } else if(p == null || q == null) {
+                return false;
+            } else if(p.val != q.val) {
+                return false;
+            }
 
             queue.offer(p.left);
             queue.offer(q.right);

@@ -40,8 +40,10 @@ public class HardQ671_SecondMinimumNodeInABinaryTree {
 
     // TODO:
     //  问题可以转化为求左右子树的最小值
-    //  如果左右子树最小值都大于根节点的值取较小的值
-    //  其他情况取左右子树较大的值。
+    //  前提：每个节点的值都已经是左右子树中最小的值了
+    //      如果当前节点的值比最小值大，说明该节点的子树中不可能有值比该节点小，即找到比最小值大的值了，返回
+    //      如果当前的值等于最小的值，说明第二小的值可能在这个节点的子树中
+    //  注：只有最小的值所在的节点才能走到叶子节点
     public int findMin(TreeNode root, int min) {
         if(root == null) return -1;
         if(root.val > min) return root.val;

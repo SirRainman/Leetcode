@@ -33,7 +33,7 @@ import dataStructure.TreeNode;
  * 链接：https://leetcode-cn.com/problems/path-sum-iii
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q437_PathSum3_double_recursion {
+public class Q112_PathSum3_double_recursion {
 
     // TODO：回溯思想，选择该元素，或者不选该元素
     public int pathSum(TreeNode root, int sum) {
