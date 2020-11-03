@@ -1,4 +1,4 @@
-package algorithm.sort;
+package algorithm.sort.algo;
 
 /**
  * 给你一个整数数组nums，请你将该数组升序排列。
@@ -80,5 +80,5 @@ public class Q912_QuickSort {
         nums[left] = pivot;
         return left;
     }
-    
+
 }

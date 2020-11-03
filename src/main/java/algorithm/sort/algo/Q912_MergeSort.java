@@ -1,4 +1,4 @@
-package algorithm.sort;
+package algorithm.sort.algo;
 
 /**
  * 给你一个整数数组nums，请你将该数组升序排列。
@@ -11,7 +11,7 @@ package algorithm.sort;
  *
  * 输入：nums = [5,1,1,2,0,0]
  * 输出：[0,0,1,1,2,5]
- * 
+ *
  *
  * 提示：
  *
@@ -26,26 +26,28 @@ package algorithm.sort;
 public class Q912_MergeSort {
     public int[] sortArray(int[] nums) {
         if(nums == null || nums.length == 1) return nums;
-        mergeSort(nums, new int[nums.length],0, nums.length-1);
+        temp = new int[nums.length];
+        mergeSort(nums, 0, nums.length - 1);
         return nums;
     }
 
-    public void mergeSort(int[] nums, int[] temp, int left, int right) {
+    int[] temp;
+    public void mergeSort(int[] nums, int left, int right) {
         if(left >= right) return;
 
         int mid = left + right >> 1;
-        mergeSort(nums, temp, left, mid);
-        mergeSort(nums, temp, mid+1, right);
+        mergeSort(nums, left, mid);
+        mergeSort(nums, mid + 1, right);
 
-        int k = 0, i = left, j = mid+1;
+        int k = 0, i = left, j = mid + 1;
         while(i <= mid && j <= right) {
-            if(nums[i] < nums[j]) temp[k++] = nums[i++];
+            if(nums[i] <= nums[j]) temp[k++] = nums[i++];
             else temp[k++] = nums[j++];
         }
-        while (i <= mid) temp[k++] = nums[i++];
-        while (j <= right) temp[k++] = nums[j++];
+        while(i <= mid) temp[k++] = nums[i++];
+        while(j <= right) temp[k++] = nums[j++];
 
-        for(i = left, j = 0; i <= right;i++, j++) {
+        for(i = left, j = 0; i <= right; i++, j++) {
             nums[i] = temp[j];
         }
     }

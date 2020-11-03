@@ -1,4 +1,4 @@
-package algorithm.sort;
+package algorithm.sort.algo;
 
 /**
  * 给你一个整数数组nums，请你将该数组升序排列。

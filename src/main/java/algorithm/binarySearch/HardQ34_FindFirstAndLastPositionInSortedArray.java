@@ -47,7 +47,7 @@ public class HardQ34_FindFirstAndLastPositionInSortedArray {
             range[0] = binarySearch(nums, target-1);
             range[1] = binarySearch(nums, target)-1;
             //System.out.println(range[0] + " " + range[1]);
-            if(nums[range[0]] != target) return new int[]{-1, -1};
+            if(range[0] == nums.length || nums[range[0]] != target) return new int[]{-1, -1};
             return range;
         }
 
