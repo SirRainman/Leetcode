@@ -1,6 +1,7 @@
 package dataStructure.map;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -33,7 +34,6 @@ public class Q136_SingleNumber {
                 map.put(num, 1);
             }
         }
-
         return (int) map.keySet().toArray()[0];
     }
 

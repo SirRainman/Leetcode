@@ -41,4 +41,37 @@ package dataStructure.union;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class UnresolvedQ200_NumberofIslands {
+
+    public int numIslands(char[][] grid) {
+        if(grid == null || grid.length < 0) return 0;
+        int ans = 0;
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[0].length; j++) {
+                if(grid[i][j] == '1') {
+                    dfs(grid, i, j);
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+
+    public void dfs(char[][] grid, int row, int column) {
+
+        if(row == grid.length || column == grid[0].length || row < 0 || column < 0 || grid[row][column] == '0') {
+            return;
+        }
+
+        grid[row][column] = '0';
+
+        dfs(grid, row+1, column);
+        dfs(grid, row-1, column);
+        dfs(grid, row, column+1);
+        dfs(grid, row, column-1);
+    }
+
+
+    // TODO:注意并查集的解法
+
+
 }

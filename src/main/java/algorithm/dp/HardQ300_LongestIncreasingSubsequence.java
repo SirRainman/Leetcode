@@ -19,6 +19,9 @@ package algorithm.dp;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ300_LongestIncreasingSubsequence {
+    // TODO：
+    //  递推 定义 dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度
+    //      dp[i]=max(dp[j])+1,其中0≤j<i且num[j]<num[i]
     public int lengthOfLIS(int[] nums) {
         if(nums == null || nums.length == 0) return 0;
         int maxAns = 1;
@@ -37,5 +40,5 @@ public class HardQ300_LongestIncreasingSubsequence {
         return maxAns;
     }
 
-    //TODO:有没有更快的做法？？？
+    //TODO:有没有更快的做法？？？ 贪心 + 二分
 }
