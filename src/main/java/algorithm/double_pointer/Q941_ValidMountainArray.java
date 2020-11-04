@@ -17,13 +17,12 @@ package algorithm.double_pointer;
 public class Q941_ValidMountainArray {
     class Solution {
         public boolean validMountainArray1(int[] A) {
-            if(A.length < 3) return false;
             int cur = 0;
             while(cur + 1 < A.length && A[cur] < A[cur + 1]) cur++;
-            if(cur == 0 || cur == A.length - 1) {
-                return false;
-            }
+            // TODO:判断一下是否走到了最后或者是否原地踏步
+            if(cur == 0 || cur == A.length - 1) return false;
             while(cur + 1 < A.length && A[cur] > A[cur + 1]) cur++;
+            // 判断是否走到了最后
             return cur == A.length - 1;
         }
 
