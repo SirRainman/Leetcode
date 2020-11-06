@@ -1,4 +1,4 @@
-package dataStructure.array;
+package dataStructure.array.bigNum;
 
 import java.util.ArrayList;
 import java.util.List;

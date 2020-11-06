@@ -1,4 +1,4 @@
-package dataStructure.array;
+package dataStructure.array.bigNum;
 
 /**
  * 给定两个字符串形式的非负整数num1 和num2，计算它们的和。

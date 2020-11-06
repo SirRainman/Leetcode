@@ -1,4 +1,4 @@
-package dataStructure.array;
+package dataStructure.array.bigNum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,7 @@ public class A793_MuiltTwoNum {
         for(int i = ans.size() - 1; i >= 0; i--) System.out.print(ans.get(i));
     }
 
+    // TODO；注意这是大数 * 小数
     public static List<Integer> multi(char[] A, int b) {
         List<Integer> C = new ArrayList<>();
         for(int i = A.length - 1, carry = 0; i >= 0 || carry != 0; i--) {
