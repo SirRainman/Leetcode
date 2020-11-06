@@ -1,4 +1,4 @@
-package algorithm.double_pointer;
+package algorithm.intervals;
 
 import java.util.ArrayList;
 import java.util.List;
