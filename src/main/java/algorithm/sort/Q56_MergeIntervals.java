@@ -42,6 +42,7 @@ public class Q56_MergeIntervals {
         Arrays.sort(intervals, new Comparator<int[]>() {
             @Override
             public int compare(int[] interval1, int[] interval2) {
+                // TODO : 这里可以根据优先级进行相应的排序
                 return interval1[0] - interval2[0];
             }
         });
