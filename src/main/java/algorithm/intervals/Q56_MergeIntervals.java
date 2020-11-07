@@ -45,16 +45,17 @@ public class Q56_MergeIntervals {
         });
 
         // 合并区间
-        List<int[]> merged = new ArrayList<>();
-        for (int[] interval : intervals) {
-            int left = interval[0], right = interval[1];
-            if (merged.size() == 0 || merged.get(merged.size() - 1)[1] < left) {
-                merged.add(new int[]{left, right});
-            } else {
-                merged.get(merged.size() - 1)[1] = Math.max(merged.get(merged.size() - 1)[1], right);
+        List<int[]> mergedIntervals = new ArrayList<>();
+        for(int i = 0; i < intervals.length; i++) {
+            int start = intervals[i][0], end = intervals[i][1];
+            int currentSize = mergedIntervals.size();
+            if(currentSize == 0 || mergedIntervals.get(currentSize - 1)[1] < start) { // 没有交集
+                mergedIntervals.add(new int[]{start, end});
+            } else { // 更新最远端点
+                mergedIntervals.get(currentSize - 1)[1] = Math.max(end, mergedIntervals.get(currentSize - 1)[1]);
             }
         }
 
-        return merged.toArray(new int[merged.size()][]);
+        return mergedIntervals.toArray(new int[mergedIntervals.size()][]);
     }
 }
