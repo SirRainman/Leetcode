@@ -38,6 +38,8 @@ public class HardQOffer51_LCOF {
                 if(nums[i] <= nums[j]) temp[k++] = nums[i++];
                 else {
                     temp[k++] = nums[j++];
+                    // TODO：注意此时贡献了一个逆序对
+                    //  假如nums[i] > nums[j]，那么从 i+1 --> mid中的每一个数，都和nums[j]构成逆序对
                     ans += mid - i + 1;
                 }
             }

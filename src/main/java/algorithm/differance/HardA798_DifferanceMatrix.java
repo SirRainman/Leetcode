@@ -42,7 +42,7 @@ import java.io.*;
  *
  * https://www.acwing.com/problem/content/800/
  */
-public class Hard798_DifferanceMatrix {
+public class HardA798_DifferanceMatrix {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter log = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -64,16 +64,18 @@ public class Hard798_DifferanceMatrix {
 
         while(times-- > 0) {
             str = reader.readLine().split(" ");
-            int startRow = Integer.parseInt(str[0]), startCol = Integer.parseInt(str[1]), endRow = Integer.parseInt(str[2]), endCol = Integer.parseInt(str[3]), value = Integer.parseInt(str[4]);
-
-            insert(diff, startRow, startCol, endRow, endCol, value);
+            int x1 = Integer.parseInt(str[0]), y1 = Integer.parseInt(str[1]), x2 = Integer.parseInt(str[2]), y2 = Integer.parseInt(str[3]), value = Integer.parseInt(str[4]);
+            insert(diff, x1, y1, x2, y2, value);
         }
 
         for(int i = 1; i <= row; i++) {
             for(int j = 1; j <= col; j++) {
                 // TODO：想一下为什么会这样？？？
-                diff[i][j] += diff[i - 1][j] + diff[i][j - 1] - diff[i - 1][j - 1];
-                log.write(diff[i][j] + " ");
+                // diff[i][j] += diff[i - 1][j] + diff[i][j - 1] - diff[i - 1][j - 1];
+                // log.write(diff[i][j] + " ");
+
+                nums[i][j] = nums[i][j - 1] + nums[i - 1][j] + diff[i][j] - nums[i - 1][j - 1];
+                log.write(nums[i][j] + " ");
             }
             log.newLine();
         }
@@ -83,11 +85,12 @@ public class Hard798_DifferanceMatrix {
         log.close();
     }
 
-    // TODO: 注意差分矩阵的定义 自己画一个矩形，然后分析一下四个角都干了啥
-    public static void insert(int[][] diff, int startRow, int startCol, int endRow, int endCol, int value) {
-        diff[startRow][startCol] += value;
-        diff[startRow][endCol + 1] -= value;
-        diff[endRow + 1][startCol] -= value;
-        diff[endRow + 1][endCol + 1] += value;
+    // TODO: 一定得注意差分矩阵的定义 自己画一个矩形，然后分析一下四个角都干了啥
+    //  定义：diff[i][j] = nums[i][j] - nums[i - 1][j] - nums[i][j - 1] + nums[i - 1][j - 1];
+    public static void insert(int[][] diff, int x1, int y1, int x2, int y2, int value) {
+        diff[x1][y1] += value;
+        diff[x1][y2 + 1] -= value;
+        diff[x2 + 1][y1] -= value;
+        diff[x2 + 1][y2 + 1] += value;
     }
 }

@@ -43,6 +43,7 @@ public class A795_prefixSum {
         int len = in.nextInt();
         // TODO: 想一想为什么从 1开始存储
         //  一般这么进行处理的时候，就是考虑到了边界！！！
+        //  因为s[i] 是 0 - i的所有的数的和 ans = sum[end] - sum[start - 1]，所以当start = 0的时候，要进行特判一下
         int[] nums = new int[len + 1];
         int[] s = new int[len + 1];
         int times = in.nextInt();

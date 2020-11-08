@@ -49,14 +49,16 @@ public class HardA797_Differance {
         int times = in.nextInt();
 
         // TODO: 注意差分 和 序列和 之间的关系，他们是一个互逆的关系。
+        //  一定要注意差分的数学定义，和他的递推公式：diff[i] = nums[i] - nums[i - 1]
         //  前缀和：就是从第一个元素到当前元素的和。
-        //  差分数组：就是这一个元素与上一个元素的差。
+        //  差分数组：就是当前元素与上一个元素的差。
         //  初始化的时间复杂度为O(n),区间增加的时间复杂度为O(1)，单点查询的时间复杂度为O(n)。
         int[] nums = new int[len + 1];
         int[] differance = new int[ len + 2];
 
         for(int i = 1; i <= len; i++) {
             nums[i] = in.nextInt();
+            // differance[i] = nums[i] - nums[i - 1];
             insert(differance, i, i, nums[i]);
         }
 

@@ -31,16 +31,19 @@ public class A799_LongestSubstringWithoutRepeatingCharacters {
         int[] nums = new int[len];
         for(int i = 0; i < len; i++) nums[i] = in.nextInt();
 
-        int[] count = new int[100010];
+        int[] isExist = new int[100010];
+        int slow = 0, fast = 0;
         int ans = 0;
-        for(int fast = 0, slow = 0; fast < len; fast++) {
-            count[nums[fast]]++;
-            while(count[nums[fast]] > 1) {
-                count[nums[slow]]--;
+        while(fast < len) {
+            isExist[nums[fast]]++;
+            // 如果该节点出现过，不重复的区间起点向前移动：直到该节点在这个区间内没有出现过
+            while(isExist[ nums[fast] ] > 1) {
+                isExist[nums[slow]]--;
                 slow++;
             }
             ans = Math.max(ans, fast - slow + 1);
+            fast++;
         }
-        System.out.println(ans);
+        System.out.print(ans);
     }
 }

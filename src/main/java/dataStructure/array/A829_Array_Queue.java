@@ -49,11 +49,12 @@ class ArrayQueue {
 
     public ArrayQueue(int size) {
         e = new int[size];
-        front = rear = 0;
+        front = 0;
+        rear = -1;
     }
 
     public void push(int x) {
-        e[rear++] = x;
+        e[++rear] = x;
     }
 
     public int pop() {
@@ -61,7 +62,7 @@ class ArrayQueue {
     }
 
     public boolean isEmpty() {
-        return front == rear;
+        return front > rear;
     }
 
     public int query() {

@@ -45,18 +45,19 @@ public class A796_subMatrixSum {
         int times = in.nextInt();
 
         int[][] grid = new int[row + 1][col + 1];
-        int[][] sum = new int[row + 1][col + 1];
+        int[][] sums = new int[row + 1][col + 1];
+        // TODO: 一定要动手画图
         for(int i = 1; i <= row; i++) {
             for(int j = 1; j <= col; j++) {
                 grid[i][j] = in.nextInt();
-                sum[i][j] = sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1] + grid[i][j];
+                sums[i][j] = sums[i - 1][j] + sums[i][j - 1] - sums[i - 1][j - 1] + grid[i][j];
             }
         }
 
         while(times-- > 0) {
-            int startRow = in.nextInt(), startCol = in.nextInt();
-            int endRow = in.nextInt(), endCol = in.nextInt();
-            System.out.println(sum[endRow][endCol] - sum[startRow - 1][endCol] - sum[endRow][startCol - 1] + sum[startRow - 1][startCol -1] );
+            int x1 = in.nextInt(), y1 = in.nextInt(), x2 = in.nextInt(), y2 = in.nextInt();
+            int ans = sums[x2][y2] - sums[x1 - 1][y2] - sums[x2][y1 - 1] + sums[x1 - 1][y1 - 1];
+            System.out.println(ans);
         }
     }
 }

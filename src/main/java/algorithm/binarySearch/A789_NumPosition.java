@@ -37,7 +37,41 @@ import java.util.Scanner;
  * https://www.acwing.com/activity/content/code/content/548089/
  */
 public class A789_NumPosition {
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int len = in.nextInt(), times = in.nextInt();
+        int[] nums = new int[len];
+        for(int i = 0; i < len; i++) nums[i] = in.nextInt();
+        while(times-- > 0) {
+            int x = in.nextInt();
+            if(x < nums[0] || x > nums[nums.length - 1]) {
+                System.out.println("-1 -1");
+                continue;
+            }
+
+            // TODO:注意传递的参数是len,不是 len - 1
+            int start = binarySearch(nums, 0, len, x - 1);
+            if(start == len || nums[start] != x) {
+                System.out.println("-1 -1");
+                continue;
+            }
+
+            int end = binarySearch(nums, 0, len, x);
+            System.out.println(start + " "  + (end - 1));
+        }
+    }
+
+    public static int binarySearch(int[] nums, int left, int right, int x) {
+        while(left < right) {
+            int mid = left + (right - left) / 2;
+            if(nums[mid] <= x) left = mid + 1;
+            else right = mid;
+        }
+        return left;
+    }
+
+
+    public static void binarySearch2(){
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int q = in.nextInt();
@@ -45,32 +79,29 @@ public class A789_NumPosition {
         for(int i = 0; i < n; i++) nums[i] = in.nextInt();
         while(q-- > 0) {
             int x = in.nextInt();
-            if(x < nums[0] || x > nums[n-1]) {
+            int l = 0, r = n - 1;
+            while(l < r){
+                // TODO：想一想为什么 mid = l + r >> 1 ？？？
+                int mid = l + r >> 1;
+                // TODO：想一想为什么 l = mid + 1 ？？？
+                if(nums[mid] < x) l = mid + 1;
+                else r = mid;
+            }
+            if(nums[l] != x){
                 System.out.println("-1 -1");
                 continue;
             }
-            int start = binarySearch(nums, x-1);
-            // 如果不在数组中
-            if(start == nums.length || nums[start] != x) {
-                System.out.println("-1 -1");
-                continue;
+            else System.out.print(l + " ");
+            l = 0;
+            r = n - 1;
+            while(l < r){
+                // TODO：想一想为什么 mid = l + r + 1 >> 1 ？？？
+                int mid = l + r + 1 >> 1;
+                // TODO：想一想为什么 r = mid - 1 ？？？
+                if(nums[mid] > x) r = mid - 1;
+                else l = mid;
             }
-            int end = binarySearch(nums, x) - 1;
-            System.out.println(start + " " + end);
+            System.out.println(l);
         }
-    }
-
-    public static int binarySearch(int[] nums, int target) {
-        int left = 0, right = nums.length;
-        while(left < right) {
-            // TODO：注意寻找的方向，向左找，还是向右找
-            int mid = left + right >> 1;
-            if(nums[mid] <= target) {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
-        }
-        return left;
     }
 }
