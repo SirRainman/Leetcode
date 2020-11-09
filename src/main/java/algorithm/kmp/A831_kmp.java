@@ -42,18 +42,20 @@ public class A831_kmp {
         char[] str = br.readLine().toCharArray();
 
         // TODO：计算next数组，想一想有没有优化方案？？？
+        //  想一想为什么next[0]会从0开始？为什么会从1开始？？？
         int[] next = new int[paternLen];
         for(int i = 1, j = 0; i < paternLen; i++) {
             while(j > 0 && patern[i] != patern[j]) j = next[j - 1];
             if(patern[i] == patern[j]) j++;
             // TODO：next[i] = j 表示（以i-j为起点，i为终点）的后缀 = （以0为起点，j为终点）的前缀 相等，且此字符串的长度最长。
+            //  Partial Match Table中的值是字符串的前缀集合与后缀集合的交集中最长元素的长度。
             next[i] = j;
         }
 
         for(int i = 0, j = 0; i < strLen; i++) {
             while(j > 0 && str[i] != patern[j]) j = next[j - 1];
             if(str[i] == patern[j]) j++;
-            if(j == paternLen) {
+            if(j == paternLen) { // 成功的匹配
                 bw.write(i - paternLen + 1 + " ");
                 j = next[j - 1];
             }
