@@ -26,6 +26,9 @@ import java.io.*;
  * ababa
  * 输出样例：
  * 0 2
+ *
+ *
+ * https://www.acwing.com/problem/content/833/
  */
 public class A831_kmp {
     // TODO:
