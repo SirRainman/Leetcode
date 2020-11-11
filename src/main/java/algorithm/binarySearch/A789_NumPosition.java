@@ -37,71 +37,78 @@ import java.util.Scanner;
  * https://www.acwing.com/activity/content/code/content/548089/
  */
 public class A789_NumPosition {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int len = in.nextInt(), times = in.nextInt();
-        int[] nums = new int[len];
-        for(int i = 0; i < len; i++) nums[i] = in.nextInt();
-        while(times-- > 0) {
-            int x = in.nextInt();
-            if(x < nums[0] || x > nums[nums.length - 1]) {
-                System.out.println("-1 -1");
-                continue;
-            }
-
-            // TODO:注意传递的参数是len,不是 len - 1
-            int start = binarySearch(nums, 0, len, x - 1);
-            if(start == len || nums[start] != x) {
-                System.out.println("-1 -1");
-                continue;
-            }
-
-            int end = binarySearch(nums, 0, len, x);
-            System.out.println(start + " "  + (end - 1));
-        }
-    }
-
-    public static int binarySearch(int[] nums, int left, int right, int x) {
+    static int binarySearch(int[] nums, int target) {
+        // TODO:注意right = len
+        int left = 0, right = nums.length;
         while(left < right) {
+            // TODO:注意mid = left + (right - left) / 2;
             int mid = left + (right - left) / 2;
-            if(nums[mid] <= x) left = mid + 1;
+            // TODO:注意区间的变化
+            if(target >= nums[mid]) left = mid + 1;
             else right = mid;
         }
         return left;
     }
 
 
-    public static void binarySearch2(){
+    public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        int q = in.nextInt();
-        int[] nums = new int[n];
-        for(int i = 0; i < n; i++) nums[i] = in.nextInt();
-        while(q-- > 0) {
-            int x = in.nextInt();
-            int l = 0, r = n - 1;
-            while(l < r){
-                // TODO：想一想为什么 mid = l + r >> 1 ？？？
-                int mid = l + r >> 1;
-                // TODO：想一想为什么 l = mid + 1 ？？？
-                if(nums[mid] < x) l = mid + 1;
-                else r = mid;
-            }
-            if(nums[l] != x){
+        int len = in.nextInt(), times = in.nextInt();
+        int[] nums = new int[len];
+        for(int i = 0; i < len; i ++) nums[i] = in.nextInt();
+
+        while(times-- > 0) {
+            int target = in.nextInt();
+            if(target < nums[0] || target > nums[len - 1]) {
                 System.out.println("-1 -1");
                 continue;
             }
-            else System.out.print(l + " ");
-            l = 0;
-            r = n - 1;
-            while(l < r){
-                // TODO：想一想为什么 mid = l + r + 1 >> 1 ？？？
-                int mid = l + r + 1 >> 1;
-                // TODO：想一想为什么 r = mid - 1 ？？？
-                if(nums[mid] > x) r = mid - 1;
-                else l = mid;
+            int start = binarySearch(nums, target - 1);
+            if(start == len || nums[start] != target) {
+                System.out.println("-1 -1");
+                continue;
             }
-            System.out.println(l);
+            int end = binarySearch(nums, target);
+            System.out.println(start + " " + (end - 1));
+        }
+    }
+
+
+    public static void binarySearch2(){
+        Scanner in = new Scanner(System.in);
+        int len = in.nextInt(), times = in.nextInt();
+        int[] nums = new int[len];
+        for(int i = 0; i < len; i ++) nums[i] = in.nextInt();
+
+        while(times-- > 0) {
+            int target = in.nextInt();
+            if(target < nums[0] || target > nums[len - 1]) {
+                System.out.println("-1 -1");
+                continue;
+            }
+
+            int start = -1, end = -1;
+            int left = 0, right = len - 1;
+            while(left < right) {
+                int mid = left + (right - left) / 2;
+                if(target <= nums[mid]) right = mid;
+                else left = mid + 1;
+            }
+            if(nums[left] != target) {
+                System.out.println("-1 -1");
+                continue;
+            }
+            start = left;
+
+            left = 0;
+            right = len - 1;
+            while(left < right) {
+                int mid = left + (right - left + 1) / 2;
+                if(target >= nums[mid]) left = mid;
+                else right = mid - 1;
+            }
+            end = left;
+            System.out.println(start + " " + end);
         }
     }
 }

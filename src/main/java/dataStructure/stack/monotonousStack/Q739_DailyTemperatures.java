@@ -23,35 +23,14 @@ public class Q739_DailyTemperatures {
         int length = T.length;
         int[] ans = new int[length];
         Deque<Integer> stack = new LinkedList<Integer>();
-        for(int i = length - 1; i >= 0; i--) {
-            while(!stack.isEmpty() && T[i] >= T[stack.peek()]) {
+        for (int i = length - 1; i >= 0; i--) {
+            // TODO：注意这个单调栈存的是下标
+            while (!stack.isEmpty() && T[i] >= T[stack.peek()]) {
                 stack.pop();
             }
             ans[i] = stack.isEmpty() ? 0 : stack.peek() - i;
             stack.push(i);
         }
-        return ans;
-    }
-
-    //TODO：动态规划
-    public int[] dailyTemperatures(int[] T) {
-        int length = T.length;
-        int[] ans = new int[length];
-        for(int i = length-1; i >= 0; i--) {
-            int j = i + 1;
-            while(j < length) {
-                if(T[j] > T[i]) {
-                    ans[i] = j - i;
-                    break;
-                } else if(ans[j] == 0) {
-                    ans[i] = 0;
-                    break;
-                } else {
-                    j += ans[j];
-                }
-            }
-        }
-
         return ans;
     }
 }

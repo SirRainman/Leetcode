@@ -1,5 +1,7 @@
 package dataStructure.array;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.util.Scanner;
 
 /**
@@ -7,7 +9,6 @@ import java.util.Scanner;
  *
  * 输入格式
  * 第一行包含整数n。
- *
  * 第二行包含n个整数，表示整个数列。
  *
  * 输出格式
@@ -33,9 +34,9 @@ public class A801_Bit {
             while(x > 0) {
                 // TODO: 判断x 第k位是否是1    (x >> k) & 1
                 // if((x & 1) == 1) ans++;
-                // x = x >> 1;
+                // x = x >>> 1;
 
-                // 每次减去x的最后一位1所对应的数值
+                // TODO: 每次减去x的最后一位1所对应的数值
                 x -= lowbit(x);
                 ans++;
             }
@@ -43,15 +44,22 @@ public class A801_Bit {
         }
     }
 
+    // TODO：判断最右边的一位1在什么位置
     public static int lowbit(int x) {
         // 原码  x       = 1010...1000
         // 反码 ~x       = 0101...0111
         // 补码 ~x + 1   = 0101...1000
-        //      x&(~x+1) = 0000...1000
-        // 在计算机语言 中-x 的值， 其实就是在x的值的基础上进行按位取反(~x)之后在增加1所得
+        // x & ( ~x + 1) = 0000...1000
+        // -x = (~x + 1)
+
         // TODO：
         //  1想一想什么是源码、反码、补码？
         //  2为什么计算机中要用-x表示~x+1
         return x & -x;
     }
+
+    // TODO: 减掉最后一位1后的大小
+    // 原码  x       = 1010...1000
+    //      x - 1   = 1010...0111
+    // x & (x - 1)  = 1010...0000
 }

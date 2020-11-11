@@ -1,4 +1,4 @@
-package algorithm.differance;
+package algorithm.diff_prefixSum;
 
 import java.util.Scanner;
 

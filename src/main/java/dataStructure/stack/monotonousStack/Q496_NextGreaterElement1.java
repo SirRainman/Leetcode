@@ -36,22 +36,20 @@ import java.util.Map;
  */
 public class Q496_NextGreaterElement1 {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        int length = nums2.length;
-        Deque<Integer> stack = new LinkedList<>();
-        Map<Integer, Integer> numIndex = new HashMap<>();
-
-        for(int i = length-1; i >= 0; i--) {
-            numIndex.put(nums2[i], i);
-            while(!stack.isEmpty() && nums2[i] >= stack.peek()) {
-                stack.pop();
-            }
-            numIndex.put(nums2[i], stack.isEmpty() ? -1 : stack.peek());
-            stack.push(nums2[i]);
+        Map<Integer, Integer> map = new HashMap<>();
+        int[] stack = new int[nums2.length];
+        int top = -1;
+        // TODO:
+        //  1 左边的第一个数 和 右边的第一个数 在遍历方向上有区别吗？
+        //  2 最大栈还是最小栈？
+        for(int i = nums2.length - 1; i >= 0; i--) {
+            while(top > -1 && nums2[i] >= stack[top]) top--;
+            map.put(nums2[i], top == -1 ? -1 : stack[top]);
+            stack[++top] = nums2[i];
         }
-
         int[] ans = new int[nums1.length];
         for(int i = 0; i < nums1.length; i++) {
-            ans[i] = numIndex.get(nums1[i]);
+            ans[i] = map.get(nums1[i]);
         }
         return ans;
     }

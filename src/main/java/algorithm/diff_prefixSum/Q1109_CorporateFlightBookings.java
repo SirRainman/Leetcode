@@ -1,4 +1,4 @@
-package algorithm.differance;
+package algorithm.diff_prefixSum;
 
 /**
  *  这里有n个航班，它们分别从 1 到 n 进行编号。
@@ -28,20 +28,21 @@ package algorithm.differance;
  */
 public class Q1109_CorporateFlightBookings {
     public int[] corpFlightBookings(int[][] bookings, int n) {
-        int[] ans = new int[n];
+        int[] seats = new int[n];
+        int[] diff = new int[n + 1];
 
-        for(int i = 0; i < bookings.length; i++) {
-            int start = bookings[i][0]-1, end = bookings[i][1]-1, bookNum = bookings[i][2];
-            ans[start] += bookNum;
-            if(end+1 < n) {
-                ans[end+1] -= bookNum;
-            }
+        // TODO:写之前一定要注意差分公式的写法
+        // seats[i] = seats[i - 1] + diff[i]
+        for(int[] book : bookings) {
+            book[0]--;book[1]--;
+            diff[book[0]] += book[2];
+            diff[book[1] + 1] -= book[2];
         }
 
-        for(int i = 1; i < n; i++) {
-            ans[i] += ans[i-1];
+        seats[0] = diff[0];
+        for(int i = 0; i < n; i++) {
+            seats[i] = seats[i - 1] + diff[i];
         }
-
-        return ans;
+        return seats;
     }
 }

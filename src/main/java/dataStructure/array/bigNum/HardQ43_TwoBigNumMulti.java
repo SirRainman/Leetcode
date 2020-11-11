@@ -23,7 +23,7 @@ package dataStructure.array.bigNum;
  * 链接：https://leetcode-cn.com/problems/multiply-strings
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q43_TwoBigNumMulti {
+public class HardQ43_TwoBigNumMulti {
     class Solution {
         public String multiply(String num1, String num2) {
             if(num1.equals("0") || num2.equals("0")) return "0";
@@ -37,6 +37,7 @@ public class Q43_TwoBigNumMulti {
                 for(int j = B.length - 1; j >= 0; j--) {
                     int b = B[j] - '0';
                     // TODO:竖式计算，每次都能确定一位
+                    //  想一想为什么会出现这种情况？？？
                     int sum = ans[i + j + 1] + a * b;
                     ans[i + j + 1] = sum % 10;
                     ans[i + j] += sum / 10;

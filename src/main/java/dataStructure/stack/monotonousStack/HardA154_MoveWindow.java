@@ -40,7 +40,7 @@ import java.io.InputStreamReader;
  * -1 -3 -3 -3 3 3
  * 3 3 5 5 6 7
  */
-public class A154_MoveWindow {
+public class HardA154_MoveWindow {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -52,6 +52,7 @@ public class A154_MoveWindow {
         str = br.readLine().split(" ");
         for (int i = 0; i < len; i++) nums[i] = Integer.parseInt(str[i]);
 
+        // TODO:想一想为什么队列的长度不能为窗口的大小 因为front rear是数组下标，且队列并不可以动态的添加或减少元素
         int[] queue = new int[1000010];
         int rear = -1, front = 0;
         // 求窗口之中的最小值
