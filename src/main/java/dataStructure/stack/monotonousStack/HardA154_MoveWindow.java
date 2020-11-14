@@ -61,7 +61,7 @@ public class HardA154_MoveWindow {
             if (front <= rear && queue[front] < i - k + 1) front++; //因为每次窗口只移动一位，所以用if
             // 当当前元素比对尾要小时，说明队尾的元素永远不可能是窗口中的最小值
             while (front <= rear && nums[i] <= nums[queue[rear]]) rear--; // 类似单调栈
-
+            // TODO:想一想为什么不直接存值，而是存下标？？？
             queue[++rear] = i;
             if (i >= k - 1) System.out.print(nums[queue[front]] + " ");
         }

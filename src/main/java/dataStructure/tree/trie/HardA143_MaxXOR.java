@@ -43,7 +43,7 @@ public class HardA143_MaxXOR {
         int parent = 0;
         for(int i = 30; i >= 0; i--) {
             int bit = x >> i & 1;
-            if(trie[parent][bit ^ 1] != 0) { // 每一次检索的时候,我们都走与当前这一位相反的位置走,也就是让Xor值最大
+            if(trie[parent][bit ^ 1] != 0) { // 说明他的相反的方向有节点，每一次检索的时候,我们都走与当前这一位相反的位置走,也就是让Xor值最大
                 parent = trie[parent][bit ^ 1];
                 ans = ans * 2 + 1;
             } else { // 如果说没有路可以走的话,那么就走相同的路.
