@@ -40,7 +40,7 @@ public class A849_Dijkstra1 {
 
 
     // TODO: 求1号点到n号点的最短路，如果不存在则返回-1
-    //  时间复杂是 O(n2+m)O(n2+m), nn 表示点数，mm 表示边数
+    //  时间复杂是 O(n2+m), n 表示点数，m 表示边数
     public static int dijkstra() {
         dist = new int[n + 1];
         st = new boolean[n + 1]; // 存放确定了最小距离的点

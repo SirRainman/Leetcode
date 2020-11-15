@@ -59,7 +59,8 @@ public class A850_Dijkstra2_heap {
         Arrays.fill(dist, INF);
         dist[1] = 0;
 
-        // TODO:用堆进行维护罪小值
+        // TODO:用堆进行维护最小值
+        //  想一想堆优化之后各个步骤的时间复杂度是多少？
         PriorityQueue<int[]> heap = new PriorityQueue<>(Comparator.comparing(x -> x[0]));
         heap.offer(new int[] {dist[1], 1});
 
