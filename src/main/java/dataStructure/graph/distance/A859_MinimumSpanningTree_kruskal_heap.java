@@ -2,6 +2,7 @@ package dataStructure.graph.distance;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /**
@@ -34,41 +35,14 @@ import java.util.Scanner;
  *
  * https://www.acwing.com/problem/content/861/
  */
-public class A859_MinimumSpanningTree_kruskal {
+public class A859_MinimumSpanningTree_kruskal_heap {
     static int INF = 0x3f3f3f3f;
     static int n, m;
-    static int[][] edges;
-
     static int[] parent;
 
     public static int find(int x) {
-        if(x != parent[x]) parent[x] = find(parent[x]);
+        if(parent[x] != x) parent[x] = find(parent[x]);
         return parent[x];
-    }
-
-    public static int kruskal() {
-        // 1.先对边的权值进行排序
-        // Arrays.sort(edges, new Comparator<int[]>() {
-        //     public int compare(int[] e1, int[] e2) {
-        //         return e1[2] - e2[2];
-        //     }
-        // });
-        Arrays.sort(edges, (o1, o2) -> o1[2] - o2[2]);
-
-        int res = 0, count = 0; // res是最小生成树的权重 count记录边的数目
-        // 遍历每一条边
-        for(int[] e : edges) {
-            if(count == n - 1) break;
-            int a = e[0], b = e[1], w = e[2];
-            int pa = find(a), pb = find(b);
-            if(pa != pb) {
-                parent[pa] = pb;
-                count ++;
-                res += w;
-            }
-        }
-
-        return count < n - 1 ? INF : res;
     }
 
     public static void main(String[] args) {
@@ -76,18 +50,28 @@ public class A859_MinimumSpanningTree_kruskal {
         n = in.nextInt();
         m = in.nextInt();
 
-        // 初始化并查集
         parent = new int[n + 1];
         for(int i = 0; i <= n; i++) parent[i] = i;
 
-        edges = new int[m][3];
+        // TODO:注意堆优化之后的写法
+        PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> o1[2] - o2[2]);
         for(int i = 0; i < m; i++) {
-            edges[i][0] = in.nextInt();
-            edges[i][1] = in.nextInt();
-            edges[i][2] = in.nextInt();
+            int a = in.nextInt(), b = in.nextInt(), w = in.nextInt();
+            heap.offer(new int[] {a, b, w});
         }
 
-        int ans = kruskal();
-        System.out.print(ans == INF ? "impossible" : ans);
+        int res = 0, count = 0;
+        while(count < n - 1) {
+            if(heap.isEmpty()) break;
+            int[] edge = heap.poll();
+            int a = edge[0], b = edge[1], w = edge[2];
+            int pa = find(a), pb = find(b);
+            if(pa != pb) {
+                parent[pa] = pb;
+                count++;
+                res += w;
+            }
+        }
+        System.out.print(count < n - 1 ? "impossible" : res);
     }
 }

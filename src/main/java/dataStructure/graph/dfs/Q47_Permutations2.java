@@ -23,7 +23,7 @@ import java.util.Set;
  * 链接：https://leetcode-cn.com/problems/permutations-ii
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class HardQ47_Permutations2 {
+public class Q47_Permutations2 {
 
     List<Integer> path = new ArrayList<>();
     List<List<Integer>> ans = new ArrayList<>();

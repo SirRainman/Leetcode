@@ -40,6 +40,14 @@ public class A854_AnyVertexShortestPath_floyd {
     static int[][] graph;
 
     public static void floyd() {
+        // TODO：想一想为什么floyd要把k放在最外层？？？
+        //  动态规划思想，Floyd算法的本质是DP，而k是DP的阶段，因此要写最外面。
+        //  g[k][i][j] 表示i到j可以通过1...k之间的中间节点的最短路径
+        //      g[k][i][j] 可以从g[k - 1][i][j]转移过来，表示不经过k
+        //      g[k][i][j] 可以从g[k - 1][i][k] + g[k - 1][k][j]转移过来，表示经过k
+        //  g[k][i][j] = min( g[k - 1][i][j] , g[k - 1][i][k] + g[k - 1][k][j]  )
+        //  可以看到，g的最外一层一维空间可以忽略，因为g[k] 只与 g[k - 1]有关。
+        //  因此在计算g[k]时，要求g[k-1]必须被更新
         for(int k = 1; k <= n; k++) {
             for(int i = 1; i <= n; i++) {
                 for(int j = 1; j <= n; j++) {

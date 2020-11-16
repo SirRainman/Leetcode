@@ -34,12 +34,12 @@ import java.util.Scanner;
  */
 public class A861_BipartiteGraphMaxMatch {
     static int N = 510, M = 100010;
-    static int n1, n2, m;
+    static int n1, n2, m;   // n1表示第一个集合中的点数，n2表示第二个集合中的点数
     static int idx = 0;
     static int[] e, next, head;
 
-    static int[] matches;
-    static boolean[] st;
+    static int[] matches;   // 存储第二个集合中的每个点当前匹配的第一个集合中的点是哪个
+    static boolean[] st;    // 表示第二个集合中的每个点是否已经被遍历过
 
     public static void add(int a, int b) {
         e[idx] = b;
@@ -84,7 +84,7 @@ public class A861_BipartiteGraphMaxMatch {
         }
 
         int res = 0;
-        for(int i = 1; i <= n1; i++) {
+        for(int i = 1; i <= n1; i++) { // 求最大匹配数，依次枚举第一个集合中的每个点能否匹配第二个集合中的点
             Arrays.fill(st, false);
             if(find(i)) res++;
         }

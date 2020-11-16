@@ -32,7 +32,7 @@ import java.util.Scanner;
  *
  * https://www.acwing.com/problem/content/848/
  */
-public class HardA846_TreeCenterOfGravity {
+public class A846_TreeCenterOfGravity {
     static int[] head, e, next; // 拉链式结构，存储每个节点的孩子节点
     static int idx = 0, ans, n;
     static boolean[] isVisited;

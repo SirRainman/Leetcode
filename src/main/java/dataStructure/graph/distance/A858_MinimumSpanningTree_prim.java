@@ -36,7 +36,7 @@ import java.util.Scanner;
  * 6
  *
  *
- * https://www.acwing.com/problem/content/860/
+ * https://www.acwing.com/probdglem/content/860/
  */
 public class A858_MinimumSpanningTree_prim {
 
@@ -77,7 +77,11 @@ public class A858_MinimumSpanningTree_prim {
         Scanner in = new Scanner(System.in);
         n = in.nextInt(); m = in.nextInt();
         graph = new int[n + 1][n + 1];
-        for(int[] g : graph) Arrays.fill(g, INF);
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
+                graph[i][j] = i == j ? 0 : INF;
+            }
+        }
         for(int i = 0; i < m; i++) {
             int a = in.nextInt(), b = in.nextInt(), value = in.nextInt();
             value = Math.min(value, graph[a][b]);

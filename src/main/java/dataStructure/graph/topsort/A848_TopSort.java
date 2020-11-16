@@ -1,4 +1,4 @@
-package dataStructure.graph.bfs;
+package dataStructure.graph.topsort;
 
 import java.util.Arrays;
 import java.util.Deque;
