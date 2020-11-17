@@ -48,10 +48,20 @@ public class A852_NegativeCircle_spfa {
         idx++;
     }
 
+    // TODO：SPFA（Shortest Path Faster Algorithm）（队列优化）算法是求单源最短路径的一种算法。
+    //  1.SPFA是在Bellman-ford算法的基础上加上一个队列优化，减少了冗余的松弛操作，是一种高效的最短路算法。
+    //      起点s到某一个点的最短路径的第一条边，必定是s与s的邻接点连成的边。所以当我们在第一次松弛（即第一次迭代求解时）时，松弛的边必定包含最短路径的第一条边。
+    //      而最短路径的第二条边，必定是s的邻接点与s的邻接点的邻接点连成的边。这样以此类推。
+    //  2.Bellman-Ford算法虽然可以处理负环，但是时间复杂度为O(ne)，e为图的边数，在图为稠密图的时候，是不可接受的。
+    //      Bellman-Ford算法的缺点在于，当某一个迭代求解已经获得了所有的最短路径后，它还是会继续执行没有执行完的迭代求解。但其实不用这样。
+
+    // TODO：求负环的常用方法，基于SPFA，一般都用方法 2（该题也是用方法 2）：
+    //  方法 1：统计每个点入队的次数，如果某个点入队n次，则说明存在负环
+    //  方法 2：统计当前每个点的最短路中所包含的边数，如果某点的最短路所包含的边数大于等于n，则也说明存在环
     public static boolean spfa() {
         int[] dist = new int[n  + 1];
         Arrays.fill(dist, INF);
-        int[] count = new int[n  + 1];
+        int[] count = new int[n  + 1]; // 记录从源点到该点的 最短路的边数
         boolean[] st = new boolean[n + 1];
 
         Deque<Integer> queue = new LinkedList<>();

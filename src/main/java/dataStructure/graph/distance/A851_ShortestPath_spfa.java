@@ -47,7 +47,11 @@ public class A851_ShortestPath_spfa {
         head[a] = idx;
         idx++;
     }
-
+    // TODO: 动态逼近法：
+    //  设立一个先进先出的队列用来保存待优化的结点，优化时每次取出队首结点u，
+    //  并且用u点当前的最短路径估计值对离开u点所指向的结点v进行松弛操作，
+    //  如果v点的最短路径估计值有所调整，且v点不在当前的队列中，就将v点放入队尾。
+    //  这样不断从队列中取出结点来进行松弛操作，直至队列空为止。
     public static int spfa() {
         int[] dist = new int[n + 1];
         Arrays.fill(dist, INF);

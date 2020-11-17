@@ -61,22 +61,22 @@ public class A850_Dijkstra2_heap {
 
         // TODO:用堆进行维护最小值
         //  想一想堆优化之后各个步骤的时间复杂度是多少？
-        PriorityQueue<int[]> heap = new PriorityQueue<>(Comparator.comparing(x -> x[0]));
+        // PriorityQueue<int[]> heap = new PriorityQueue<>(Comparator.comparing(x -> x[0]));
+        PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> o1[0] - o2[0]);
         heap.offer(new int[] {dist[1], 1});
 
         st = new boolean[n + 1];
 
         while(!heap.isEmpty()) {
             int[] t = heap.poll();
-            int distance = t[0], vertex = t[1];
-
-            if(!st[vertex]) {
-                st[vertex] = true;
-                for(int i = head[vertex]; i != -1; i = next[i]) {
+            int u = t[0];
+            if(!st[u]) {
+                st[u] = true;
+                for(int i = head[u]; i != -1; i = next[i]) {
                     int v = e[i];
-                    if(dist[v] > dist[vertex] + weight[i]) {
-                        dist[v] = dist[vertex] + weight[i];
-                        heap.offer(new int[]{dist[v], v});
+                    if(dist[v] > dist[u] + weight[i]) {
+                        dist[v] = dist[u] + weight[i];
+                        heap.offer(new int[]{v, dist[v]});
                     }
                 }
             }
