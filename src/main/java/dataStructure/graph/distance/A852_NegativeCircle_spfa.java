@@ -64,6 +64,7 @@ public class A852_NegativeCircle_spfa {
         int[] count = new int[n  + 1]; // 记录从源点到该点的 最短路的边数
         boolean[] st = new boolean[n + 1];
 
+        // TODO: 为什不没有设置dist[i] = 0 ? 这样每个dist[i]不都是大于INF的吗？？？
         Deque<Integer> queue = new LinkedList<>();
         for(int i = 1; i <= n; i++) {
             queue.offer(i);

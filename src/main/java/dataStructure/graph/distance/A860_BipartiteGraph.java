@@ -1,9 +1,6 @@
 package dataStructure.graph.distance;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * 给定一个n个点m条边的无向图，图中可能存在重边和自环。
@@ -26,6 +23,8 @@ import java.util.Scanner;
  * 2 4
  * 输出样例：
  * Yes
+ *
+ * https://www.acwing.com/problem/content/description/862/
  */
 public class A860_BipartiteGraph {
     static int N = 200010;
@@ -59,9 +58,6 @@ public class A860_BipartiteGraph {
     }
 
     public static boolean check() {
-        color = new int[n + 1];
-        Arrays.fill(color, -1);
-
         for(int i = 1; i <= n; i++) {
             if(color[i] == -1) {
                 if( !dfs(i, 0) ) {
@@ -69,26 +65,22 @@ public class A860_BipartiteGraph {
                 }
             }
         }
-
         return true;
     }
 
     public static boolean bfs_check () {
-        color = new int[n + 1];
-        Arrays.fill(color, -1);
-        Queue<Integer> queue = new LinkedList<Integer>();
+        Deque<Integer> queue = new LinkedList<>();
         for(int i = 1; i <= n; i++) {
-            //若该点未染色
             if(color[i] == -1) {
                 color[i] = 0;
-                queue.add(i);
+                queue.offer(i);
                 while(!queue.isEmpty()) {
                     int u = queue.poll();
                     for(int j = head[u]; j != -1; j = next[j]) {
                         int v = e[j];
                         if(color[v] == -1) {
                             color[v] = 1 - color[u];
-                            queue.add(v);
+                            queue.offer(v);
                         } else if(color[v] == color[u]) {
                             return false;
                         }
@@ -108,6 +100,9 @@ public class A860_BipartiteGraph {
         next = new int[N];
         head = new int[n + 1];
         Arrays.fill(head, -1);
+
+        color = new int[n + 1];
+        Arrays.fill(color, -1);
 
         for(int i = 0; i < m; i++) {
             int a = in.nextInt();

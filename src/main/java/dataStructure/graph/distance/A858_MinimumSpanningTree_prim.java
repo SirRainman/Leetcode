@@ -32,7 +32,7 @@ import java.util.Scanner;
  * 6
  *
  *
- * https://www.acwing.com/probdglem/content/860/
+ * https://www.acwing.com/problem/content/860/
  */
 public class A858_MinimumSpanningTree_prim {
 

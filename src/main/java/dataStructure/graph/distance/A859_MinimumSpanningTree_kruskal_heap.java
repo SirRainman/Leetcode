@@ -38,12 +38,37 @@ import java.util.Scanner;
 public class A859_MinimumSpanningTree_kruskal_heap {
     static int INF = 0x3f3f3f3f;
     static int n, m;
+    static int[][] edges;
+
     static int[] parent;
 
     public static int find(int x) {
-        if(parent[x] != x) parent[x] = find(parent[x]);
+        if(parent[x] != x) {
+            parent[x] = find(parent[x]);
+        }
         return parent[x];
     }
+
+    public static int kruskal() {
+        int ans = 0;
+        int[] dist = new int[n + 1];
+        Arrays.fill(dist, INF);
+        PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> o1[2] - o2[2]);
+        for(int[] e : edges) heap.offer(e);
+        int count = 0;
+        while( !heap.isEmpty() && count < n - 1) {
+            int[] e = heap.poll();
+            int a = e[0], b = e[1], w = e[2];
+            int pa= find(a), pb = find(b);
+            if(pa != pb) {
+                parent[pa] = pb;
+                ans += w;
+                count++;
+            }
+        }
+        return count == n - 1 ? ans : INF;
+    }
+
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -51,27 +76,16 @@ public class A859_MinimumSpanningTree_kruskal_heap {
         m = in.nextInt();
 
         parent = new int[n + 1];
-        for(int i = 0; i <= n; i++) parent[i] = i;
+        for(int i = 1; i <= n; i++) parent[i] = i;
 
-        // TODO:注意堆优化之后的写法
-        PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> o1[2] - o2[2]);
+        edges = new int[m][3];
         for(int i = 0; i < m; i++) {
-            int a = in.nextInt(), b = in.nextInt(), w = in.nextInt();
-            heap.offer(new int[] {a, b, w});
+            edges[i][0] = in.nextInt();
+            edges[i][1] = in.nextInt();
+            edges[i][2] = in.nextInt();
         }
 
-        int res = 0, count = 0;
-        while(count < n - 1) {
-            if(heap.isEmpty()) break;
-            int[] edge = heap.poll();
-            int a = edge[0], b = edge[1], w = edge[2];
-            int pa = find(a), pb = find(b);
-            if(pa != pb) {
-                parent[pa] = pb;
-                count++;
-                res += w;
-            }
-        }
-        System.out.print(count < n - 1 ? "impossible" : res);
+        int ans = kruskal();
+        System.out.print(ans > INF / 2 ? "impossible" : ans);
     }
 }

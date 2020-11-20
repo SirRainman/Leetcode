@@ -62,13 +62,16 @@ public class A850_Dijkstra2_heap {
         // TODO:用堆进行维护最小值
         //  想一想堆优化之后各个步骤的时间复杂度是多少？
         // PriorityQueue<int[]> heap = new PriorityQueue<>(Comparator.comparing(x -> x[0]));
-        PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> o1[0] - o2[0]);
-        heap.offer(new int[] {dist[1], 1});
+        PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
+        heap.offer(new int[] {1, dist[1]});
 
         st = new boolean[n + 1];
 
         while(!heap.isEmpty()) {
             int[] t = heap.poll();
+            // TODO:为什么从堆中取出来的点就是单源最短路径？
+            //  因为目前离 v1顶点最近的是 v3顶点，并且这个图所有的边都是正数，那么肯定不可能通过第三个顶点中转，使得 v1顶点到 v3顶点的路程进一步缩短了。
+            //  因为 v1顶点到其它顶点的路程肯定没有 v1到 v3顶点短.
             int u = t[0];
             if(!st[u]) {
                 st[u] = true;

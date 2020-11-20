@@ -40,7 +40,7 @@ public class A849_Dijkstra1 {
 
 
     // TODO: 求1号点到n号点的最短路，如果不存在则返回-1
-    //  时间复杂是 O(n2+m), n 表示点数，m 表示边数
+    //  时间复杂是 O(n^2+m), n 表示点数，m 表示边数
     public static int dijkstra() {
         dist = new int[n + 1];
         st = new boolean[n + 1]; // 存放确定了最小距离的点
@@ -84,73 +84,76 @@ public class A849_Dijkstra1 {
         int ans = dijkstra();
         System.out.println(ans);
     }
-}
 
-// TODO：稀疏图
-class Main {
 
-    static int N = 200020;
-    static int INF = 0x3f3f3f3f;
 
-    static int n, m;
-    static int idx = 0;
-    static int[] e, weight, head, next; // 稀疏图
 
-    static int[] dist;
-    static boolean[] st;
 
-    public static void add (int a, int b, int w) {
-        e[idx] = b;
-        weight[idx] = w;
-        next[idx] = head[a];
-        head[a] = idx;
-        idx++;
-    }
+    // TODO：稀疏图
+    static class Main {
+        static int N = 200020;
+        static int INF = 0x3f3f3f3f;
 
-    public static int dijkstra() {
-        dist[1] = 0;
+        static int n, m;
+        static int idx = 0;
+        static int[] e, weight, head, next; // 稀疏图
 
-        for(int i = 0; i < n; i++) {
-            int t = -1;
-            for(int j = 1; j <= n; j++) {
-                if(!st[j] && (t == -1 || dist[t] > dist[j])) {
-                    t = j;
+        static int[] dist;
+        static boolean[] st;
+
+        public static void add (int a, int b, int w) {
+            e[idx] = b;
+            weight[idx] = w;
+            next[idx] = head[a];
+            head[a] = idx;
+            idx++;
+        }
+
+        public static int dijkstra() {
+            dist[1] = 0;
+
+            for(int i = 0; i < n; i++) {
+                int t = -1;
+                for(int j = 1; j <= n; j++) {
+                    if(!st[j] && (t == -1 || dist[t] > dist[j])) {
+                        t = j;
+                    }
+                }
+
+                st[t] = true;
+
+                for(int j = head[t]; j != -1; j = next[j]) {
+                    int v = e[j];
+                    dist[v] = Math.min(dist[v], dist[t] + weight[j]);
                 }
             }
 
-            st[t] = true;
+            return dist[n] == INF ? -1 : dist[n];
+        }
 
-            for(int j = head[t]; j != -1; j = next[j]) {
-                int v = e[j];
-                dist[v] = Math.min(dist[v], dist[t] + weight[j]);
+        public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            n = in.nextInt();
+            m = in.nextInt();
+
+            e = new int[N];
+            weight = new int[N];
+            next = new int[N];
+            head = new int[n + 1];
+            Arrays.fill(head, -1);
+
+            dist = new int[n + 1];
+            Arrays.fill(dist, INF);
+            st = new boolean[n + 1];
+
+
+            for(int i = 0; i < m; i++) {
+                int a = in.nextInt(), b = in.nextInt(), w = in.nextInt();
+                add(a, b, w);
             }
+
+            int ans = dijkstra();
+            System.out.print(ans);
         }
-
-        return dist[n] == INF ? -1 : dist[n];
-    }
-
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        n = in.nextInt();
-        m = in.nextInt();
-
-        e = new int[N];
-        weight = new int[N];
-        next = new int[N];
-        head = new int[n + 1];
-        Arrays.fill(head, -1);
-
-        dist = new int[n + 1];
-        Arrays.fill(dist, INF);
-        st = new boolean[n + 1];
-
-
-        for(int i = 0; i < m; i++) {
-            int a = in.nextInt(), b = in.nextInt(), w = in.nextInt();
-            add(a, b, w);
-        }
-
-        int ans = dijkstra();
-        System.out.print(ans);
     }
 }
