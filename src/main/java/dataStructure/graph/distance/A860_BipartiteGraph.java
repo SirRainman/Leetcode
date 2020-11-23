@@ -32,7 +32,7 @@ public class A860_BipartiteGraph {
     static int idx = 0;
     static int[] e, head, next;
 
-    static int[] color;
+    static int[] color; // 表示每个点的颜色，-1表示为染色，0表示白色，1表示黑色
 
     public static void add(int a, int b) {
         e[idx] = b;

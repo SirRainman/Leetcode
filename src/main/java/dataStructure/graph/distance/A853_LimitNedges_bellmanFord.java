@@ -44,13 +44,13 @@ public class A853_LimitNedges_bellmanFord {
         for(int i = 0; i < k; i++) {// 走k条边
             // back[]数组是上一次迭代后dist[]数组的备份，由于是每个点同时向外出发，因此需要对dist[]数组进行备份，若不进行备份会因此发生串联效应，影响到下一个点。
             int[] backup = Arrays.copyOf(dist, dist.length);
-            for(int j = 0; j < m; j++) {
-                int a = edges[j][0], b = edges[j][1], weight = edges[j][2];
+            for(int[] e : edges) {
+                int a = e[0], b = e[1], w = e[2];
                 // TODO:下面这句话没有看懂
-                // 连续进行松弛，在每次松弛时把每条边都更新一下，如果第n次迭代仍然会松弛三角不等式，
-                // 就说明存在一条长度是n+1的最短路径，由抽屉原理，路径中至少存在两个相同的点，说明图中存在负权回路。
-                // 图解：https://juejin.im/post/6844903661395509262
-                dist[b] = Math.min(dist[b], backup[a] + weight);
+                //  连续进行松弛，在每次松弛时把每条边都更新一下，如果第n次迭代仍然会松弛三角不等式，
+                //  就说明存在一条长度是n+1的最短路径，由抽屉原理，路径中至少存在两个相同的点，说明图中存在负权回路。
+                //  图解：https://juejin.im/post/6844903661395509262
+                dist[b] = Math.min(dist[b], backup[a] + w);
             }
         }
 

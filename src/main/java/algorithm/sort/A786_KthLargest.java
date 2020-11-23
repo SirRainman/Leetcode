@@ -54,12 +54,11 @@ public class A786_KthLargest {
 
     public static int partition(int[] nums, int left, int right) {
         int pivot = nums[left];
-        while (left < right) {
-            while (left < right && pivot <= nums[right]) right--;
-            if (left < right) nums[left] = nums[right];
-
-            while (left < right && pivot >= nums[left]) left++;
-            if (left < right) nums[right] = nums[left];
+        while(left < right) {
+            while(left < right && nums[right] >= pivot) right--;
+            nums[left] = nums[right];
+            while(left < right && nums[left] <= pivot ) left++;
+            nums[right] = nums[left];
         }
         nums[left] = pivot;
         return left;

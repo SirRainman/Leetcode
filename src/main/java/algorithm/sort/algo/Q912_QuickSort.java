@@ -1,5 +1,7 @@
 package algorithm.sort.algo;
 
+import java.util.Random;
+
 /**
  * 给你一个整数数组nums，请你将该数组升序排列。
  *
@@ -53,22 +55,32 @@ public class Q912_QuickSort {
 
     // TODO：我的写法
     public void quickSort(int[] nums, int left, int right) {
-        int mid = partition(nums, left, right);
+        //int mid = partition(nums, left, right);
+        int mid = randomPartition(nums, left, right);
         quickSort(nums, left, mid - 1);
         quickSort(nums, mid + 1, right);
     }
 
-    public int partition(int[] nums, int left, int right) {
-        if (left >= right) return left;
+    // TODO: 加了这个效率倍增！！！！
+    //  想一想这样避免了什么情况出现？
+    static Random random = new Random();
+    public static int randomPartition(int[] nums, int left, int right) {
+        int i = random.nextInt(right - left + 1) + left;
+        int t = nums[i];
+        nums[i] = nums[left];
+        nums[left] = t;
+        return partition(nums, left, right);
+    }
+
+    public static int partition(int[] nums, int left, int right) {
         int pivot = nums[left];
-        while (left < right) {
-            while (left < right && nums[right] >= pivot) right--;
-            nums[left++] = nums[right];
-            while (left < right && nums[left] <= pivot) left++;
-            nums[right--] = nums[left];
+        while(left < right) {
+            while(left < right && nums[right] >= pivot) right--;
+            nums[left] = nums[right];
+            while(left < right && nums[left] <= pivot ) left++;
+            nums[right] = nums[left];
         }
         nums[left] = pivot;
         return left;
     }
-
 }

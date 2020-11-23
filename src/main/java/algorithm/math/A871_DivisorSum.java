@@ -32,17 +32,26 @@ public class A871_DivisorSum {
     public static void updatePrimesDivisor(int x, Map<Integer, Integer> primes) {
         for(int i = 2; i <= x / i; i++) {
             if(x % i == 0) {
-                int count = 0;
+                int index = 0;
                 while(x % i == 0) {
+                    index ++;
                     x /= i;
-                    count++;
                 }
-                primes.put(i, primes.getOrDefault(i, 0) + count);
+                primes.put(i, primes.getOrDefault(i, 0) + index);
             }
         }
         if(x > 1) primes.put(x, primes.getOrDefault(x, 0) + 1);
     }
 
+    // TODO: 约数之和
+    //  证明：若n可以分解质因数：n = p1^a1 * p2^a2 * p3^a3 * ... * pk^ak,
+    //  可知p1^a1的约数有:p1^0, p1^1, p1^2......p1^a1
+    //  ...
+    //  同理可知，pk^ak的约数有:pk^0, pk^1, pk^2......pk^ak ；
+    //  实际上n的约数是在p1^a1、p2^a2、...、pk^ak每一个的约数中分别挑一个相乘得来，
+    //  可知共有(a₁+1)(a₂+1)(a₃+1)...(ak+1)种挑法，即约数的个数。
+    //  由乘法原理可知它们的和为
+    //  f(n)= (p1^0 + p1^1 + p1^2+... p1^a1) * (p2^0 + p2^1 + p2^2 + ... p2^a2) * ... * (pk^0 + pk^1 + pk^2 + ... pk^ak）
     public static long getDivisorSum(Map<Integer, Integer> primes) {
         long sum = 1;
         int M = (int )(1e9 + 7);

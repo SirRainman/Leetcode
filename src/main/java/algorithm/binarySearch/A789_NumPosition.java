@@ -38,7 +38,9 @@ import java.util.Scanner;
  */
 public class A789_NumPosition {
     static int binarySearch(int[] nums, int target) {
-        // TODO:注意right = len
+        // TODO:注意right = len，所以 mid = left + (right - left) / 2 是在中间靠右的位置
+        //  为什么mid在中间偏右的位置，left = mid + 1不会越界？？？
+        //  是不是因为只有第一次算mid的时候是靠右的，其他的情况都是靠左？？？
         int left = 0, right = nums.length;
         while(left < right) {
             // TODO:注意mid = left + (right - left) / 2;
@@ -88,8 +90,10 @@ public class A789_NumPosition {
             }
 
             int start = -1, end = -1;
+            // TODO：注意right = len - 1 而不是 len
             int left = 0, right = len - 1;
             while(left < right) {
+                // TODO:mid在中间靠左的位置，所以left = mid + 1不会越界
                 int mid = left + (right - left) / 2;
                 if(target <= nums[mid]) right = mid;
                 else left = mid + 1;
@@ -103,6 +107,7 @@ public class A789_NumPosition {
             left = 0;
             right = len - 1;
             while(left < right) {
+                // TODO：mid在中间靠右的位置，所以right = mid - 1不会越界
                 int mid = left + (right - left + 1) / 2;
                 if(target >= nums[mid]) left = mid;
                 else right = mid - 1;

@@ -34,17 +34,18 @@ import java.util.Scanner;
 public class A867_PrimeDivisor {
     public static List<int[]> getPrimeDivisor(int x) {
         List<int[]> ans = new ArrayList<>();
+
         for(int i = 2; i <= x / i; i++) {
             if(x % i == 0) {
-                int s = 0;
+                int index = 0;
                 while(x % i == 0) {
-                    s++;
-                    x /= i;
+                    index ++;
+                    x /= i; // 注意x发生了改变
                 }
-                ans.add(new int[]{i, s});
+                ans.add(new int[]{i, index});
             }
         }
-        if(x > 1) ans.add(new int[]{x, 1});
+        if(x > 1) ans.add(new int[]{x, 1}); // n中最多只包含一个大于sqrt(n)的质因子
         return ans;
     }
 
