@@ -56,7 +56,7 @@ public class HardQ222_CountCompleteTreeNodes {
             if (leftDepth == rightDepth) { // TODO: 如果左右的高度相同，说明左边的树一定是满的
                 count += Math.pow(2, leftDepth); // 2 ^ d - 1 之所以没有减1是因为算上了当前的跟节点
                 cur = cur.right;
-            } else { // 如果不相同说明，右边的一定是满的
+            } else { // TODO: 如果不相同说明，右边的一定是满的
                 count += Math.pow(2, rightDepth);
                 cur = cur.left;
             }
@@ -64,6 +64,15 @@ public class HardQ222_CountCompleteTreeNodes {
         }
         return count;
     }
+
+
+
+
+
+
+
+
+
 
     // TODO：判断第d层是否存在第idx个节点
     public boolean isExist(TreeNode root, int d, int idx) {

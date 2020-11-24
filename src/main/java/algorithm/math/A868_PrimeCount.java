@@ -18,7 +18,9 @@ import java.util.Scanner;
  * 输出样例：
  * 4
  *
- * https://www.acwing.com/problem/content/870/
+ * acwing: https://www.acwing.com/problem/content/870/
+ *
+ * leetcode: https://leetcode-cn.com/problems/count-primes/
  */
 public class A868_PrimeCount {
 
@@ -93,7 +95,7 @@ public class A868_PrimeCount {
             }
         }
         return count;
-    }w
+    }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);

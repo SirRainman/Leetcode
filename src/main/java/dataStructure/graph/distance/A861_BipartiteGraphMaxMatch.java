@@ -31,6 +31,8 @@ import java.util.Scanner;
  * 2 2
  * 输出样例：
  * 2
+ *
+ * https://www.acwing.com/problem/content/863/
  */
 public class A861_BipartiteGraphMaxMatch {
     static int N = 510, M = 100010;
@@ -54,6 +56,8 @@ public class A861_BipartiteGraphMaxMatch {
             int v = e[i];
             if(!st[v]) {
                 st[v] = true;
+                // TODO：为什么匈牙利算法可以求二分图的最大匹配？
+                //  尽可能为当前点进行匹配，如果当前点已经匹配过，为匹配当前点的点重新寻找可以匹配的点
                 if(matches[v] == 0 || find(matches[v]) ) {
                     matches[v] = u;
                     return true;
