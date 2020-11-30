@@ -36,7 +36,7 @@ import java.util.Scanner;
  *
  * https://www.acwing.com/problem/content/878/
  */
-public class A876_InverseElement {
+public class A876_InverseModular {
     public static long qmi(int a, int b, int p) {
         long res = 1;
         while(b > 0) {
