@@ -36,7 +36,7 @@ public class A867_PrimeDivisor {
         List<int[]> ans = new ArrayList<>();
 
         for(int i = 2; i <= x / i; i++) {
-            if(x % i == 0) {
+            if(x % i == 0) { // TODO:如果可以整除说明当前是最小质因子
                 int index = 0;
                 while(x % i == 0) {
                     index ++;
@@ -45,7 +45,7 @@ public class A867_PrimeDivisor {
                 ans.add(new int[]{i, index});
             }
         }
-        if(x > 1) ans.add(new int[]{x, 1}); // n中最多只包含一个大于sqrt(n)的质因子
+        if(x > 1) ans.add(new int[]{x, 1}); // TODO：n中最多只包含一个大于sqrt(n)的质因子，若多于一个则相乘大于n了。
         return ans;
     }
 

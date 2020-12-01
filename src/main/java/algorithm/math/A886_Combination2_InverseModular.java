@@ -7,7 +7,6 @@ import java.util.Scanner;
  *
  * 输入格式
  * 第一行包含整数n。
- *
  * 接下来n行，每行包含一组a和b。
  *
  * 输出格式
@@ -23,6 +22,7 @@ import java.util.Scanner;
  * 3 1
  * 5 3
  * 2 2
+ *
  * 输出样例：
  * 3
  * 10
@@ -52,8 +52,7 @@ public class A886_Combination2_InverseModular {
         factorial[0] = inFact[0] = 1;
         for(int i = 1; i < N; i++) {
             // TODO:注意a b的取值范围
-            // TODO:(a / b) % MOD   =  a * b^-1 % MOD
-            //  注意推理过程
+            // TODO: 注意推理过程 (a / b) % MOD   =  a * b^-1 % MOD
             factorial[i] = (int)( (long) factorial[i - 1] * i % MOD);
             inFact[i] = (int) ( (long) qmi(i, MOD - 2) * inFact[i - 1] % MOD);
         }
@@ -61,10 +60,11 @@ public class A886_Combination2_InverseModular {
 
     public static int combination(int a, int b) {
         int res = 1;
-        // TODO:注意看组合公式，这个地方有分子分母约分
-        for(int i = 1, j = a; i <= b; i++, j--) {
-            res = (int) ((long) res * j % MOD);
-            res = (int) ((long) res * qmi(i, MOD - 2) % MOD);
+        // TODO:注意看这个地方有分子分母约分
+        //  组合公式: c[i][j] = i! / ((i - j)! * j!)
+        for(int i = a, j = 1; j <= b; j++, i--) {
+            res = (int) ((long) res * i % MOD);
+            res = (int) ((long) res * qmi(j, MOD - 2) % MOD);
         }
         return res;
     }
@@ -77,6 +77,7 @@ public class A886_Combination2_InverseModular {
         int n = in.nextInt();
         while(n-- > 0) {
             int a = in.nextInt(), b = in.nextInt();
+            // TODO: 注意组合公式 c[i][j] = i! / ((i - j)! * j!)
             int c = (int)( (long) factorial[a] * inFact[a - b] % MOD * inFact[b] % MOD);
             System.out.println(c);
         }

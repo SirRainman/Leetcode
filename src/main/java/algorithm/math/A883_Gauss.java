@@ -62,14 +62,14 @@ public class A883_Gauss {
             // 3.将绝对值最大的行换到未确定的最顶端
             for(int j = c; j <= n; j++) swap(r, j, t, j);
 
-            // 将当前上的首位变成1，注意从后往前遍历，防止先写后读。先写完a[r][c]之后，会影响后面的数。
-            for(int j = n; j >= c; j--) a[r][j] = a[r][j] / a[r][c];
+            // 4.将当前上的首位变成1。
+            for(int j = n; j >= c; j--) a[r][j] = a[r][j] / a[r][c]; // TODO: 注意从后往前遍历，防止先写后读。先写完a[r][c]之后，会影响后面的数
 
-            // 用当前行将下面所有的列的首位消成0
+            // 5.用第r行，将r行下面所有行的第c列消成0
             for(int i = r + 1; i < n; i++) {
                 if(Math.abs(a[i][c]) > eps) {
-                    for(int j = n; j >= c; j--) {
-                        a[i][j] = a[i][j] - a[r][j] * a[i][c];
+                    for(int j = n; j >= c; j--) { // TODO: 注意从后往前遍历，防止先写后读。先写完a[i][c]之后，会影响后面的数
+                        a[i][j] = a[i][j] - a[i][c] * a[r][j]; // TODO：把a[i][c] 变为0
                     }
                 }
             }
@@ -87,11 +87,12 @@ public class A883_Gauss {
             return 0;
         }
 
-        // 化简为单元矩阵
-        for (int i = n - 1; i >= 0; i-- )
-            for (int j = i + 1; j < n; j++ )
-                a[i][n] = a[i][n] - a[i][j] * a[j][n];
-
+        // TODO：难：化简为单元矩阵
+        for(int i = n - 1; i >= 0; i--) { // TODO: 注意从后往前遍历，防止先写后读。
+            for(int j = i + 1; j < n; j++) {
+                a[i][n] = a[i][n] - a[i][j] * a[j][n];  // TODO:把a[i][j]变为0
+            }
+        }
         return 1;
     }
 

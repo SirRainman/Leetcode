@@ -34,11 +34,11 @@ public class A885_Combination1_Definition {
 
     public static void combination() {
 
+        // TODO:注意a b的取值范围
         for(int i = 0; i < N; i++) {
             for(int j = 0; j <= i; j++) {
                 if(j == 0) c[i][j] = 1;
-                // TODO:从组合的性质出发
-                // TODO:注意a b的取值范围
+                // TODO:从组合的性质出发 c[i][j] = c[i - 1][j] + c[i - 1][j - 1]
                 else c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % MOD;
             }
         }

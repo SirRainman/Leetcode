@@ -37,11 +37,18 @@ import java.util.Scanner;
  * https://www.acwing.com/problem/content/878/
  */
 public class A876_InverseModular {
-    public static long qmi(int a, int b, int p) {
-        long res = 1;
+    public static int qmi2(int a, int b, int p) {
+        if(b == 0) return 1;
+        int res = qmi2(a, b >> 1, p);
+        if((b & 1) > 0) return (int)((long) res * res % p * a % p);
+        else return (int) ((long) res * res % p);
+    }
+
+    public static int qmi(int a, int b, int p) {
+        int res = 1;
         while(b > 0) {
-            if((b & 1) == 1) res = res * a % p;
-            a = (int)( a * (long) a % p );
+            if((b & 1) == 1) res = (int)((long) res * a % p);
+            a = (int)( (long) a * a % p );
             b = b >> 1;
         }
         return res;

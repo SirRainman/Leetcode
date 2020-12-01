@@ -29,7 +29,7 @@ import java.util.Scanner;
  *
  * https://www.acwing.com/problem/content/880/
  */
-public class A878_CongruenceEquation {
+public class HardA878_CongruenceEquation {
     static class Solution {
         int x, y, gcd;
         Solution (int x, int y, int gcd) {
@@ -55,17 +55,19 @@ public class A878_CongruenceEquation {
             int a = in.nextInt(), b = in.nextInt(), m = in.nextInt();
             // TODO: a ∗ x ≡ b (mod m)
             //  设 a * x = m * k + b
-            //  则 a * x + m * ( -k ) = b
+            //  则 a * x + m * (-k) = b
             //  设 x1 = x , y1 = -k
             //  则 a * x1 + m * y1 = b
             //  求 x1, y1? 在这里只输出 x1就好了
             Solution res = extendGCD(a, m);
             // 有解的前提必须是 b = k * gcd
             // TODO:想一想为什么x是这个？？？
+            //  因  a * x1 + m * y1 = gcd(a, m)
+            //  设  b = k1 * gcd(a, m)
+            //  即  k1 = b / gcd(a, m)
+            //  则  k1 * (a * x1 + m * y1) = k1 * gcd(a, m) = b
+            //  则  x = k1 * x1 = b / gcd(a, m) * b
             System.out.println(b % res.gcd == 0 ? (long) res.x * b / res.gcd % m : "impossible");
-
-            // TODO:想一想为什么这个x不对？？？
-            // System.out.println(b % res.gcd == 0 ? (long) (b - m * res.y) / res.x : "impossible");
         }
     }
 }

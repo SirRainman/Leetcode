@@ -30,19 +30,18 @@ import java.util.Scanner;
  */
 public class A875_QuickMultiIndex {
 
-    public static long qmi(long a, long b, long p) {
+    public static int qmi(int a, int b, int p) {
         if(b == 0) return 1;
-        a = a % p;
-        long res = qmi(a, b >> 1, p);
-        if((b & 1) == 1) return (res * res % p) * a % p;
-        else return res * res % p;
+        int res = qmi(a, b >> 1, p);
+        if((b & 1) > 0)  return (int) ((long) res * res % p * a % p); // TODO: b 如果是奇数，多乘一个a
+        else return (int) ((long) res * res % p); // TODO：b 如果是偶数
     }
 
-    public static long qmi2(int a, int b, int p) {
-        long res = 1;
+    public static int qmi2(int a, int b, int p) {
+        int res = 1;
         while(b > 0) {
-            if((b & 1) == 1) res = res * a % p;
-            a = (int)( a * (long) a % p );
+            if((b & 1) > 0) res = (int)((long) res * a % p);
+            a = (int) ((long) a * a % p);
             b = b >> 1;
         }
         return res;

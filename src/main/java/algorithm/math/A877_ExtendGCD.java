@@ -39,6 +39,7 @@ public class A877_ExtendGCD {
     //  1.裴蜀定理
     //  2.欧几里得定理
     //  3.裴蜀定理展开
+    //  4.a的系数和 b的系数要对应上
     public static Solution extendGCD(int a, int b) {
         if(b == 0) return new Solution(1, 0);
         Solution res = extendGCD(b, a % b);

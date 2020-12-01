@@ -25,11 +25,11 @@ public class A874_EulerFunctionFrom1ToN {
             for(int j = 0; primes[j] <= n / i; j++) {
                 int t = primes[j] * i;
                 st[t] = true;
-                if(i % primes[j] == 0) {
+                if(i % primes[j] == 0) { // TODO: 说明p是i的最小质因子，欧拉函数和质因子的指数无关，即e[p * i] = p * e[i]
                     euler[t] = primes[j] * euler[i];
                     break;
                 }
-                euler[t] = euler[i] * (primes[j] - 1);
+                euler[t] = euler[i] * (primes[j] - 1); // TODO: 说明p 和 i 互质，即e[p * i] = e[i] * e[p - 1] = e[i] * (p - 1)
             }
 
             res += euler[i];

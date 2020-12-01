@@ -11,6 +11,7 @@ public class A873_EulerTotientFunction {
         int phi = x;
         for(int i = 2; i <= x / i; i++) {
             if(x % i == 0) {
+                // TODO:注意是先除后乘，避免溢出
                 phi = phi / i * (i - 1);
                 while(x % i == 0) x /= i;
             }

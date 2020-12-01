@@ -59,6 +59,7 @@ public class A871_DivisorSum {
         for(Map.Entry<Integer, Integer> entry : primes.entrySet()) {
             int prime = entry.getKey(), count = entry.getValue();
             long t = 1;
+            // TODO:注意这个求和公式
             for(int i = 0; i < count; i++) t = (t * prime + 1) % M;
             sum = (sum * t) % M;
         }
