@@ -35,8 +35,8 @@ public class A890_Inclusion_Exclusion {
         // m 个质数可以组成的集合的个数是2^m - 1
         for(int i = 1; i < (1 << m); i++ ) {
             // t表示当前集合的所有质数的乘积
-            // s表示当前集合的元素的个数，可以用来判断符号（正负交替）
-            int t = 1, s = 0;
+            // size表示当前集合的元素的个数，可以用来判断符号（正负交替）
+            int t = 1, size = 0;
             for(int j = 0; j < m; j++) {
                 // m个元素可以构造2^m−1种不同的非空集合，集合包含的元素可用m位二进制表示，例如5=101b，表示集合有第1个元素和第3个元素
                 if((i >> j & 1) == 1) { // 当前集合包含了 第j个元素
@@ -45,14 +45,14 @@ public class A890_Inclusion_Exclusion {
                         break;
                     }
                     t = t * p[j];
-                    s++;
+                    size++;
                 }
             }
 
             if(t == -1) continue;
             // 根据当前集合质数的个数的奇偶性实现正负交替
             // 1 ~ n中能被pp整除的数的个数为⌊n / p⌋
-            if((s & 1) == 1) res += n / t;
+            if((size & 1) == 1) res += n / t;
             else res -= n / t;
         }
 

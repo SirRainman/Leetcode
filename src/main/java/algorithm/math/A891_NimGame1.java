@@ -32,7 +32,7 @@ public class A891_NimGame1 {
         int res = 0;
         while(n-- > 0) {
             int a = in.nextInt();
-            // TODO：想一想应该怎么证明？？？
+            // TODO：想一想应该怎么证明？？？ 一定要看证明
             res = res ^ a;
         }
         System.out.print(res > 0 ? "Yes" : "No");

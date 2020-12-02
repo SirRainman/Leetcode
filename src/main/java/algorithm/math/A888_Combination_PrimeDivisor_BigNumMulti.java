@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * 输入a,b，求Cba的值。
+ * 输入a,b，求C(a, b)的值。
  *
  * 注意结果可能很大，需要使用高精度计算。
  *
@@ -28,7 +28,7 @@ public class A888_Combination_PrimeDivisor_BigNumMulti {
     static int n;
 
     static int count = 0;
-    static int[] primes, sum;
+    static int[] primes, sumIndex;
     static boolean[] st;
 
     // TODO:筛选质数
@@ -73,16 +73,16 @@ public class A888_Combination_PrimeDivisor_BigNumMulti {
         n = Math.max(a, b);
         getPrimes(n);
 
-        sum = new int[n + 1];
+        sumIndex = new int[n + 1];
         for(int i = 0; i < count; i++) {
             // TODO：牢记组合公式
-            sum[i] = getCount(a, primes[i]) - getCount(b, primes[i]) - getCount(a - b, primes[i]);
+            sumIndex[i] = getCount(a, primes[i]) - getCount(b, primes[i]) - getCount(a - b, primes[i]);
         }
 
         List<Integer> res = new ArrayList<>();
         res.add(1);
         for(int i = 0; i < count; i++) {
-            for(int j = 0; j < sum[i]; j++) {
+            for(int j = 0; j < sumIndex[i]; j++) {
                 res = multi(res, primes[i]);
             }
         }

@@ -29,7 +29,7 @@ import java.util.Scanner;
  *
  * https://www.acwing.com/problem/content/880/
  */
-public class HardA878_CongruenceEquation {
+public class A878_CongruenceEquation {
     static class Solution {
         int x, y, gcd;
         Solution (int x, int y, int gcd) {

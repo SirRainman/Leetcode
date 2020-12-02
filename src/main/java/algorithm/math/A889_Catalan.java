@@ -36,6 +36,9 @@ public class A889_Catalan {
         return res;
     }
 
+    // TODO: Catalan(n) = C(2n, n) - C(2n, n - 1) = C(2n, n) / (n + 1)
+    //  1 卡特兰数的推导一定要记住
+    //  2 再记住他的其他的应用场景
     public static int catalan(int n) {
         int a = 2 * n, b = n;
         int res = 1;
