@@ -43,7 +43,7 @@ public class A887_Combination_Lucas {
     public static long combination(long a, long b, long p) {
         if(b > a) return 0;
         long res = 1;
-        // TODO：注意i和j的取值范围，以及组合的公式
+        // TODO：注意i和j的取值范围，以及组合的公式，这里有约分
         for(long i = 1, j = a; i <= b; i++, j--) {
             res = res * j % p;
             res = res * qmi(i, p - 2, p) % p;
