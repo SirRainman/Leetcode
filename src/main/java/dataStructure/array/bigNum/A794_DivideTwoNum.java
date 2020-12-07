@@ -41,6 +41,7 @@ public class A794_DivideTwoNum {
         System.out.print(ans.get(ans.size() - 1));
     }
 
+    // TODO：注意这是大数除小数
     public static List<Integer> divideTwoNum(List<Integer> A, int b) {
         List<Integer> ans = new ArrayList<>();
         int carry = 0;
@@ -55,4 +56,6 @@ public class A794_DivideTwoNum {
         ans.add(carry);
         return ans;
     }
+
+    // TODO：看一看leetcode怎么处理的？？？
 }

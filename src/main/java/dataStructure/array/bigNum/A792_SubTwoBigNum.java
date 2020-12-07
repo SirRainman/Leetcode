@@ -67,4 +67,6 @@ public class A792_SubTwoBigNum {
         while (C.size() > 1 && C.get(C.size() - 1) == 0) C.remove(C.size() - 1);
         return C;
     }
+
+    // TODO：看一看leetcode是怎么处理这个问题的，我感觉上面的这种解法并不简介
 }

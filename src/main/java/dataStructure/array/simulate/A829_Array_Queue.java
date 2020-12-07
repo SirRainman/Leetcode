@@ -1,4 +1,4 @@
-package dataStructure.array;
+package dataStructure.array.simulate;
 
 import java.util.Scanner;
 
@@ -43,11 +43,14 @@ import java.util.Scanner;
  * 4
  */
 
-class ArrayQueue {
+class ArrayQueue1 {
     int[] e;
     int front, rear;
 
-    public ArrayQueue(int size) {
+    // TODO：
+    //  1 注意front rear的初始值
+    //  2 注意判空的方法，想一想循环队列应该怎么判断是否是空/满
+    public ArrayQueue1(int size) {
         e = new int[size];
         front = 0;
         rear = -1;
@@ -70,6 +73,44 @@ class ArrayQueue {
     }
 }
 
+// TODO: 更推荐这种做法，因为这种做法和循环队列的判断方法正好可以对上
+
+// TODO：循环队列的队空队判断和一般队队列不一样
+//  循环队列中，队空判断 front == rear，队满判断 (rear+1) % n == front
+//  由于入队时尾指针向前追赶头指针；出队时头指针向前追赶尾指针，造成队空和队满时头尾指针均相等。
+//  因此，无法通过条件front==rear来判别队列是"空"还是"满"。
+//  解决这个问题的方法至少有两种：
+//  1 另设一布尔变量以区别队列的空和满；
+//  2 另一种方式就是数据结构常用的，牺牲掉一个单位的空间：
+//      队满时：(rear+1)%n==front，n为队列长度（所用数组大小），
+//      由于rear，front均为所用空间的指针，循环只是逻辑上的循环，所以需要求余运算。
+
+class ArrayQueue{
+    int[] e;
+    int front, rear;
+
+    public ArrayQueue(int size) {
+        e = new int[size];
+        front = rear = 0;
+    }
+
+    public void push(int x) {
+        e[rear++] = x;
+    }
+
+    public int pop() {
+        return e[front++];
+    }
+
+    public boolean isEmpty() {
+        return front == rear;
+    }
+
+    public int query() {
+        return e[front];
+    }
+}
+
 public class A829_Array_Queue {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -79,11 +120,11 @@ public class A829_Array_Queue {
             String op = in.next();
             if(op.compareTo("push") == 0) {
                 queue.push(in.nextInt());
-            }else if (op.compareTo("pop") == 0) {
+            } else if (op.compareTo("pop") == 0) {
                 queue.pop();
-            }else if (op.compareTo("empty") == 0) {
+            } else if (op.compareTo("empty") == 0) {
                 System.out.println(queue.isEmpty()?"YES":"NO");
-            }else if (op.compareTo("query") == 0) {
+            } else if (op.compareTo("query") == 0) {
                 System.out.println(queue.query());
             }
         }

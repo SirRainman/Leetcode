@@ -41,11 +41,9 @@ public class A892_NimGame2 {
             //      从奇数台阶上拿完之后，res一定不为0，后手可以再从奇数上拿，使得res = 0
             //      从偶数台阶上拿到奇数台阶上之后，后手面对的res也不为零
             //      即无论如何始终会面对res = 0的情况
+            int stone = in.nextInt();
             if((i & 1) == 1) {
-                int stone = in.nextInt();
                 res ^= stone;
-            } else {
-                in.nextInt();
             }
         }
         System.out.print(res > 0 ? "Yes" : "No");

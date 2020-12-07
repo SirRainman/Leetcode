@@ -63,4 +63,31 @@ public class A791_AddTwoBigNum {
         if (carry != 0) ans.add(0, carry);
         return ans;
     }
+
+
+
+
+    // TODO：我认为这个答案更好
+    //  leetcode：https://leetcode-cn.com/problems/add-strings
+    class Solution {
+        // TODO: 高精度
+        //  1.逆序
+        //  2.带位
+        public String addStrings(String num1, String num2) {
+            char[] A = num1.toCharArray();
+            char[] B = num2.toCharArray();
+
+            StringBuffer res = new StringBuffer();
+            int i = A.length - 1, j = B.length - 1;
+            int carry = 0;
+            while(i >= 0 || j >= 0 || carry > 0) {
+                int a = i >= 0 ? A[i--] - '0' : 0;
+                int b = j >= 0 ? B[j--] - '0' : 0;
+                res.append((a + b + carry) % 10);
+                carry = (a + b + carry) / 10;
+            }
+            return res.reverse().toString();
+        }
+
+    }
 }

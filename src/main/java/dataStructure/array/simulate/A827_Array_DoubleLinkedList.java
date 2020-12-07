@@ -1,4 +1,4 @@
-package dataStructure.array;
+package dataStructure.array.simulate;
 
 import java.util.Scanner;
 

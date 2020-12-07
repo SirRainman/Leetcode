@@ -40,13 +40,17 @@ public class A893_NimGame3_Set {
     static int[] s; // 存储每次可以拿多少个石子
     static int[] mem; // 记忆话存储。
 
+    // TODO: 定理
+    //  有向图游戏的某个局面必胜，当且仅当该局面对应节点的SG函数值大于0。
+    //  有向图游戏的某个局面必败，当且仅当该局面对应节点的SG函数值等于0。
     public static int sg(int stone) {
         if(mem[stone] != -1) return mem[stone];
 
+        // 构造子树
         Set<Integer> set = new HashSet<>(); // set存储每一堆的石子，再经过拿取之后，他的sg值。
         for(int i = 0; i < k; i++) {
             if(stone >= s[i]) {
-                set.add(sg(stone - s[i]));
+                set.add(sg(stone - s[i])); // 保存后继结点到S中（递归）
             }
         }
 
@@ -66,6 +70,7 @@ public class A893_NimGame3_Set {
         s = new int[k];
         for(int i = 0; i < k; i++) s[i] = in.nextInt();
 
+        // TODO：把n堆石子看成n个独立的有向图G，把各个有向图结果做异或即可得到答案
         int res = 0;
         n = in.nextInt();
         for(int i = 0; i < n; i++) {
