@@ -1,4 +1,4 @@
-package algorithm.dp;
+package algorithm.dp.test;
 
 /**
  * 你是一个专业的小偷，计划偷窃沿街的房屋。

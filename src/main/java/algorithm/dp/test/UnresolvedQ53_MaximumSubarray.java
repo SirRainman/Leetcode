@@ -1,4 +1,4 @@
-package algorithm.dp;
+package algorithm.dp.test;
 
 import java.lang.reflect.Array;
 
