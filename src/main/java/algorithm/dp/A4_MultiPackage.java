@@ -56,11 +56,7 @@ public class A4_MultiPackage {
     //  4 即 f[i, j]    != max( f[i-1, j], f[i, j-v]+w)
     //  5 因 max操作不能做减法，所以多了的一项f[i-1, j - (s+1)v] + (s+1)w 去不掉
     public static int getMaxWeight() {
-        int[] f = new int[V + 1];
-
-        for(int i = )
-
-        return f[V];
+        return -1;
     }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
