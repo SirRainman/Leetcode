@@ -34,7 +34,7 @@ public class A2_01Package {
     static int[] v, w; // v[i]: 物品体积 weight[i]：物品重量
 
     public static int getMaxWeight1() {
-        int[][] f = new int[N + 1][V + 1]; // f[i][j]表示在考虑前i个物品后，背包容量为j条件下的最大价值
+        int[][] f = new int[N + 1][V + 1]; // 状态表示 f[i][j] 表示 背包容量为j的条件下，从前i件物品中可以选到的最大重量
 
         for(int i = 1; i <= N; i++) {
             for(int j = 1; j <= V; j++) {
@@ -42,7 +42,7 @@ public class A2_01Package {
                 if(v[i] > j) { // 背包装不下这么大体积的物品
                     f[i][j] = f[i - 1][j]; // 价值等于前i-1个物品
                 } else { // 背包可以装下该物品
-                    // 要么选择该物品，要么不选
+                    // 要么选择该物品 f[i][j] = f[i - 1][j - w[i]] + v[i] ，要么不选 f[i][j] = f[i-1][j]
                     f[i][j] = Math.max(f[i - 1][j], f[i - 1][j - v[i]] + w[i]);
                 }
             }
@@ -50,6 +50,7 @@ public class A2_01Package {
         return f[N][V];
     }
 
+    // TODO: 如何理解一维？ 不要从代码推思路，要根据思路写代码。
     public static int getMaxWeight() {
         int[] f = new int[V + 1]; // f[j]表示背包容量为j条件下的最大价值
 
@@ -59,7 +60,12 @@ public class A2_01Package {
         //  故 可以看出当前的状态只与上一层的状态是相关的，和本层状态无关
         //  即 倒着遍历j
         for(int i = 1; i <= N; i++) {
-            for(int j = V; j >= v[i]; j--) { // TODO: 注意是倒序，否则出现写后读错误，注意与完全背包问题的一维优化区分开
+            // TODO：要保证定义的状态和计算过程是一致的
+            //  注意是倒序，否则出现写后读错误，注意与完全背包问题的一维优化区分开
+            //  从大到小循环的原因是f[i, j]要用f[i - 1, j - v[i]] + w[i]来更新，
+            //  从大到小可以保证算f[j]时用到的f[j - v[i]]存储的是f[i - 1, j - v[i]]，而不是f[i, j - v[i]]；
+            //  如果从小到大循环，那么f[j - v[i]]会在f[j]前被计算出来，那么它就表示f[i, j - v[i]]了。
+            for(int j = V; j >= v[i]; j--) {
                 f[j] = Math.max(f[j], f[j - v[i]] + w[i]);
             }
         }

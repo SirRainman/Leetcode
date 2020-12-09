@@ -41,6 +41,9 @@ public class A3_CompletePackage {
             for(int j = 1; j <= V; j++) {
                 for(int k = 0; k * v[i] <= j; k++) { // 选k次
                     f[i][j] = Math.max(f[i][j], f[i - 1][j - k * v[i]] + k * w[i]);
+                    // TODO: 一维优化
+                    //  想一想为什么这样也对？
+                    // dp[j] = Math.max(dp[j], dp[j - k * v[i]] + k * w[i]);
                 }
             }
         }
@@ -74,14 +77,18 @@ public class A3_CompletePackage {
 
     // TODO: 如何从二维优化到一维
     //    f[i, j] = max(f[i-1][j], f[i, j - v])
-    //    !!注 一定要注意这个公式是有区别于01背包问题的!!
+    //    不断使用前面已经更新过的 f [i][ 前面体积 ]来更新 f [i][ 后面的体积 j ]
+    //    !!!!!!!!!!!!!! 注 一定要注意这个公式是有区别于01背包问题的 !!!!!!!!!!!!
     //      因 当前状态与 上一层的状态 和 本层的状态有关
     //      故 在遍历的时候需要注意状态的择取问题
     public static int getMaxWeight() {
         int[] f = new int[V + 1];
 
         for(int i = 1; i <= N; i++) {
-            for(int j = v[i]; j <= V; j++) { // TODO：一定注意j的取值范围，要和01背包问题的一维优化区分开！！！
+            for(int j = v[i]; j <= V; j++) {
+                // TODO: 一定注意j的取值范围式从小大大枚举，要和01背包问题的一维优化区分开！！！
+                //  f[i][j] = max(f[i][j], f[i - 1][j- v[i]] + w[i]);   01背包
+                //  f[i][j] = max(f[i][j], f[i][j- v[i]] + w[i]);       完全背包问题
                 f[j] = Math.max(f[j], f[j - v[i]] + w[i]);
             }
         }
