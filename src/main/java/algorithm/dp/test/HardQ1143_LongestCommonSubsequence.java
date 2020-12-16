@@ -33,18 +33,16 @@ package algorithm.dp.test;
  * 
  */
 public class HardQ1143_LongestCommonSubsequence {
-    class Solution {
-        public int longestCommonSubsequence(String text1, String text2) {
-            char[] a = text1.toCharArray();
-            char[] b = text2.toCharArray();
-            int[][] dp = new int[a.length + 1][b.length + 1]; // dp[i][j] 表示text1[0~i-1] 和 text2[0~j-1] 的最长公共子序列长度
-            for(int i = 1; i <= a.length; i++) {
-                for(int j = 1; j <= b.length; j++) {
-                    if(a[i - 1] == b[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
-                    else dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-                }
+    public int longestCommonSubsequence(String text1, String text2) {
+        char[] a = text1.toCharArray();
+        char[] b = text2.toCharArray();
+        int[][] dp = new int[a.length + 1][b.length + 1]; // dp[i][j] 表示text1[0~i-1] 和 text2[0~j-1] 的最长公共子序列长度
+        for(int i = 1; i <= a.length; i++) {
+            for(int j = 1; j <= b.length; j++) {
+                if(a[i - 1] == b[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
+                else dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
             }
-            return dp[a.length][b.length];
         }
+        return dp[a.length][b.length];
     }
 }

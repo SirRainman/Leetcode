@@ -29,12 +29,12 @@ import java.util.Scanner;
  *
  * https://www.acwing.com/problem/content/4/
  */
-public class A4_MultiPackage {
+public class A4_MultiPackage1 {
     static int N, V;
     static int[] v, w, s;
 
-    public static int getMaxWeight1() {
-        int[][] f = new int[N + 1][V + 1];
+    public static int getMaxWeight() {
+        int[][] f = new int[N + 1][V + 1]; // 状态的含义是 从前i个物品中选，且总体积不超过j-w的最大价值
 
         // TODO: f[i, j] = max( f[i-1, j], f[i-1, j-v] + w, f[i-1, j-2v] + 2w, ..., f[i-1, j - sv] + sw)
         for(int i = 1; i <= N; i++) {
@@ -51,13 +51,15 @@ public class A4_MultiPackage {
     //  1 因 f[i, j]     = max( f[i-1, j], f[i-1, j-v] + w, f[i-1, j-2v] + 2w, ..., f[i-1, j - sv] + sw)
     //  2 则 f[i, j-v]   = max(            f[i-1, j-v],     f[i-1, j-2v] + w,  ..., f[i-1, j - (s+1)v] + sw)
     //      一定要注意 公式最后这里 和完全背包不一样，完全背包是可以一直往里放，而多重背包是有限个
-    //      即完全背包的s是可以最大往其中放s个，多重背包是只能有s[i]个，可以放多余s个
+    //      为什么最后一项会是f[i-1,j-(S+1)v]+Sw??
+    //      即 完全背包由于对每种物品没有选择个数的限制，所以只要体积够用就可以一直选，完全背包的s是可以最大往其中放s个，
+    //         多重背包是只能有s[i]个，可以放多余s个
     //  3 故 f[i, j-v]+w = max(            f[i-1, j-v] + w, f[i-1, j-2v] + 2w, ..., f[i-1, j - sv] + sw, f[i-1, j - (s+1)v] + (s+1)w)
     //  4 即 f[i, j]    != max( f[i-1, j], f[i, j-v]+w)
     //  5 因 max操作不能做减法，所以多了的一项f[i-1, j - (s+1)v] + (s+1)w 去不掉
-    public static int getMaxWeight() {
-        return -1;
-    }
+
+
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         N = in.nextInt();

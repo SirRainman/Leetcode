@@ -47,7 +47,7 @@ public class A9_GroupPackage {
         // TODO: f[i][j] = max(f[i-1][j], f[i-1][j - v[i][k]] + w[i][k])
         for(int i = 1; i <= N; i++) {
             for (int j = 1; j <= V; j++) {
-                f[i][j] = f[i - 1][j]; //不选
+                f[i][j] = f[i - 1][j]; // 不选
                 for (int k = 1; k <= s[i]; k++) {
                     if (v[i][k] <= j) {
                         f[i][j] = Math.max(f[i][j], f[i - 1][j - v[i][k]] + w[i][k]);
@@ -61,6 +61,10 @@ public class A9_GroupPackage {
 
 
     // TODO: 想一想是怎么从2维变成一维的？
+    //  1 首先看看是不是只与上一层有关
+    //  2 f[i][j] = Math.max(f[i][j], f[i - 1][j - v[i][k]] + w[i][k]);
+    //  3 确实只和上一层的状态有关
+    //  4 用滚动数组，如果和当前层有关就正序遍历，和上一层有关就倒序遍历
     public static int getMaxWeight() {
         int[] f = new int[V + 1];
         for(int i = 1; i <= N; i++) {

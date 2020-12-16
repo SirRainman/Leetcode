@@ -32,8 +32,8 @@ public class A885_Combination1_Definition {
     static int N = 2010;
     static int[][] c;
 
+    // TODO: 想一想这个能不能优化为一维数组？
     public static void combination() {
-
         // TODO:注意a b的取值范围
         for(int i = 0; i < N; i++) {
             for(int j = 0; j <= i; j++) {
@@ -42,6 +42,15 @@ public class A885_Combination1_Definition {
                 else c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % MOD;
             }
         }
+    }
+
+    // TODO：从组合的定义出发
+    public static long combination(int a, int b) {
+        long c = 1;
+        for(int i = 1, j = a; i <= b; i++, j--) {
+            c = c * j / i;
+        }
+        return c;
     }
 
     public static void main(String[] args) {

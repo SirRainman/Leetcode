@@ -40,9 +40,11 @@ public class A3_CompletePackage {
         for(int i = 1; i <= N; i++) {
             for(int j = 1; j <= V; j++) {
                 for(int k = 0; k * v[i] <= j; k++) { // 选k次
+                    // TODO：状态转移
+                    //  f[i, j] = max(f[i-1][j], f[i-1][j-v] + w, f[i-1][j-2v] + 2w, f[i-1][j-3v] + 3w, ..., f[i-1][j-sv] + sw )
                     f[i][j] = Math.max(f[i][j], f[i - 1][j - k * v[i]] + k * w[i]);
                     // TODO: 一维优化
-                    //  想一想为什么这样也对？
+                    //  想一想为什么这样也对？因为这个对比的是本层已经更新过的值
                     // dp[j] = Math.max(dp[j], dp[j - k * v[i]] + k * w[i]);
                 }
             }
