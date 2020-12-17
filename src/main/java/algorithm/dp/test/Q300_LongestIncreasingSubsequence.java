@@ -18,27 +18,26 @@ package algorithm.dp.test;
  * 链接：https://leetcode-cn.com/problems/longest-increasing-subsequence
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class HardQ300_LongestIncreasingSubsequence {
+public class Q300_LongestIncreasingSubsequence {
     // TODO：
-    //  递推 定义 dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度
-    //      dp[i]=max(dp[j])+1,其中0≤j<i且num[j]<num[i]
+    //  1.集合划分：集合所有以i结尾的上升子序列的长度
+    //  2.属性：max
+    //  3.状态计算：dp[i] = max(dp[i], dp[j] + 1), 其中0≤j<i且num[j]<num[i]
     public int lengthOfLIS(int[] nums) {
-        if(nums == null || nums.length == 0) return 0;
-        int maxAns = 1;
-        int[] dp = new int[nums.length];
-        dp[0] = 1;
-        for(int i = 1; i < nums.length; i++) {
-            int maxVal = 0;
-            for(int j = 0; j < i; j++) {
-                if(nums[i] > nums[j]) {
-                    maxVal = Math.max(maxVal, dp[j]);
+        int n = nums.length;
+        if (nums == null || n == 0) return 0;
+        int[] dp = new int[n]; // dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
-            dp[i] = maxVal + 1;
-            maxAns = Math.max(maxAns, dp[i]);
+            res = Math.max(res, dp[i]);
         }
-        return maxAns;
+        return res;
     }
-
     //TODO:有没有更快的做法？？？ 贪心 + 二分
 }

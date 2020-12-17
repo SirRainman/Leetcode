@@ -33,12 +33,15 @@ public class A897_LongestCommonSubsequence {
     static int la, lb;
     static char[] a, b;
 
-    // TODO：看的云里雾里的
+    // TODO:
+    //  1.集合划分：0 - Ai, 0 - Bj 中所有的公共子序列
+    //  2.属性：max
+    //  3.状态计算
+    //      max(dp[i - 1][j], dp[i][j - 1]) a[i] != b[j]
+    //      dp[i - 1][j - 1] + 1,           a[i] == b[j]
     public static int getLongestSubSet() {
-        int res;
         int[][] dp = new int[la + 1][lb + 1]; // dp[i][j] 表示text1[0~i-1] 和 text2[0~j-1] 的最长公共子序列长度
         // TODO: 状态转移方程是什么？
-        //  dp[i][j] =
         for(int i = 1; i <= la; i++) {
             for(int j = 1; j <= lb; j++) {
                 if(a[i - 1] == b[j - 1]) {

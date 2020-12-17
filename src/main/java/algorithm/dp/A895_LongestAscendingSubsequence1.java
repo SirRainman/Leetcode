@@ -70,7 +70,25 @@ public class A895_LongestAscendingSubsequence1 {
         return res;
     }
 
+    // TODO:
+    //  1.集合划分：所有以i为结尾的上升子序列
+    //  2.属性：max
+    //  3.状态计算: max(dp[0], dp[1] .... dp[i - 1])
+    public static int getLongestSubSet2() {
+        int[] dp = new int[n + 1];
+        int res = 0;
 
+        for(int i = 1; i <= n; i++) {
+            dp[i] = 1;
+            for(int j = 1; j < i; j++) {
+                if(a[i] > a[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
 
 
     public static void main(String[] args) {

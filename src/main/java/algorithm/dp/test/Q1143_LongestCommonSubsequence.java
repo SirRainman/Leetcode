@@ -32,7 +32,13 @@ package algorithm.dp.test;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * 
  */
-public class HardQ1143_LongestCommonSubsequence {
+public class Q1143_LongestCommonSubsequence {
+    // TODO:
+    //  1.集合划分：0 - Ai, 0 - Bj 中所有的公共子序列
+    //  2.属性：max
+    //  3.状态计算
+    //      max(dp[i - 1][j], dp[i][j - 1]) a[i] != b[j]
+    //      dp[i - 1][j - 1] + 1,           a[i] == b[j]
     public int longestCommonSubsequence(String text1, String text2) {
         char[] a = text1.toCharArray();
         char[] b = text2.toCharArray();

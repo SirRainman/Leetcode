@@ -27,17 +27,24 @@ import java.util.Scanner;
  *
  * https://www.acwing.com/problem/content/284/
  */
-public class A282_MergeStones {
+public class HardA282_MergeStones {
     static int INF = 0x3f3f3f3f;
     static int n;
     static int[] s;
 
+    // TODO：没怎么看懂
+    // TODO:
+    //  1.集合划分i - j堆石子合并到一起的方案
+    //  2.属性min
+    //  3.状态计算：dp[i][j] = min(s[i] + dp[i + 1][j], dp[i][j - 1] + s[j])
     public static int getMinWeight() {
+        // TODO: 为什么要求前缀和？？？
+        //  当从i - j合并完成之后，只剩下两堆时，最后一步的合并时的体力是所有石子的总重量。
         for(int i = 1; i <= n; i++) { // 前缀和
             s[i] += s[i - 1];
         }
 
-        int[][] dp = new int[n + 1][n + 1]; // 表示将 ii 到 jj 合并成一堆的方案的集合，属性 Min
+        int[][] dp = new int[n + 1][n + 1];
 
         // TODO：为什么要先枚举长度？
         //  因为要保证后面使用到的状态在前面被计算过，所以只能先枚举长度
