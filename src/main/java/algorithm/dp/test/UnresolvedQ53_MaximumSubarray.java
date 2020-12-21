@@ -1,7 +1,5 @@
 package algorithm.dp.test;
 
-import java.lang.reflect.Array;
-
 /**
  *  给定一个整数数组 nums，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
  *
@@ -19,27 +17,33 @@ import java.lang.reflect.Array;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class UnresolvedQ53_MaximumSubarray {
-    public int maxSubArray2(int[] nums) {
-        int[] subSum = new int[nums.length];
-        int maxSubSum = Integer.MIN_VALUE;
-        subSum[0] = nums[0];
-        maxSubSum = Math.max(subSum[0], maxSubSum);
-        for(int i = 1; i < nums.length; i++) {
-            subSum[i] = Math.max(subSum[i-1] + nums[i], nums[i]);
-            maxSubSum = Math.max(subSum[i], maxSubSum);
+
+    // TODO:
+    //  集合划分：dp[i] 所有以i为结尾的连续子数组的和
+    //  属性：max
+    //  状态计算：dp[i] = max(dp[i - 1] + nums[i], nums[i])
+    public int maxSubArray1(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n + 1];
+        int maxSum = Integer.MIN_VALUE;
+        for(int i = 1; i <= n; i++) {
+            int cur = nums[i - 1];
+            dp[i] = Math.max(dp[i - 1] + cur, cur);
+            maxSum = Math.max(maxSum, dp[i]);
         }
-        return maxSubSum;
+        return maxSum;
     }
 
     public int maxSubArray(int[] nums) {
-        int maxSubSum = nums[0];
-        int sum = 0;
-        for(int i = 0; i < nums.length; i++) {
-            sum = Math.max(sum + nums[i], nums[i]);
-            maxSubSum = Math.max(sum, maxSubSum);
+        int n = nums.length;
+        int maxSum = Integer.MIN_VALUE;
+        int lastSum = 0;
+        for(int x : nums) {
+            lastSum = Math.max(lastSum + x, x);
+            maxSum = Math.max(maxSum, lastSum);
         }
-        return maxSubSum;
+        return maxSum;
     }
 
-    // TODO:还有分治 没有进行探索
+    // TODO:还有分治 线段树思想 没有进行探索
 }

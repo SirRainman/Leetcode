@@ -37,17 +37,25 @@ public class A897_LongestCommonSubsequence {
     //  1.集合划分：0 - Ai, 0 - Bj 中所有的公共子序列
     //  2.属性：max
     //  3.状态计算
-    //      max(dp[i - 1][j], dp[i][j - 1]) a[i] != b[j]
-    //      dp[i - 1][j - 1] + 1,           a[i] == b[j]
+    //      当a[i] != b[j]，dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    //      当a[i] == b[j]，dp[i][j] = dp[i - 1][j - 1] + 1,
     public static int getLongestSubSet() {
         int[][] dp = new int[la + 1][lb + 1]; // dp[i][j] 表示text1[0~i-1] 和 text2[0~j-1] 的最长公共子序列长度
-        // TODO: 状态转移方程是什么？
         for(int i = 1; i <= la; i++) {
             for(int j = 1; j <= lb; j++) {
                 if(a[i - 1] == b[j - 1]) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
-                    // TODO: 难点：为什么不考虑ai bj都不在子序列中的情况dp[i-1][j-1]
+                    // TODO: 难点：为什么不考虑ai bj都不在子序列中的情况dp[i-1][j-1]????
+                    //  设 00: 表示 a[i] b[j] 都不选，01 10 11以此类推
+                    //  问：为什么 f(i−1, j) 并不是01的等价形式？
+                    //  f(i−1, j) 并不是01的等价形式，但01 ⊆ f(i − 1,j) ⊆ f(i, j)，
+                    //      因此maxf(i−1, j) 包含了max(01)，且剩余的部分也是属于f(i, j)的，故可用f(i−1,j)代替01。
+                    //      答：f (i−1, j) 表示的是 子序列在( i-1, j )之前出现了，但并不是表示子序列的最后一个字符在第j个位置，
+                    //      即f(i-1, j)是包含了b[j]在第j个位置出现的。
+                    //  同理f(i,j−1)可代替10
+                    //  若C ⊆ A ∩ B，则max(A, B, C) = max(A, B)。
+                    //  由于f(i−1, j−1) ⊆ f(i−1, j) ∪ f(i, j−1)，故无需考虑00的情形，而只需考虑01，10和11的情况
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
             }

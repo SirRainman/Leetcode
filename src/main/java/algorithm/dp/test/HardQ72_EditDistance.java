@@ -35,8 +35,32 @@ package algorithm.dp.test;
  * 链接：https://leetcode-cn.com/problems/edit-distance
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class UnresolvedQ72_EditDistance {
+public class HardQ72_EditDistance {
+    // TODO:
+    //  1.集合划分：dp[i][j] wa[1, i] 变成 wb[1, j] 的编辑方式的操作数
+    //  2.属性：min
+    //  3.状态计算：
+    //      1 增加 dp[i][j] = dp[i][j - 1] + 1
+    //      2 删除 dp[i][j] = dp[i - 1][j] + 1
+    //      3 修改
+    //          a[i] = b[j],  dp[i][j] = dp[i - 1][j - 1]
+    //          a[i] != b[j], dp[i][j] = dp[i - 1][j - 1] + 1
     public int minDistance(String word1, String word2) {
+        int la = word1.length(), lb = word2.length();
+        char[] a = word1.toCharArray();
+        char[] b = word2.toCharArray();
 
+        int[][] dp = new int[la + 1][lb + 1];
+        for(int i = 0; i <= la; i++) dp[i][0] = i;
+        for(int j = 0; j <= lb; j++) dp[0][j] = j;
+
+        for(int i = 1; i <= la; i++) {
+            for(int j = 1; j <= lb; j++) {
+                dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + 1;
+                if(a[i - 1] == b[j - 1]) dp[i][j] = Math.min(dp[i][j], dp[i - 1][j - 1]);
+                else dp[i][j] = Math.min(dp[i][j], dp[i - 1][j - 1] + 1);
+            }
+        }
+        return dp[la][lb];
     }
 }

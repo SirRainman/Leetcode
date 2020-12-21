@@ -18,12 +18,12 @@ package algorithm.dp.test;
  * 链接：https://leetcode-cn.com/problems/longest-increasing-subsequence
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q300_LongestIncreasingSubsequence {
+public class HardQ300_LongestIncreasingSubsequence {
     // TODO：
     //  1.集合划分：集合所有以i结尾的上升子序列的长度
     //  2.属性：max
     //  3.状态计算：dp[i] = max(dp[i], dp[j] + 1), 其中0≤j<i且num[j]<num[i]
-    public int lengthOfLIS(int[] nums) {
+    public int lengthOfLIS1(int[] nums) {
         int n = nums.length;
         if (nums == null || n == 0) return 0;
         int[] dp = new int[n]; // dp[i] 为考虑前 i 个元素，以第 i 个数字结尾的最长上升子序列的长度
@@ -39,5 +39,28 @@ public class Q300_LongestIncreasingSubsequence {
         }
         return res;
     }
-    //TODO:有没有更快的做法？？？ 贪心 + 二分
+
+    // TODO: 有没有更快的做法？？？
+    //  贪心 + 二分
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        if(nums == null || n == 0) return 0;
+
+        int[] q = new int[n + 1];
+
+        int len = 0;
+        for(int i = 0; i < n; i++) {
+            // TODO: 找到 q[l] < nums[i] < q[l + 1]
+            int left = 0, right = len;
+            while(left < right) {
+                int mid = left + right + 1 >> 1;
+                if(nums[i] <= q[mid]) right = mid - 1;
+                else left = mid;
+            }
+            len = Math.max(len, left + 1);
+            q[left + 1] = nums[i];
+        }
+
+        return len;
+    }
 }
