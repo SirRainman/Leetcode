@@ -9,9 +9,7 @@ import java.util.Scanner;
  *
  * 输入格式
  * 第一行包含整数n和q，表示数组长度和询问个数。
- *
  * 第二行包含n个整数（均在1~10000范围内），表示完整数组。
- *
  * 接下来q行，每行包含一个整数k，表示一个询问元素。
  *
  * 输出格式
@@ -34,7 +32,7 @@ import java.util.Scanner;
  * 5 5
  * -1 -1
  *
- * https://www.acwing.com/activity/content/code/content/548089/
+ * https://www.acwing.com/problem/content/791/
  */
 public class A789_NumPosition {
     static int binarySearch(int[] nums, int target) {

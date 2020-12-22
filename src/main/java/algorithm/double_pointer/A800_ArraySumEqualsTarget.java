@@ -5,14 +5,11 @@ import java.util.Scanner;
 /**
  * 给定两个升序排序的有序数组A和B，以及一个目标值x。数组下标从0开始。
  * 请你求出满足A[i] + B[j] = x的数对(i, j)。
- *
  * 数据保证有唯一解。
  *
  * 输入格式
  * 第一行包含三个整数n，m，x，分别表示A的长度，B的长度以及目标值x。
- *
  * 第二行包含n个整数，表示数组A。
- *
  * 第三行包含m个整数，表示数组B。
  *
  * 输出格式
@@ -32,7 +29,7 @@ import java.util.Scanner;
  *
  * https://www.acwing.com/problem/content/802/
  */
-public class A800_AandBequalsTarget {
+public class A800_ArraySumEqualsTarget {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int len1 = in.nextInt(), len2 = in.nextInt(), target = in.nextInt();
