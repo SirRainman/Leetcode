@@ -35,10 +35,12 @@ public class Q912_MergeSort {
     public void mergeSort(int[] nums, int left, int right) {
         if(left >= right) return;
 
+        // 先排左右半边两个区间
         int mid = left + right >> 1;
         mergeSort(nums, left, mid);
         mergeSort(nums, mid + 1, right);
 
+        // 将两个区间连在temp中
         int k = 0, i = left, j = mid + 1;
         while(i <= mid && j <= right) {
             if(nums[i] <= nums[j]) temp[k++] = nums[i++];
@@ -47,6 +49,7 @@ public class Q912_MergeSort {
         while(i <= mid) temp[k++] = nums[i++];
         while(j <= right) temp[k++] = nums[j++];
 
+        // 将排序好的区间temp替掉nums
         for(i = left, j = 0; i <= right; i++, j++) {
             nums[i] = temp[j];
         }

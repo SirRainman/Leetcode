@@ -36,7 +36,7 @@ import java.util.*;
  *
  * https://www.acwing.com/problem/content/description/804/
  */
-public class A802_IntervalsSum {
+public class HardA802_IntervalsSum {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);

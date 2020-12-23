@@ -24,28 +24,26 @@ package algorithm.binarySearch;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class QOffer53_FindNum {
-    class Solution {
 
-        public int search(int[] nums, int target) {
-            if (nums == null || nums.length == 0 || nums[0] > target || nums[nums.length - 1] < target) {
-                return 0;
-            }
-            int right = binarySearch(nums, target);
-            int left = binarySearch(nums, target-1);
-            return right - left;
+    public int search(int[] nums, int target) {
+        if (nums == null || nums.length == 0 || nums[0] > target || nums[nums.length - 1] < target) {
+            return 0;
         }
+        int right = binarySearch(nums, target);
+        int left = binarySearch(nums, target-1);
+        return right - left;
+    }
 
-        public int binarySearch(int[] nums, int target) {
-            int left = 0, right = nums.length;
-            while(left < right) {
-                int mid = left + right >> 1;
-                if(nums[mid] <= target) {
-                    left = mid + 1;
-                } else {
-                    right = mid;
-                }
+    public int binarySearch(int[] nums, int target) {
+        int left = 0, right = nums.length;
+        while(left < right) {
+            int mid = left + right >> 1;
+            if(nums[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid;
             }
-            return left;
         }
+        return left;
     }
 }

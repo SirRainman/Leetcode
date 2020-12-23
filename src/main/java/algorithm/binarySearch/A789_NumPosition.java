@@ -51,7 +51,7 @@ public class A789_NumPosition {
     }
 
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         Scanner in = new Scanner(System.in);
         int len = in.nextInt(), times = in.nextInt();
         int[] nums = new int[len];
@@ -92,6 +92,7 @@ public class A789_NumPosition {
             int left = 0, right = len - 1;
             while(left < right) {
                 // TODO:mid在中间靠左的位置，所以left = mid + 1不会越界
+                //  注意为什么这样是向左走的？？？
                 int mid = left + (right - left) / 2;
                 if(target <= nums[mid]) right = mid;
                 else left = mid + 1;

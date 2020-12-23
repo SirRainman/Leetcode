@@ -20,7 +20,7 @@ import java.util.Scanner;
  * 链接：https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class HardQ34_FindFirstAndLastPositionInSortedArray {
+public class UnresolvedQ34_FindFirstAndLastPositionInSortedArray {
     /**
      * 注意！！！
      * 

@@ -35,8 +35,11 @@ public class A799_LongestSubstringWithoutRepeatingCharacters {
         int ans = 0;
         while(fast < len) {
             isExist[nums[fast]]++;
-            // 如果该节点出现过，不重复的区间起点向前移动：直到该节点在这个区间内没有出现过
-            while(isExist[ nums[fast] ] > 1) {
+            // TODO: 核心思想
+            //  遍历数组nums中的每一个元素nums[i],
+            //  对于每一个i，找到j使得双指针[j, i]维护的是以nums[i]结尾的最长连续不重复子序列，长度为i - j + 1,
+            //  将这一长度与maxLen的较大者更新给maxLen。
+            while(isExist[ nums[fast] ] > 1) { // 如果该节点出现过，不重复的区间起点向前移动：直到该节点在这个区间内没有出现过
                 isExist[nums[slow]]--;
                 slow++;
             }

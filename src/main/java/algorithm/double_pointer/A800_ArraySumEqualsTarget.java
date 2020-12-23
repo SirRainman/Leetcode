@@ -32,23 +32,16 @@ import java.util.Scanner;
 public class A800_ArraySumEqualsTarget {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int len1 = in.nextInt(), len2 = in.nextInt(), target = in.nextInt();
-        int[] nums1 = new int[len1];
-        int[] nums2 = new int[len2];
+        int la = in.nextInt(), lb = in.nextInt(), target = in.nextInt();
+        int[] a = new int[la], b = new int[lb];
+        for(int i = 0; i < la; i++) a[i] = in.nextInt();
+        for(int j = 0; j < lb; j++) b[j] = in.nextInt();
 
-        for(int i = 0; i < len1; i++) nums1[i] = in.nextInt();
-        for(int i = 0; i < len2; i++) nums2[i] = in.nextInt();
-
-        int i = 0, j = len2 - 1;
-        while(i < len1 || j >= 0) {
-            if(nums1[i] + nums2[j] < target) {
-                i++;
-            } else if(nums1[i] + nums2[j] > target) {
-                j--;
-            } else {
-                System.out.print(i + " " + j);
-                break;
-            }
+        int i = 0, j = lb - 1;
+        while(i < la && j >= 0) {
+            if(a[i] + b[j] == target) {System.out.println(i + " " + j); break;}
+            else if(a[i] + b[j] < target) i++;
+            else j--;
         }
     }
 }

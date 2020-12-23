@@ -47,6 +47,11 @@ public class A788_LCOF {
             if(nums[i] <= nums[j]) temp[k++] = nums[i++];
             else {
                 temp[k++] = nums[j++];
+                // TODO: 为什么 是mid−i+1 ？
+                //  1 i ~ mid是递增的，
+                //  2 触发条件是a[i] > a[j]，
+                //  3 所以i~mid中的数字都比当前a[j]大，
+                //  4 所以左边i ~ mid的数组中有 mid - i + 1个数比a[j] 大
                 ans += mid - i + 1;
             }
         }
