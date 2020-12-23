@@ -49,6 +49,8 @@ public class HardQ34_FindFirstAndLastPositionInSortedArray {
     }
 
     public int binarySearch(int[] nums, int target) {
+        // TODO: 为什么 right = nums.length???
+        //  当right = nums.length - 1;时，为什么不对？？？
         int left = 0, right = nums.length;
         while (left < right) {
             int mid = left + right >> 1;
@@ -61,6 +63,7 @@ public class HardQ34_FindFirstAndLastPositionInSortedArray {
         return left;
     }
 
+    // TODO: 上面的那个做法有点邪乎，以下面这个为主！！！
     public static void binarySearch2() {
         Scanner in = new Scanner(System.in);
         int len = in.nextInt(), times = in.nextInt();
