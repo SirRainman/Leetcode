@@ -21,6 +21,8 @@ import java.util.Scanner;
  * 3 4 2 7 5
  * 输出样例：
  * -1 3 -1 2 2
+ *
+ * https://www.acwing.com/problem/content/description/832/
  */
 public class A830_PreviousSmallerNum {
 

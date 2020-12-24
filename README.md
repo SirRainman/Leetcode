@@ -1,6 +1,6 @@
 # 算法分类
 
-## 基础算法
+## 1 基础算法
 
 ### 排序
 
@@ -32,14 +32,14 @@
 
 1.
 
-### 高精度
+### 高精度 *
 
 1. 高精度加法
 2. 高精度减法
 3. 高精度乘法
 4. 高精度除法
 
-### 前缀和 差分
+### 前缀和&差分
 
 1. [A795 前缀和](https://www.acwing.com/problem/content/797/)
 2. [A796 子矩阵的和](https://www.acwing.com/problem/content/798/)
@@ -55,7 +55,7 @@
 
 1. [A801 二进制数中1的个数](https://www.acwing.com/problem/content/803/)
 
-### 离散化
+### 离散化 *
 
 1. [A802 离散化](https://www.acwing.com/problem/content/description/804/)
 
@@ -65,29 +65,38 @@
 
 
 
+## 2 数据结构
 
+### 栈
 
+1. [A830 单调栈](https://www.acwing.com/problem/content/description/832/)
+2. 
 
+### 队列
 
+1. 单调队列
 
+### 字符串
 
+1. KMP
 
+### Trie
 
+1. Trie字符串统计
+2. 最大异或对
 
+### 并查集
 
+1. 合并集合
+2. 连通块中点的数量
+3. 食物链
 
+### 堆
 
+1. 堆排序
+2. 模拟堆
 
-
-
-
-
-
-
-
-
-
-
+### 哈希表
 
 
 
