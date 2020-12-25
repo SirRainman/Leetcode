@@ -39,6 +39,8 @@ import java.io.InputStreamReader;
  * 输出样例：
  * -1 -3 -3 -3 3 3
  * 3 3 5 5 6 7
+ *
+ * https://www.acwing.com/problem/content/156/
  */
 public class HardA154_MoveWindow {
 
