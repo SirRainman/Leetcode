@@ -32,20 +32,22 @@ package dataStructure.stack.monotonousStack;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ239_SlidingWindowMaximum {
-    class Solution {
-        public int[] maxSlidingWindow(int[] nums, int k) {
-            int[] ans = new int[nums.length - k + 1];
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        int[] res = new int[n - k + 1];
 
-            int[] queue = new int[100010];
-            int front = 0, rear = -1;
-            for (int i = 0; i < nums.length; i++) {
-                if (front <= rear && queue[front] < i - k + 1) front++;
-                while (front <= rear && nums[i] >= nums[queue[rear]]) rear--;
-                queue[++rear] = i;
-                if (i >= k - 1) ans[i - k + 1] = nums[queue[front]];
-            }
-
-            return ans;
+        // TODO: 想一想为什么队列里存储的是下标？？？
+        //  如果不存下标，是没有办法判断什么时候出队的
+        int[] queue = new int[100100];
+        int front = 0, rear = -1;
+        for(int i = 0; i < n; i++) {
+            // i - k + 1 是窗口的左边界，和队列没有关系，如果存的是数组元素的话，就没有办法判断什么时候出队了
+            if(front <= rear && queue[front] < i - k + 1) front++;
+            while(front <= rear && nums[queue[rear]] <= nums[i]) rear--;
+            queue[++rear] = i;
+            if(i >= k - 1) res[i - k + 1] = nums[queue[front]];
         }
+
+        return res;
     }
 }

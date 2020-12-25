@@ -34,7 +34,6 @@ public class A831_kmp {
     // TODO:
     //  1 先想怎么暴力
     //  2 优化
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -45,7 +44,9 @@ public class A831_kmp {
         char[] str = br.readLine().toCharArray();
 
         // TODO：计算next数组，想一想有没有优化方案？？？
-        //  想一想为什么next[0]会从0开始？为什么会从1开始？？？
+        //  想一想为什么next[0]会从0开始？
+        //  为什么会从1开始？？？
+        //  为什么从-1开始？？？
         int[] next = new int[paternLen];
         for(int i = 1, j = 0; i < paternLen; i++) {
             while(j > 0 && patern[i] != patern[j]) j = next[j - 1];
