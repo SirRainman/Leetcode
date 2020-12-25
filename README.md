@@ -17,6 +17,13 @@
     2. [Qoffer51 逆序对的数量](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof)
     3. [Q629 K个逆序对数组](https://leetcode-cn.com/problems/k-inverse-pairs-array/)
 
+堆排序：
+
+1. [A839 模拟堆](https://www.acwing.com/problem/content/841/)
+2. [A838 堆排序](https://www.acwing.com/problem/content/841/) 
+
+
+
 ### 二分
 
 整数二分：
@@ -30,7 +37,7 @@
 
 数组二分：
 
-1.
+1. 
 
 ### 高精度 *
 
@@ -70,67 +77,35 @@
 ### 栈
 
 1. [A830 单调栈](https://www.acwing.com/problem/content/description/832/)
-2. 
+2. [Q496下一个更大的数1](https://leetcode-cn.com/problems/next-greater-element-i)
+3. [Q503 下一个更大的数2](https://leetcode-cn.com/problems/next-greater-element-ii)
+4. [Q739 每日气温表](https://leetcode-cn.com/problems/daily-temperatures)
 
 ### 队列
 
-1. 单调队列
+1. [A154 滑动窗口](https://www.acwing.com/problem/content/156/)
+2. [Q239 滑动窗口中的最大值](https://leetcode-cn.com/problems/sliding-window-maximum)
 
 ### 字符串
 
-1. KMP
+1. [A831 KMP](https://www.acwing.com/problem/content/833/)
 
 ### Trie
 
-1. Trie字符串统计
-2. 最大异或对
+1. [A835 Trie字符串统计](https://www.acwing.com/problem/content/837/)
+2. [A143 最大异或对](https://www.acwing.com/problem/content/description/145/)
 
 ### 并查集
 
-1. 合并集合
-2. 连通块中点的数量
-3. 食物链
-
-### 堆
-
-1. 堆排序
-2. 模拟堆
+1. [A836 合并集合](https://www.acwing.com/problem/content/838/)
+2. [A837 连通块中点的数量](https://www.acwing.com/problem/content/839/)
+3. [A240 食物链](https://www.acwing.com/problem/content/242/)
 
 ### 哈希表
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. [A840 开放寻址](https://www.acwing.com/problem/content/842/)
+2. [A840 拉链法](https://www.acwing.com/problem/content/842/)
+3. [A841 字符串哈希](https://www.acwing.com/problem/content/843/)
 
 
 
