@@ -13,9 +13,8 @@
 
 1. 归并排序 [Q912](https://leetcode-cn.com/problems/sort-an-array)
 2. 逆序对的数量
-    1. [A788 逆序对的数量](https://www.acwing.com/problem/content/description/790/)
-    2. [Qoffer51 逆序对的数量](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof)
-    3. [Q629 K个逆序对数组](https://leetcode-cn.com/problems/k-inverse-pairs-array/)
+    1. [Qoffer51 逆序对的数量](https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof)
+    2. [* Q629 K个逆序对数组](https://leetcode-cn.com/problems/k-inverse-pairs-array/)
 
 堆排序：
 
@@ -34,8 +33,6 @@
 
 1. [Q34 找到一个数在数组中的第一个和最后一个出现的位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array)
 2. [A789 数的范围](https://www.acwing.com/problem/content/791/)
-
-数组二分：
 
 1. 
 

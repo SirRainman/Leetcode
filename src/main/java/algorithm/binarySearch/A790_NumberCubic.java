@@ -25,10 +25,10 @@ import java.util.Scanner;
 public class A790_NumberCubic {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Double x = in.nextDouble();
-        Double left = -10000.0, right = 10000.0;
-        while(right - left > 10e-8) {
-            Double mid = left + (right - left )  / 2;
+        double x = in.nextDouble();
+        double left = -10000, right = 10000;
+        while(right - left >= 1e-7) {
+            double mid = (left + right) / 2;
             if(mid * mid * mid <= x) left = mid;
             else right = mid;
         }
