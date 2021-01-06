@@ -33,15 +33,17 @@ package dataStructure.stack.monotonousStack;
  */
 public class HardQ239_SlidingWindowMaximum {
     public int[] maxSlidingWindow(int[] nums, int k) {
+        if(nums == null || nums.length == 0) return new int[0];
+
         int n = nums.length;
         int[] res = new int[n - k + 1];
 
         // TODO: 想一想为什么队列里存储的是下标？？？
-        //  如果不存下标，是没有办法判断什么时候出队的
-        int[] queue = new int[100100];
+        //  答：如果不存下标，是没有办法判断什么时候出队的
+        int[] queue = new int[n];
         int front = 0, rear = -1;
         for(int i = 0; i < n; i++) {
-            // i - k + 1 是窗口的左边界，和队列没有关系，如果存的是数组元素的话，就没有办法判断什么时候出队了
+            // TODO：i - k + 1 是窗口的左边界，和队列没有关系，如果存的是数组元素的话，就没有办法判断什么时候出队了
             if(front <= rear && queue[front] < i - k + 1) front++;
             while(front <= rear && nums[queue[rear]] <= nums[i]) rear--;
             queue[++rear] = i;

@@ -1,5 +1,7 @@
 package algorithm.double_pointer;
 
+import dataStructure.ListNode;
+
 /**
  * 你的朋友正在使用键盘输入他的名字name。偶尔，在键入字符c时，按键可能会被长按，而字符可能被输入 1 次或多次。
  *
@@ -56,4 +58,5 @@ public class Q925_LongPressedName {
         }
         return slow == n.length;
     }
+
 }

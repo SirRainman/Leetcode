@@ -97,6 +97,7 @@
 1. [A836 合并集合](https://www.acwing.com/problem/content/838/)
 2. [A837 连通块中点的数量](https://www.acwing.com/problem/content/839/)
 3. [A240 食物链](https://www.acwing.com/problem/content/242/)
+4. [Q399 除法求值*](https://leetcode-cn.com/problems/evaluate-division/solution/399-chu-fa-qiu-zhi-nan-du-zhong-deng-286-w45d/)
 
 ### 哈希表
 

@@ -34,14 +34,14 @@ import java.util.LinkedList;
  * 链接：https://leetcode-cn.com/problems/implement-queue-using-stacks
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q232_ImplementQueueusingStacks {
+public class Q232_ImplementQueueUsingStacks {
 
 
     Deque<Integer> in;
     Deque<Integer> out;
 
     /** Initialize your data structure here. */
-    public Q232_ImplementQueueusingStacks() {
+    public Q232_ImplementQueueUsingStacks() {
         in = new LinkedList<>();
         out = new LinkedList<>();
     }

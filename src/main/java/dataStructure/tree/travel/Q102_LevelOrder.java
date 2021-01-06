@@ -3,9 +3,7 @@ package dataStructure.tree.travel;
 
 import dataStructure.TreeNode;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
@@ -35,22 +33,23 @@ public class Q102_LevelOrder {
     // TODO: linkedlist 和 Arraylist的区别？？？
     //  ArrayList的实现用的是数组，LinkedList是基于链表，ArrayList适合查找，LinkedList适合增删
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> lists = new LinkedList<>();
-        if (root == null) return lists;
-        Queue<TreeNode> level = new LinkedList<>();
-        level.offer(root);
-        TreeNode p;
-        while (!level.isEmpty()) {
-            int size = level.size();
-            List<Integer> list = new LinkedList<>();
-            while (size-- > 0) {
-                p = level.poll();
-                list.add(p.val);
-                if (p.left != null) level.offer(p.left);
-                if (p.right != null) level.offer(p.right);
+        List<List<Integer>> res = new ArrayList<>();
+        if(root == null) return res;
+
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            int levelSize = queue.size();
+            List<Integer> levelNodes = new ArrayList<>();
+            while(levelSize-- > 0) {
+                TreeNode p = queue.poll();
+                levelNodes.add(p.val);
+                if(p.left != null) queue.offer(p.left);
+                if(p.right != null) queue.offer(p.right);
             }
-            lists.add(list);
+            res.add(levelNodes);
         }
-        return  lists;
+
+        return res;
     }
 }

@@ -23,7 +23,7 @@ import java.util.Scanner;
  *
  * https://www.acwing.com/problem/content/description/790/
  */
-public class A788_LCOF {
+public class A788_ReversePair {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int len = in.nextInt();

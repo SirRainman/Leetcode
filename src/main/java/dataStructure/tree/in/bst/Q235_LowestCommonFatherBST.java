@@ -31,7 +31,7 @@ import dataStructure.TreeNode;
  * 链接：https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q235_LowestCommonofaBinarySearchTree {
+public class Q235_LowestCommonFatherBST {
     //TODO:二叉树的最近公共祖先怎么写？？？  Q236
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root.val > p.val && root.val > q.val) return lowestCommonAncestor(root.left, p, q);

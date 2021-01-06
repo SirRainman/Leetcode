@@ -4,9 +4,7 @@ import dataStructure.TreeNode;
 
 /**
  * 给定一个二叉树，判断它是否是高度平衡的二叉树。
- *
  * 本题中，一棵高度平衡二叉树定义为：
- *
  * 一个二叉树每个节点的左右两个子树的高度差的绝对值不超过1。
  *
  * 示例 1:
@@ -37,7 +35,7 @@ import dataStructure.TreeNode;
  * 链接：https://leetcode-cn.com/problems/balanced-binary-tree
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * */
-public class MediumQ110_BalancedBinaryTree {
+public class Q110_BalancedBinaryTree {
     // TODO:这个算法的时间复杂度是多少？？
     public boolean isBalanced(TreeNode root) {
         if (root == null) return true;
@@ -53,6 +51,7 @@ public class MediumQ110_BalancedBinaryTree {
 
 
     // TODO:想一想为什么这个方法更好？
+    //  设置一个不合理值，提前返回结果
     public boolean isBalanced2(TreeNode root) {
         return depth2(root) >= 0;
     }

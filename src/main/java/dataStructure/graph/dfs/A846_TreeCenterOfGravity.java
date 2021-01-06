@@ -33,39 +33,42 @@ import java.util.Scanner;
  * https://www.acwing.com/problem/content/848/
  */
 public class A846_TreeCenterOfGravity {
-    static int[] head, e, next; // 拉链式结构，存储每个节点的孩子节点
-    static int idx = 0, ans, n;
+    static int n;
+    static int[] e, next, head;
+    static int idx = 0;
     static boolean[] isVisited;
 
-    public static void add(int a, int b) {
-        e[idx] = b;
-        next[idx] = head[a];
-        head[a] = idx;
+    static int res;
+
+    public static void add(int u, int v) {
+        e[idx] = v;
+        next[idx] = head[u];
+        head[u] = idx;
         idx++;
     }
 
     // 返回以u为跟节点的子树的重量（节点数）
     public static int dfs(int u) {
         isVisited[u] = true;
-        int res = 0, sum = 1;
+        int maxWeight = 0, count = 1;
         for(int v = head[u]; v != -1; v = next[v]) {
             if(isVisited[e[v]]) continue;
-            int s = dfs(e[v]); // 每个孩子节点的节点数
-            res = Math.max(res, s); // 求他的孩子节点中，体重（节点数目）最大的那一个
-            sum += s; // 每个节点的总重量
+            int c = dfs(e[v]); // 每个孩子节点的节点数
+            maxWeight = Math.max(maxWeight, c); // 求他的孩子节点中，体重（节点数目）最大的那一个
+            count += c; // 每个节点的总重量
         }
         // TODO：将重心删除掉之后，会划分出多个连通图，多个连通图中谁最有可能成为最大的连通图？
         //  1 去掉以该节点为根的树
         //  2 以该节点为根的树中最重的那个孩子节点
-        res = Math.max(res, n - sum);
-        ans = Math.min(res, ans); // TODO：注意树的重心的定义，反正我不太懂！！！如果将这个点删除后，剩余各个连通块中点数的最大值最小，那么这个节点被称为树的重心。
-        return sum;
+        maxWeight = Math.max(maxWeight, n - count);
+        res = Math.min(maxWeight, res); // TODO：注意树的重心的定义，反正我不太懂！！！如果将这个点删除后，剩余各个连通块中点数的最大值最小，那么这个节点被称为树的重心。
+        return count;
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         n = in.nextInt();
-        ans = n;
+        res = n;
         head = new int[n + 1]; Arrays.fill(head, -1);
         isVisited = new boolean[n + 1];
         e = new int[2 * (n + 1)];
@@ -77,6 +80,6 @@ public class A846_TreeCenterOfGravity {
             add(b, a);
         }
         dfs(1);
-        System.out.println(ans);
+        System.out.println(res);
     }
 }

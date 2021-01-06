@@ -15,7 +15,7 @@ package algorithm.sort;
  * 链接：https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class HardQOffer51_LCOF {
+public class HardQOffer51_ReversePair {
 
     int pairs = 0;
     public int reversePairs(int[] nums) {

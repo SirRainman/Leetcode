@@ -29,35 +29,31 @@ import java.util.*;
  */
 public class Q103_BinaryTreeZigzagLevelOrderTraversal {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> ans = new ArrayList<>();
-        if(root == null) return ans;
+        List<List<Integer>> res = new ArrayList<>();
+        if(root == null) return res;
 
-        Queue<TreeNode> queue = new LinkedList<>();
         int level = 0;
-        TreeNode cur = root;
-        queue.add(cur);
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
         while(!queue.isEmpty()) {
-            int size = queue.size();
             level++;
-            LinkedList<Integer> levelPath = new LinkedList<>();
-            //System.out.println(queue.toString());
-            while(size-- > 0) {
-                cur = queue.poll();
-                // TODO:注意判断奇偶的方法
-                //  注意add 和 push 的区别！！！
-                if((level & 1) == 1) {
-                    levelPath.add(cur.val);
-                } else {
-                    levelPath.push(cur.val);
-                }
+            int levelSize = queue.size();
+            LinkedList<Integer> levelNodes = new LinkedList<>();
+            while(levelSize-- > 0) {
+                TreeNode p = queue.poll();
+                // TODO:
+                //  add 在末尾添加
+                //  push 在开头添加
+                if(level % 2 == 1) levelNodes.add(p.val);
+                else levelNodes.push(p.val);
 
-                if(cur.left != null) queue.offer(cur.left);
-                if(cur.right != null) queue.offer(cur.right);
+                if(p.left != null) queue.offer(p.left);
+                if(p.right != null) queue.offer(p.right);
             }
-            // TODO:注意可以把LinkedList放到ArrayList里
-            ans.add(new ArrayList(levelPath));
+            res.add(levelNodes);
         }
-        return ans;
+
+        return res;
     }
 
 }

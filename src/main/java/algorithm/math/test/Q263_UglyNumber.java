@@ -30,19 +30,11 @@ package algorithm.math.test;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q263_UglyNumber {
-    class Solution {
-        public boolean isUgly(int num) {
-            if(num == 1) return true;
-            if(num == 0) return false;
-            for(int i = 2; i <= 5; i++) {
-                if(num % i == 0) {
-                    while(num % i == 0) {
-                        num /= i;
-                    }
-                }
-                //System.out.println(num);
-            }
-            return num == 1;
-        }
+    public boolean isUgly(int num) {
+        if(num == 0) return false;
+        while(num % 2 == 0) num /= 2;
+        while(num % 3 == 0) num /= 3;
+        while(num % 5 == 0) num /= 5;
+        return num == 1;
     }
 }

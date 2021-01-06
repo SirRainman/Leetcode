@@ -14,9 +14,9 @@ import dataStructure.ListNode;
  */
 public class Q21_MergeTwoSortedLists {
 
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode head = new ListNode(0);
-        ListNode cur = head;
+    public ListNode mergeTwoLists1(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
         while (l1 != null && l2 != null) {
             if (l1.val <= l2.val) {
                 cur.next = l1;
@@ -32,14 +32,14 @@ public class Q21_MergeTwoSortedLists {
         if (l1 == null) cur.next = l2;
         else cur.next = l1;
 
-        return head.next;
+        return dummy.next;
     }
 
-    public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
-        if (l1 == null) return l2;
-        else if (l2 == null) return l1;
-        ListNode head;
-        if (l1.val <= l2.val) {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null) return l2;
+        if(l2 == null) return l1;
+        ListNode head = null;
+        if(l1.val < l2.val) {
             head = l1;
             head.next = mergeTwoLists(l1.next, l2);
         } else {
@@ -49,7 +49,4 @@ public class Q21_MergeTwoSortedLists {
         return head;
     }
 
-    public static void main(String[] args) {
-
-    }
 }

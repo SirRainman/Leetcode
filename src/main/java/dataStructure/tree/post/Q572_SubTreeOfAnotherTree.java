@@ -42,19 +42,18 @@ import dataStructure.TreeNode;
  * 链接：https://leetcode-cn.com/problems/subtree-of-another-tree
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class MediumQ572_SubtreeOfAnotherTree {
+public class Q572_SubTreeOfAnotherTree {
 
+    // TODO: 注意这里是判断t是不是s的一个子树
+    //  如何判断t是不是s的一个子结构？？？？QOffer26
     public boolean isSubtree(TreeNode s, TreeNode t) {
-        if (s == null) {
-            return false;
-        } else if (s.val == t.val && isSameTree(s, t)) {
-            return true;
-        } else {
-            return isSubtree(s.left, t) || isSubtree(s.right, t);
-        }
+        if(s == null || t == null ) return false;
+        return isSameTree(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t);
     }
 
     private boolean isSameTree(TreeNode p, TreeNode q) {
-        return (p == q) || (p != null && q != null && p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right));
+        if(p == null) return q == null;
+        if(q == null) return p == null;
+        return p.val == q.val && isSameTree(p.left, q.left ) && isSameTree(p.right, q.right);
     }
 }

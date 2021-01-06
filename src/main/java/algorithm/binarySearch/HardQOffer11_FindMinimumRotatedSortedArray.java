@@ -19,6 +19,7 @@ package algorithm.binarySearch;
  */
 public class HardQOffer11_FindMinimumRotatedSortedArray {
     // TODO: 排序数组的查找问题首先考虑使用 二分法 解决，其可将 遍历法 的 线性级别 时间复杂度降低至 对数级别 。
+    //  二分的终极目标是：缩小范围
     //  根据旋转数组的定义，左半边的元素 >= 右半边的元素
     //  设x为右半边左边界
     //  nums[mid] > nums[right] 说明中间元素在 x左半边，mid肯定不是右半边的左边界 left = mid + 1
