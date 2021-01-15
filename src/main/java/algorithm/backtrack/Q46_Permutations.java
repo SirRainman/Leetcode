@@ -1,4 +1,4 @@
-package dataStructure.graph.dfs;
+package algorithm.backtrack;
 
 import java.util.ArrayList;
 import java.util.List;

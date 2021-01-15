@@ -36,27 +36,23 @@ package dataStructure.union;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q684_RedundantConnection {
-    class Solution {
-
-        int[] parent;
-
-        public int find(int x) {
-            if(x != parent[x]) parent[x] = find(parent[x]);
-            return parent[x];
+    public int find(int a) {
+        if(parent[a] != a) {
+            parent[a] = find(parent[a]);
         }
-        public int[] findRedundantConnection(int[][] edges) {
-            parent = new int[edges.length + 1];
-            for(int i = 0; i < parent.length; i++) parent[i] = i;
+        return parent[a];
+    }
 
-            for(int[] edge : edges) {
-                int p1 = find(edge[0]), p2 = find(edge[1]);
-                if(p1 == p2) {
-                    return edge;
-                } else {
-                    parent[p1] = p2;
-                }
-            }
-            return new int[] {-1, -1};
+    int[] parent;
+    public int[] findRedundantConnection(int[][] edges) {
+        int n = edges.length;
+        parent = new int[n + 1];
+        for(int i = 1; i <= n; i++) parent[i] = i;
+        for(int[] e : edges) {
+            int pa = find(e[0]), pb = find(e[1]);
+            if(pa == pb) return e;
+            parent[pa] = pb;
         }
+        return new int[] {-1, -1};
     }
 }

@@ -42,7 +42,8 @@ public class A853_LimitNedges_bellmanFord {
         Arrays.fill(dist, INF);
         dist[1] = 0;
         for(int i = 0; i < k; i++) {// 走k条边
-            // back[]数组是上一次迭代后dist[]数组的备份，由于是每个点同时向外出发，因此需要对dist[]数组进行备份，若不进行备份会因此发生串联效应，影响到下一个点。
+            // back[]数组是上一次迭代后dist[]数组的备份，
+            // 由于是每个点同时向外出发，因此需要对dist[]数组进行备份，若不进行备份会因此发生串联效应，影响到下一个点。
             int[] backup = Arrays.copyOf(dist, dist.length);
             for(int[] e : edges) {
                 int a = e[0], b = e[1], w = e[2];

@@ -1,4 +1,4 @@
-package dataStructure.graph.dfs;
+package dataStructure.graph;
 
 import java.util.Deque;
 import java.util.LinkedList;

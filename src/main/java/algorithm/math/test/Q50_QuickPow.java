@@ -26,18 +26,24 @@ package algorithm.math.test;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q50_QuickPow {
-    class Solution {
-        public double myPow(double x, int n) {
-            double res = 1;
-            // TODO:int的取值范围为（-2147483648~2147483647）
-            //  Math.abs(-2147483648) = 0
-            long b = Math.abs((long)n);
-            while(b > 0) {
-                if((b & 1) > 0) res = res * x;
-                x *= x;
-                b = b >> 1;
-            }
-            return n > 0 ? res : 1 / res;
+    public double myPow1(double x, int n) {
+        double res = 1;
+        // TODO:int的取值范围为（-2147483648~2147483647）
+        //  Math.abs(-2147483648) = 0
+        long b = Math.abs((long)n);
+        while(b > 0) {
+            if((b & 1) > 0) res = res * x;
+            x *= x;
+            b = b >> 1;
         }
+        return n > 0 ? res : 1 / res;
+    }
+
+    public double myPow(double x, int n) {
+        if(n == 0) return 1;
+        if(n == -1) return 1 / x;
+        double res = myPow(x, n >> 1);
+        if((n & 1) == 1) return res * res * x;
+        else return res * res;
     }
 }

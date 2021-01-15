@@ -7,7 +7,8 @@ import java.util.Scanner;
  * 给定一个n个点m条边的无向图，图中可能存在重边和自环，边权可能为负数。
  * 求最小生成树的树边权重之和，如果最小生成树不存在则输出impossible。
  * 给定一张边带权的无向图G=(V, E)，其中V表示图中点的集合，E表示图中边的集合，n=|V|，m=|E|。
- * 由V中的全部n个顶点和E中n-1条边构成的无向连通子图被称为G的一棵生成树，其中边的权值之和最小的生成树被称为无向图G的最小生成树。
+ * 由V中的全部n个顶点和E中n-1条边构成的无向连通子图被称为G的一棵生成树，
+ * 其中边的权值之和最小的生成树被称为无向图G的最小生成树。
  *
  * 输入格式
  * 第一行包含两个整数n和m。
@@ -38,7 +39,7 @@ public class A858_MinimumSpanningTree_prim {
 
     static int INF = 0x3f3f3f3f;
     static int n, m;
-    static int[][] graph;
+    static int[][] g;
 
     public static int prim() {
 
@@ -62,7 +63,7 @@ public class A858_MinimumSpanningTree_prim {
             st[t] = true;
 
             for(int j = 1; j <= n; j++) {
-                dist[j] = Math.min(dist[j], graph[t][j]);
+                dist[j] = Math.min(dist[j], g[t][j]);
             }
         }
 
@@ -72,17 +73,17 @@ public class A858_MinimumSpanningTree_prim {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         n = in.nextInt(); m = in.nextInt();
-        graph = new int[n + 1][n + 1];
+        g = new int[n + 1][n + 1];
         for(int i = 1; i <= n; i++) {
             for(int j = 1; j <= n; j++) {
-                graph[i][j] = i == j ? 0 : INF;
+                g[i][j] = i == j ? 0 : INF;
             }
         }
         for(int i = 0; i < m; i++) {
             int a = in.nextInt(), b = in.nextInt(), value = in.nextInt();
-            value = Math.min(value, graph[a][b]);
-            graph[a][b] = value;
-            graph[b][a] = value;
+            value = Math.min(value, g[a][b]);
+            g[a][b] = value;
+            g[b][a] = value;
         }
         int ans = prim();
         System.out.print(ans == INF ? "impossible" : ans);

@@ -26,6 +26,9 @@ import java.util.Scanner;
  * https://www.acwing.com/problem/content/803/
  */
 public class A801_Bit {
+    // TODO: java 中 >> 和 >>> 的含义是不一样的
+    //  >> 是有符号的右移
+    //  >>> 是无符号的右移
     public static void main(String[] args ) {
         Scanner in = new Scanner(System.in);
         int len = in.nextInt();
@@ -44,14 +47,27 @@ public class A801_Bit {
         }
     }
 
-    // TODO：判断最右边的一位1在什么位置
-    public static int lowbit(int x) {
-        // 原码  x       = 1010...1000
-        // 反码 ~x       = 0101...0111
-        // 补码 ~x + 1   = 0101...1000
-        // x & ( ~x + 1) = 0000...1000
-        // -x = (~x + 1)
+    // TODO：解法一
+    //  n           = 1010100
+    //  n - 1       = 1010011
+    //  n & (n - 1) = 1010000
+    public int hammingWeight(int n) {
+        int res = 0;
+        while(n != 0) {
+            res++;
+            n &= n - 1;
+        }
+        return res;
+    }
 
+    // TODO：解法二
+    //  判断最右边的一位1在什么位置
+    //  原码  x        = 1010...1000
+    //  反码 ~x        = 0101...0111
+    //  补码 ~x + 1    = 0101...1000
+    //  x & ( ~x + 1) = 0000...1000
+    //  -x = (~x + 1)
+    public static int lowbit(int x) {
         // TODO：
         //  1想一想什么是源码、反码、补码？
         //  2为什么计算机中要用-x表示~x+1

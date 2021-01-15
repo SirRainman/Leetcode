@@ -45,24 +45,19 @@ public class A860_BipartiteGraph {
         color[u] = c;
         for(int i = head[u]; i != -1; i = next[i]) {
             int v = e[i];
-            if(color[v] == -1) {
-                if( ! dfs(v, 1 - c) ) {
-                    return false;
-                }
+            if(color[v] == -1 && !dfs(v, 1 - c)) {
+                return false;
             } else if(color[v] == c) {
                 return false;
             }
         }
-
         return true;
     }
 
     public static boolean check() {
         for(int i = 1; i <= n; i++) {
-            if(color[i] == -1) {
-                if( !dfs(i, 0) ) {
-                    return false;
-                }
+            if(color[i] == -1 && !dfs(i, 0)) {
+                return false;
             }
         }
         return true;

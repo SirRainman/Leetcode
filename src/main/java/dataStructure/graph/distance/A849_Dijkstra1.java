@@ -89,29 +89,25 @@ public class A849_Dijkstra1 {
 
 
 
-    // TODO：稀疏图
     static class Main {
-        static int N = 200020;
         static int INF = 0x3f3f3f3f;
-
         static int n, m;
-        static int idx = 0;
-        static int[] e, weight, head, next; // 稀疏图
+        static int[] e, head, next, weight;
+        static int idx;
 
-        static int[] dist;
-        static boolean[] st;
-
-        public static void add (int a, int b, int w) {
-            e[idx] = b;
+        public static void add(int u, int v, int w) {
+            e[idx] = v;
             weight[idx] = w;
-            next[idx] = head[a];
-            head[a] = idx;
-            idx++;
+            next[idx] = head[u];
+            head[u] = idx++;
         }
 
         public static int dijkstra() {
-            dist[1] = 0;
+            boolean[] st = new boolean[n + 1];
+            int[] dist = new int[n + 1];
+            Arrays.fill(dist, INF);
 
+            dist[1] = 0;
             for(int i = 0; i < n; i++) {
                 int t = -1;
                 for(int j = 1; j <= n; j++) {
@@ -119,41 +115,30 @@ public class A849_Dijkstra1 {
                         t = j;
                     }
                 }
-
                 st[t] = true;
-
                 for(int j = head[t]; j != -1; j = next[j]) {
                     int v = e[j];
                     dist[v] = Math.min(dist[v], dist[t] + weight[j]);
                 }
             }
-
             return dist[n] == INF ? -1 : dist[n];
         }
 
         public static void main(String[] args) {
             Scanner in = new Scanner(System.in);
-            n = in.nextInt();
-            m = in.nextInt();
 
-            e = new int[N];
-            weight = new int[N];
-            next = new int[N];
+            n = in.nextInt(); m = in.nextInt();
+            e = new int[m];
+            next = new int[m];
             head = new int[n + 1];
             Arrays.fill(head, -1);
-
-            dist = new int[n + 1];
-            Arrays.fill(dist, INF);
-            st = new boolean[n + 1];
-
+            weight = new int[m];
 
             for(int i = 0; i < m; i++) {
-                int a = in.nextInt(), b = in.nextInt(), w = in.nextInt();
-                add(a, b, w);
+                int u = in.nextInt(), v = in.nextInt(), w = in.nextInt();
+                add(u, v, w);
             }
-
-            int ans = dijkstra();
-            System.out.print(ans);
+            System.out.print(dijkstra());
         }
     }
 }

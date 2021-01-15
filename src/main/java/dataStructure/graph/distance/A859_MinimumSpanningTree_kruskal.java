@@ -56,6 +56,7 @@ public class A859_MinimumSpanningTree_kruskal {
         Arrays.sort(edges, (o1, o2) -> o1[2] - o2[2]);
 
         int res = 0, count = 0; // res是最小生成树的权重 count记录边的数目
+        // TODO: 为什么用边存储这个图，而不用临接表？？？
         // 遍历每一条边
         for(int[] e : edges) {
             if(count == n - 1) break;

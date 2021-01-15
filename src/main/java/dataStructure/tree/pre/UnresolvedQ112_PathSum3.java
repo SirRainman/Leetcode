@@ -39,8 +39,9 @@ public class UnresolvedQ112_PathSum3 {
 
     public int pathSumWithRoot(TreeNode root, int sum) {
         if(root == null) return 0;
-        int path = sum == root.val ? 1 : 0;
-        return path + pathSumWithRoot(root.left, sum - root.val) + pathSumWithRoot(root.right, sum - root.val);
+        int isValid = sum == root.val ? 1 : 0;
+        return isValid + pathSumWithRoot(root.left, sum - root.val)
+                + pathSumWithRoot(root.right, sum - root.val);
     }
 
     // TODO:前缀和

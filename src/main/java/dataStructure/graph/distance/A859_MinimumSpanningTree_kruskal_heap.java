@@ -42,31 +42,27 @@ public class A859_MinimumSpanningTree_kruskal_heap {
 
     static int[] parent;
 
-    public static int find(int x) {
-        if(parent[x] != x) {
-            parent[x] = find(parent[x]);
-        }
-        return parent[x];
+    public static int find(int a) {
+        if(parent[a] != a) parent[a] = find(parent[a]);
+        return parent[a];
     }
 
     public static int kruskal() {
-        int ans = 0;
-        int[] dist = new int[n + 1];
-        Arrays.fill(dist, INF);
+        int res = 0;
         PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> o1[2] - o2[2]);
         for(int[] e : edges) heap.offer(e);
         int count = 0;
-        while( !heap.isEmpty() && count < n - 1) {
+        while(!heap.isEmpty() && count < n - 1) {
             int[] e = heap.poll();
             int a = e[0], b = e[1], w = e[2];
-            int pa= find(a), pb = find(b);
+            int pa = find(a), pb = find(b);
             if(pa != pb) {
                 parent[pa] = pb;
-                ans += w;
                 count++;
+                res += w;
             }
         }
-        return count == n - 1 ? ans : INF;
+        return count < n - 1 ? INF : res;
     }
 
 

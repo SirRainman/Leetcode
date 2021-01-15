@@ -39,32 +39,33 @@ import java.util.Scanner;
  *  https://www.acwing.com/problem/content/839/
  */
 public class A837_MergeSetWithSize {
+    static int n, m;
     static int[] parent, size;
 
-    public static int find(int x) {
-        if(parent[x] != x) parent[x] = find(parent[x]);
-        return parent[x];
+    public static int find(int a) {
+        if(parent[a] != a) parent[a] = find(parent[a]);
+        return parent[a];
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int n = in.nextInt(), times = in.nextInt();
+        n = in.nextInt(); m = in.nextInt();
+
         parent = new int[n + 1];
         size = new int[n + 1];
-        for(int i = 1; i <= n; i++) {
+        for(int i = 0; i <= n; i++) {
             parent[i] = i;
             size[i] = 1;
         }
 
-        while(times-- > 0) {
+        while(m-- > 0) {
             String op = in.next();
+
             if(op.compareTo("C") == 0) {
                 int a = in.nextInt(), b = in.nextInt();
-                a = find(a);
-                b = find(b);
-                if(a == b) continue;
-                parent[a] = parent[b];
-                size[b] += size[a];
+                int pa = find(a), pb = find(b);
+                parent[pa] = parent[pb];
+                if(pa != pb) size[pb] += size[pa];
             } else if(op.compareTo("Q1") == 0) {
                 int a = in.nextInt(), b = in.nextInt();
                 System.out.println(find(a) == find(b) ? "Yes" : "No");

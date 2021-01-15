@@ -9,7 +9,6 @@ import java.util.Scanner;
  *
  * 输入格式
  * 第一行包含整数n。
- *
  * 接下来n行，每行包含一个整数ai。
  *
  * 输出格式
@@ -29,23 +28,24 @@ import java.util.Scanner;
  * https://www.acwing.com/problem/content/description/871/
  */
 public class A869_Divisor {
-    public static List<Integer> getDivisor(int x) {
-        List<Integer> ans = new ArrayList<>();
+    public static List<Integer> getDivisors(int x) {
+        List<Integer> divisors = new ArrayList<>();
         for(int i = 1; i <= x / i; i++) {
             if(x % i == 0) {
-                ans.add(i);
-                if(i != x / i) ans.add(x / i);
+                divisors.add(i);
+                if(x / i != i) divisors.add(x / i);
             }
         }
-        ans.sort((o1, o2) -> o1 - o2);
-        return ans;
+        // TODO: 注意List的排序方法
+        divisors.sort((o1, o2) -> o1 - o2);
+        return divisors;
     }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         while(n-- > 0) {
             int x = in.nextInt();
-            List<Integer> ans = getDivisor(x);
+            List<Integer> ans = getDivisors(x);
             for(int i : ans) System.out.print(i + " ");
             System.out.println();
         }

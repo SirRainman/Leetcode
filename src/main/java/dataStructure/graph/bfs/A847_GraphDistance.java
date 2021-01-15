@@ -34,49 +34,49 @@ import java.util.Scanner;
  * https://www.acwing.com/problem/content/849/
  */
 public class A847_GraphDistance {
-
-    static int N = 100010;
+    static int INF = 0x3f3f3f3f;
     static int n, m;
+    static int idx;
     static int[] e, head, next;
-    static int idx = 0;
-    static int[] dist;
 
-    // 临接表存有向图
-    static void add (int a, int b) {
-        e[idx] = b;
-        next[idx] = head[a];
-        head[a] = idx;
-        idx++;
+    public static void add(int u, int v) {
+        e[idx] = v;
+        next[idx] = head[u];
+        head[u] = idx++;
     }
 
-    static int bfs() {
+    public static int bfs() {
+        int[] dist = new int[n + 1];
+        Arrays.fill(dist, INF);
         Deque<Integer> queue = new LinkedList<>();
         queue.offer(1);
         dist[1] = 0;
         while(!queue.isEmpty()) {
             int u = queue.poll();
-            for(int v = head[u]; v != -1; v = next[v]) {
-                if(dist[e[v]] != -1) continue;
-                queue.offer(e[v]);
-                dist[e[v]] = dist[u] + 1;
+            for(int i = head[u]; i != -1; i = next[i]) {
+                int v = e[i];
+                // if(dist[v] > dist[u] + 1) {
+                //     queue.offer(v);
+                //     dist[v] = dist[u] + 1;
+                // }
+                if(dist[v] != INF) continue;
+                queue.offer(v);
+                dist[v] = dist[u] + 1;
             }
         }
-        return dist[n];
+        return dist[n] == INF ? -1 : dist[n];
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         n = in.nextInt(); m = in.nextInt();
+        e = new int[m];
+        next = new int[m];
         head = new int[n + 1];
-        e = new int[N];
-        next = new int[N];
-        dist = new int[n + 1];
         Arrays.fill(head, -1);
-        Arrays.fill(dist, -1);
-
         for(int i = 0; i < m; i++) {
-            int a = in.nextInt(), b = in.nextInt();
-            add(a, b);
+            int u = in.nextInt(), v = in.nextInt();
+            add(u, v);
         }
         System.out.print(bfs());
     }

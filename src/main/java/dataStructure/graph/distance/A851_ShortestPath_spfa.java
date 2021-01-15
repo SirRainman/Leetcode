@@ -33,7 +33,6 @@ import java.util.Scanner;
  * https://www.acwing.com/problem/content/853/
  */
 public class A851_ShortestPath_spfa {
-    static int N = 100010;
     static int INF = 0x3f3f3f3f;
 
     static int n, m;
@@ -59,9 +58,9 @@ public class A851_ShortestPath_spfa {
         boolean[] st = new boolean[n + 1]; //判断节点是否在队列里
 
         Deque<Integer> queue = new LinkedList<>();
+        queue.offer(1);
         dist[1] = 0;
         st[1] = true;
-        queue.offer(1);
 
         while (!queue.isEmpty()) {
             int u = queue.poll();
@@ -86,16 +85,14 @@ public class A851_ShortestPath_spfa {
         n = in.nextInt();
         m = in.nextInt();
 
-        e = new int[N];
+        e = new int[m];
         head = new int[n + 1];
         Arrays.fill(head, -1);
-        next = new int[N];
-        weight = new int[N];
+        next = new int[m];
+        weight = new int[m];
 
         for (int i = 0; i < m; i++) {
-            int a = in.nextInt();
-            int b = in.nextInt();
-            int w = in.nextInt();
+            int a = in.nextInt(), b = in.nextInt(), w = in.nextInt();
             add(a, b, w);
         }
         int ans = spfa();

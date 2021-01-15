@@ -32,21 +32,26 @@ import java.util.Scanner;
  * https://www.acwing.com/problem/content/869/
  */
 public class A867_PrimeDivisor {
+    // TODO:如果可以整除说明当前是最小质因子
+    //  为什么 x % i == 0 中的i一定是x的最小质因数？？
+    //      当枚举到i时，就表明x不含有 2...i - 1的质因子了，
+    //      即x把 2...i-1之间的质因数除干净了，
+    //      因此i也不包含2…i-1之间的质因子了，i也是质数；
+    //      反证法：如果包含质因子，说明前面没有除干净
     public static List<int[]> getPrimeDivisor(int x) {
-        List<int[]> ans = new ArrayList<>();
-
+        List<int[]> divisors = new ArrayList<>();
         for(int i = 2; i <= x / i; i++) {
-            if(x % i == 0) { // TODO:如果可以整除说明当前是最小质因子
-                int index = 0;
+            if(x % i == 0) {
+                int exp = 0;
                 while(x % i == 0) {
-                    index ++;
-                    x /= i; // 注意x发生了改变
+                    exp++;
+                    x /= i;
                 }
-                ans.add(new int[]{i, index});
+                divisors.add(new int[]{i, exp});
             }
         }
-        if(x > 1) ans.add(new int[]{x, 1}); // TODO：n中最多只包含一个大于sqrt(n)的质因子，若多于一个则相乘大于n了。
-        return ans;
+        // TODO：n中最多只包含一个大于sqrt(n)的质因子
+        if(x > 1) divisors.add(new int[]{x, 1}); return divisors;
     }
 
     public static void main(String[] args) {

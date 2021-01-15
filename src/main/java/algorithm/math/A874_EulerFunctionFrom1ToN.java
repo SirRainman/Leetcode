@@ -9,19 +9,18 @@ import java.util.Scanner;
 public class A874_EulerFunctionFrom1ToN {
     public static long getSumEuler(int n ) {
         int[] euler = new int[n + 1];
-
         int count = 0;
         int[] primes = new int[n + 1];
         boolean[] st = new boolean[n + 1];
 
         euler[1] = 1;
-        long res = euler[1];
+        long sum = euler[1];
         for(int i = 2; i <= n; i++) {
             if(!st[i]) {
                 euler[i] = i - 1;
                 primes[count++] = i;
             }
-
+            // TODO: 注意公式推导
             for(int j = 0; primes[j] <= n / i; j++) {
                 int t = primes[j] * i;
                 st[t] = true;
@@ -32,16 +31,16 @@ public class A874_EulerFunctionFrom1ToN {
                 euler[t] = euler[i] * (primes[j] - 1); // TODO: 说明p 和 i 互质，即e[p * i] = e[i] * e[p - 1] = e[i] * (p - 1)
             }
 
-            res += euler[i];
+            sum += euler[i];
         }
 
-        return res;
+        return sum;
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
-        long res = getSumEuler(n);
-        System.out.print(res);
+        long sum = getSumEuler(n);
+        System.out.print(sum);
     }
 }

@@ -1,4 +1,4 @@
-package dataStructure.graph.dfs;
+package algorithm.backtrack;
 
 
 import java.util.ArrayList;
@@ -39,16 +39,11 @@ public class Q47_Permutations2 {
 
         Set<Integer> exist = new HashSet<>();
         for(int i = start; i < nums.length; i++) {
-            if(exist.contains(nums[i])) continue;
-
-
             swap(nums, i, start);
-
+            if(exist.contains(nums[i])) continue;
             exist.add(nums[start]);
             path.add(nums[start]);
-
             dfs(nums, start + 1);
-
             path.remove(path.size() - 1);
             swap(nums, i, start);
         }

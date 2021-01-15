@@ -32,64 +32,68 @@ import java.util.Scanner;
  * https://www.acwing.com/problem/content/850/
  */
 public class A848_TopSort {
-    static int N = 100010;
     static int n, m;
     static int[] e, head, next;
-    static int idx = 0;
-    static int[] inDegree;
+    static int idx;
+    static int[] indegree;
 
-    public static void add(int a, int b) {
-        e[idx] = b;
-        next[idx] = head[a];
-        head[a] = idx;
-        idx++;
+    public static void add(int u, int v) {
+        e[idx] = v;
+        next[idx] = head[u];
+        head[u] = idx++;
     }
 
     public static Deque<Integer> topSort() {
+        Deque<Integer> res = new LinkedList<>();
         Deque<Integer> queue = new LinkedList<>();
-        Deque<Integer> ans = new LinkedList<>();
-        for(int u = 1; u <= n; u++) {
-            if(inDegree[u] == 0) {
-                queue.offer(u);
+
+        boolean[] st = new boolean[n + 1];
+
+        for(int i = 1; i <= n; i++) {
+            if(indegree[i] == 0) {
+                queue.offer(i);
+                st[i] = true;
             }
         }
 
         while(!queue.isEmpty()) {
             int u = queue.poll();
-            ans.offer(u);
-            for(int v = head[u]; v != -1; v = next[v]) {
-                inDegree[e[v]] --;
-                if(inDegree[e[v]] == 0) queue.offer(e[v]);
+            res.offer(u);
+            for(int i = head[u]; i != -1; i = next[i]) {
+                if(st[e[i]]) continue;
+                indegree[e[i]]--;
+                if(indegree[e[i]] == 0) {
+                    st[e[i]] = true;
+                    queue.offer(e[i]);
+                }
             }
         }
-        return ans;
+
+        return res;
     }
 
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        n = input.nextInt();
-        m = input.nextInt();
-
-        e = new int[N];
-        next = new int[N];
+        Scanner in = new Scanner(System.in);
+        n = in.nextInt();
+        m = in.nextInt();
+        e = new int[m];
+        next = new int[m];
         head = new int[n + 1];
-
-        inDegree = new int[n + 1];
-
         Arrays.fill(head, -1);
+        indegree = new int[n + 1];
 
-        for (int i = 0; i < m; i++) {
-            int a = input.nextInt(), b = input.nextInt();
-            inDegree[b]++;
-            add(a, b);
+        for(int i = 0; i < m; i++) {
+            int u = in.nextInt(), v = in.nextInt();
+            add(u, v);
+            indegree[v]++;
         }
 
-        Deque<Integer> ans = topSort();
-        if (ans.size() == n) {
-            while (!ans.isEmpty()) System.out.print(ans.poll() + " ");
+        Deque<Integer> res = topSort();
+        if(res.size() != n) {
+            System.out.print(-1);
         } else {
-            System.out.print("-1");
+            while(!res.isEmpty()) System.out.print(res.poll() + " ");
         }
     }
 }

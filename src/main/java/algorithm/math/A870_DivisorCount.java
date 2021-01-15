@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * 给定n个正整数ai，请你输出这些数的乘积的约数个数，答案对109+7取模。
+ * 给定n个正整数ai，请你输出这些数的乘积的约数个数，答案对10e9+7取模。
  *
  * 输入格式
  * 第一行包含整数n。
@@ -32,12 +32,12 @@ public class A870_DivisorCount {
     public static void updatePrimesDivisor(int x, Map<Integer, Integer> primes) {
         for(int i = 2; i <= x / i; i++) {
             if(x % i == 0) {
-                int index = 0;
+                int exp = 0;
                 while(x % i == 0) {
-                    index ++;
+                    exp ++;
                     x /= i;
                 }
-                primes.put(i, primes.getOrDefault(i, 0) + index);
+                primes.put(i, primes.getOrDefault(i, 0) + exp);
             }
         }
         if(x > 1) primes.put(x, primes.getOrDefault(x, 0) + 1);

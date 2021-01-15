@@ -74,7 +74,8 @@ public class A868_PrimeCount {
     // TODO：为什么是线性的？？？
     //  证明：
     //  1.对于任意一个合数 x <= n，他一定存在一个最小质因子。
-    //  2.假设primes[j]是x的最小质因子，当i枚举到x / primes[j] 的时候，内循环中的 st [primes[j] * i ] = true 一定会把x枚举掉
+    //  2.假设primes[j]是x的最小质因子，当i枚举到x / primes[j] 的时候，
+    //      内循环中的 st [primes[j] * i ] = true 一定会把x枚举掉
     //  3.因为每个数只有一个最小质因子，所以每个数只会被筛掉一次，所以是线性的
     public static int getPrimeCount3(int n) {
         int count = 0;
@@ -87,11 +88,16 @@ public class A868_PrimeCount {
                 st[primes[j] * i] = true;
                 if(i % primes[j] == 0) break;
                 // TODO：用最小质因子筛选掉每一个合数
-                //  1.当i % primes[j] != 0时，说明此时遍历到的primes[j]不是 i 的质因子，那么只可能是此时的primes[j] < i 的最小质因子，
+                //  1.当i % primes[j] != 0时，
+                //      说明此时遍历到的primes[j]不是 i 的质因子，
+                //      那么此时 primes[j] < i 的最小质因子，
                 //      所以primes[j] *  i的最小质因子就是primes[j]
-                //  2.当有i % primes[j] == 0时，说明i的最小质因子是primes[j]，因此primes[j] * i的最小质因子也就应该是prime[j]，
-                //      之后接着用st[primes[j+1] * i] = true去筛合数时，就不是用最小质因子去更新了，因为i有最小质因子primes[j] < primes[j+1]，
-                //      此时的primes[j+1]不是primes[j+1] * i的最小质因子，此时就应该退出循环，避免之后重复进行筛选
+                //  2.当有i % primes[j] == 0时，
+                //      说明i的最小质因子是primes[j]，因此primes[j] * i的最小质因子也就应该是prime[j]，
+                //      若继续用st[primes[j+1] * i] = true去筛合数时，就不是用最小质因子去筛选了，
+                //      因为i的最小质因子primes[j] < primes[j+1]，
+                //      此时的primes[j+1]不是primes[j+1] * i的最小质因子，此时就应该退出循环，
+                //      避免之后重复进行筛选
             }
         }
         return count;

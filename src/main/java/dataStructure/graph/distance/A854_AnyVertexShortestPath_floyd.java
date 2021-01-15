@@ -36,22 +36,22 @@ import java.util.Scanner;
  */
 public class A854_AnyVertexShortestPath_floyd {
     static int INF = 0x3f3f3f3f;
-    static int n, m, q;
-    static int[][] graph;
+    static int n, m, k;
+    static int[][] g;
 
     public static void floyd() {
         // TODO：想一想为什么floyd要把k放在最外层？？？
         //  动态规划思想，Floyd算法的本质是DP，而k是DP的阶段，因此要写最外面。
         //  g[k][i][j] 表示i到j可以通过1...k之间的中间节点的最短路径
-        //      g[k][i][j] 可以从g[k - 1][i][j]转移过来，表示不经过k
-        //      g[k][i][j] 可以从g[k - 1][i][k] + g[k - 1][k][j]转移过来，表示经过k
+        //      g[k][i][j] 可以从g[k - 1][i][j] 转移过来，表示不经过k
+        //      g[k][i][j] 可以从g[k - 1][i][k] + g[k - 1][k][j] 转移过来，表示经过k
         //  g[k][i][j] = min( g[k - 1][i][j] , g[k - 1][i][k] + g[k - 1][k][j]  )
         //  可以看到，g的最外一层一维空间可以忽略，因为g[k] 只与 g[k - 1]有关。
         //  因此在计算g[k]时，要求g[k-1]必须被更新
         for(int k = 1; k <= n; k++) {
             for(int i = 1; i <= n; i++) {
                 for(int j = 1; j <= n; j++) {
-                    graph[i][j] = Math.min(graph[i][j], graph[i][k] + graph[k][j]);
+                    g[i][j] = Math.min(g[i][j], g[i][k] + g[k][j]);
                 }
             }
         }
@@ -59,25 +59,21 @@ public class A854_AnyVertexShortestPath_floyd {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        n = in.nextInt();
-        m = in.nextInt();
-        q = in.nextInt();
-
-        graph = new int[n + 1][n + 1];
-        for(int i = 1; i <= n; i++)
-            for(int j = 1; j <= n; j++)
-                graph[i][j] = i == j ? 0 : INF;
-
-        for(int i = 0; i < m; i++) {
-            int a = in.nextInt(), b = in.nextInt(), w = in.nextInt();
-            graph[a][b] = Math.min(graph[a][b], w);
+        n = in.nextInt(); m = in.nextInt(); k = in.nextInt();
+        g = new int[n + 1][n + 1];
+        for(int i = 1; i <= n; i++) {
+            for(int j = 1; j <= n; j++) {
+                g[i][j] = i == j ? 0 : INF;
+            }
         }
-
+        for(int i = 0; i < m; i++) {
+            int u = in.nextInt(), v = in.nextInt(), w = in.nextInt();
+            g[u][v] = Math.min(g[u][v], w);
+        }
         floyd();
-
-        while(q-- > 0) {
-            int a = in.nextInt(), b = in.nextInt();
-            System.out.println(graph[a][b] > INF / 2 ? "impossible" : graph[a][b]);
+        while(k-- > 0) {
+            int u = in.nextInt(), v = in.nextInt();
+            System.out.println(g[u][v] > INF / 2 ? "impossible" : g[u][v]);
         }
     }
 }

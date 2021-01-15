@@ -70,9 +70,9 @@ public class A846_TreeCenterOfGravity {
         n = in.nextInt();
         res = n;
         head = new int[n + 1]; Arrays.fill(head, -1);
-        isVisited = new boolean[n + 1];
         e = new int[2 * (n + 1)];
         next = new int[2 * (n + 1)];
+        isVisited = new boolean[n + 1];
 
         for(int i = 0; i < n - 1; i++) {
             int a = in.nextInt(), b = in.nextInt();

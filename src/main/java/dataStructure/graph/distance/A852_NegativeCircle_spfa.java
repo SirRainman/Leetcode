@@ -65,6 +65,7 @@ public class A852_NegativeCircle_spfa {
         boolean[] st = new boolean[n + 1];
 
         // TODO: 为什不没有设置dist[i] = 0 ? 这样每个dist[i]不都是大于INF的吗？？？
+        //  因为统计的是从任意一点出发的负环图
         Deque<Integer> queue = new LinkedList<>();
         for(int i = 1; i <= n; i++) {
             queue.offer(i);
@@ -77,9 +78,9 @@ public class A852_NegativeCircle_spfa {
             for(int i = head[u]; i != -1; i = next[i]) {
                 int v = e[i];
                 if(dist[v] > dist[u] + weight[i]) {
-                    dist[v] = dist[u] + weight[i];
                     count[v] = count[u] + 1;
                     if(count[v] >= n) return true;
+                    dist[v] = dist[u] + weight[i];
                     if(!st[v] ) {
                         st[v] = true;
                         queue.offer(v);

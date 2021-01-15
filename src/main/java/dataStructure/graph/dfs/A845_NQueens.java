@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- *  n-皇后问题是指将 n 个皇后放在 n∗n 的国际象棋棋盘上，使得皇后不能相互攻击到，即任意两个皇后都不能处于同一行、同一列或同一斜线上。
+ *  n-皇后问题是指将 n 个皇后放在 n∗n 的国际象棋棋盘上，
+ *  使得皇后不能相互攻击到，即任意两个皇后都不能处于同一行、同一列或同一斜线上。
  *
  * https://www.acwing.com/problem/content/845/
  */
@@ -27,8 +28,8 @@ public class A845_NQueens {
         }
 
         for(int i = 0; i < n; i++) { // i是列下标
-            //  对角线元素的行下标 减 列下标 为一个固定的数
-            //反对角线元素的行下标 加 列下标 为一个固定的数
+            // 对角线元素的行下标 减 列下标 为一个固定的数
+            // 反对角线元素的行下标 加 列下标 为一个固定的数
             if(!col[i] && !antiDiagnal[row + i] && !diagnal[row - i + n]) {
                 col[i] = antiDiagnal[row + i] = diagnal[row - i + n] = true;
                 board[row][i] = 'Q';

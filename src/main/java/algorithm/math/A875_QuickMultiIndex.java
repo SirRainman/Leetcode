@@ -3,16 +3,14 @@ package algorithm.math;
 import java.util.Scanner;
 
 /**
- * 给定n组ai,bi,pi，对于每组数据，求出abii mod pi的值。
+ * 给定n组ai,bi,pi，对于每组数据，求出ai^bi mod pi的值。
  *
  * 输入格式
  * 第一行包含整数n。
- *
  * 接下来n行，每行包含三个整数ai,bi,pi。
  *
  * 输出格式
  * 对于每组数据，输出一个结果，表示abii mod pi的值。
- *
  * 每个结果占一行。
  *
  * 数据范围

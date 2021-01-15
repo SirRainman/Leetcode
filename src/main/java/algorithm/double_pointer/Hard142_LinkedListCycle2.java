@@ -24,25 +24,18 @@ public class Hard142_LinkedListCycle2 {
     //  1.想一想为什么快慢指针会相遇
     //  2.想一想为什么相遇后一个从表头走 一个从相遇点走 这两个人会相遇？
     public ListNode detectCycle(ListNode head) {
-        if(head == null) return null;
-        ListNode slow = head, fast = slow;
-        while(fast != null) {
+        ListNode fast = head, slow = head;
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
             slow = slow.next;
-            if(fast.next != null){
-                fast = fast.next.next;
-            } else {
-                return null;
-            }
-
-            if(fast == slow) {
-                ListNode cur = head;
-                while(cur != slow) {
-                    cur = cur.next;
-                    slow = slow.next;
-                }
-                return slow;
-            }
+            if(fast == slow) break;
         }
-        return null;
+        if(fast == null || fast.next == null) return null;
+        ListNode p = head;
+        while(p != slow) {
+            p = p.next;
+            slow = slow.next;
+        }
+        return p;
     }
 }

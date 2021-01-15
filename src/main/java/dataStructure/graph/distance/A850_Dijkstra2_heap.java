@@ -40,11 +40,8 @@ public class A850_Dijkstra2_heap {
     static int INF = 0x3f3f3f3f; //
     static int n, m;
 
-    static int[] dist;
-    static boolean[] st;
-
-    static int[] e, weight, head, next;
     static int idx = 0;
+    static int[] e, weight, head, next;
 
     public static void add(int a, int b, int w) {
         e[idx] = b;
@@ -55,7 +52,7 @@ public class A850_Dijkstra2_heap {
     }
 
     public static int dijkstra() {
-        dist = new int[n + 1];
+        int[] dist = new int[n + 1];
         Arrays.fill(dist, INF);
         dist[1] = 0;
 
@@ -65,7 +62,7 @@ public class A850_Dijkstra2_heap {
         PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
         heap.offer(new int[] {1, dist[1]});
 
-        st = new boolean[n + 1];
+        boolean[] st = new boolean[n + 1];
 
         while(!heap.isEmpty()) {
             int[] t = heap.poll();
