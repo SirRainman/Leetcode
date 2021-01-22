@@ -33,45 +33,41 @@ import java.util.Scanner;
  * https://www.acwing.com/problem/content/846/
  */
 public class A844_Maze {
-    static int row, col;
-    static int[][] maze, dist;
+    static int n, m;
+    static int[][] g, dist;
 
     public static int bfs() {
-
+        int[] nx = new int[]{0, 0, 1, -1};
+        int[] ny = new int[]{1, -1, 0, 0};
         Deque<int[]> queue = new LinkedList<>();
-        queue.offer(new int[] {0, 0});
+        queue.offer(new int[]{0, 0});
         dist[0][0] = 0;
         while(!queue.isEmpty()) {
-            int[] p = queue.poll();
-            int[] nextX = new int[] {0, 0, 1, -1};
-            int[] nextY = new int[] {1, -1, 0, 0};
+            int[] v = queue.poll();
             for(int i = 0; i < 4; i++) {
-                int x = p[0] + nextX[i];
-                int y = p[1] + nextY[i];
-                if(x >= 0 && x < row && y >= 0 && y < col && maze[x][y] == 0 && dist[x][y] == -1) {
+                int x = v[0] + nx[i], y = v[1] + ny[i];
+                if(x < 0 || x >= n || y < 0 || y >= m) continue;
+                if(g[x][y] == 0 && dist[x][y] == -1) {
                     queue.offer(new int[]{x, y});
-                    dist[x][y] = dist[p[0]][p[1]] + 1;
+                    dist[x][y] = dist[v[0]][v[1]] + 1;
                 }
             }
         }
-        return dist[row - 1][col - 1];
+
+        return dist[n - 1][m - 1];
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        row = in.nextInt();
-        col = in.nextInt();
-        maze = new int[row][col];
-        dist = new int[row][col];
-        for(int[] d : dist) Arrays.fill(d, -1);
-
-
-        for(int i = 0; i < row; i++) {
-            for(int j = 0; j < col; j++) {
-                maze[i][j] = in.nextInt();
+        n = in.nextInt(); m = in.nextInt();
+        g = new int[n][m];
+        dist = new int[n][m];
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                g[i][j] = in.nextInt();
+                dist[i][j] = -1;
             }
         }
-
-        System.out.println(bfs());
+        System.out.print(bfs());
     }
 }

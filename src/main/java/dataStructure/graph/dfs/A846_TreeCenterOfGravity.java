@@ -51,9 +51,10 @@ public class A846_TreeCenterOfGravity {
     public static int dfs(int u) {
         isVisited[u] = true;
         int maxWeight = 0, count = 1;
-        for(int v = head[u]; v != -1; v = next[v]) {
-            if(isVisited[e[v]]) continue;
-            int c = dfs(e[v]); // 每个孩子节点的节点数
+        for(int i = head[u]; i != -1; i = next[i]) {
+            int v = e[i];
+            if(isVisited[v]) continue;
+            int c = dfs(v); // 每个孩子节点的节点数
             maxWeight = Math.max(maxWeight, c); // 求他的孩子节点中，体重（节点数目）最大的那一个
             count += c; // 每个节点的总重量
         }

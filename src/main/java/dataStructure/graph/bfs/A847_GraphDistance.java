@@ -55,13 +55,10 @@ public class A847_GraphDistance {
             int u = queue.poll();
             for(int i = head[u]; i != -1; i = next[i]) {
                 int v = e[i];
-                // if(dist[v] > dist[u] + 1) {
-                //     queue.offer(v);
-                //     dist[v] = dist[u] + 1;
-                // }
-                if(dist[v] != INF) continue;
-                queue.offer(v);
-                dist[v] = dist[u] + 1;
+                if(dist[v] == INF) {
+                    dist[v] = dist[u] + 1;
+                    queue.offer(v);
+                }
             }
         }
         return dist[n] == INF ? -1 : dist[n];

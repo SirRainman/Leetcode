@@ -1,7 +1,5 @@
 package dataStructure.union;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -77,7 +75,7 @@ public class HardQ947_MostStonesRemovedWithSameRowOrColumn {
         return n - count;
     }
 
-    // TODO: 按边合并
+    // TODO: 按边合并, 重点关注
     //  并查集语义：所有横坐标为 x 的石头和所有纵坐标为 y 的石头都属于同一个连通分量。
     //  问题：石头的位置是「有序数对（二维）」，并查集的底层是「一维数组」，我们在并查集里应该如何区分横纵坐标呢？
     public int removeStones(int[][] stones) {

@@ -66,7 +66,7 @@ public class A801_Bit {
     //  反码 ~x        = 0101...0111
     //  补码 ~x + 1    = 0101...1000
     //  x & ( ~x + 1) = 0000...1000
-    //  -x = (~x + 1)
+    //  java中 -x = (~x + 1)
     public static int lowbit(int x) {
         // TODO：
         //  1想一想什么是源码、反码、补码？

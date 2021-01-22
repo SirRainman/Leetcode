@@ -58,4 +58,29 @@ public class A842_CombinationNum {
         dfs(0);
     }
 
+
+
+    // TODO: 解法二
+    static int[] nums;
+    public static void swap(int a, int b) {
+        int t = nums[a];
+        nums[a] = nums[b];
+        nums[b] = t;
+    }
+
+    public static void dfs(int cur, List<Integer> path) {
+        if(cur == n) {
+            for(int x : path) System.out.print(x + " ");
+            System.out.println();
+            return ;
+        }
+
+        for(int i = cur; i < n; i++) {
+            swap(cur, i);
+            path.add(nums[cur]);
+            dfs(cur + 1, path);
+            path.remove(path.size() - 1);
+            swap(cur, i);
+        }
+    }
 }

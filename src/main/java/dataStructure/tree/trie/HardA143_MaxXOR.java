@@ -7,7 +7,6 @@ import java.util.Scanner;
  *
  * 输入格式
  * 第一行输入一个整数N。
- *
  * 第二行输入N个整数A1～AN。
  *
  * 输出格式

@@ -47,6 +47,13 @@ public class A837_MergeSetWithSize {
         return parent[a];
     }
 
+    public static void union(int a, int b) {
+        int pa = find(a), pb = find(b);
+        if(pa == pb) return ;
+        parent[pa] = pb;
+        size[pb] += size[pa];
+    }
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         n = in.nextInt(); m = in.nextInt();
@@ -63,9 +70,7 @@ public class A837_MergeSetWithSize {
 
             if(op.compareTo("C") == 0) {
                 int a = in.nextInt(), b = in.nextInt();
-                int pa = find(a), pb = find(b);
-                parent[pa] = parent[pb];
-                if(pa != pb) size[pb] += size[pa];
+                union(a, b);
             } else if(op.compareTo("Q1") == 0) {
                 int a = in.nextInt(), b = in.nextInt();
                 System.out.println(find(a) == find(b) ? "Yes" : "No");
