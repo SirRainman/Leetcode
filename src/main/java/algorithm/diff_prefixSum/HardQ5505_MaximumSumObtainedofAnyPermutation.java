@@ -3,16 +3,13 @@ package algorithm.diff_prefixSum;
 import java.util.Arrays;
 
 /**
- * 有一个整数数组nums，和一个查询数组requests，其中requests[i] = [starti, endi]。第i个查询求nums[starti] + nums[starti + 1] + ... + nums[endi - 1] + nums[endi]的结果，starti 和endi数组索引都是 从 0 开始 的。
- *
+ * 有一个整数数组nums，和一个查询数组requests，其中requests[i] = [starti, endi]。
+ * 第i个查询求nums[starti] + nums[starti + 1] + ... + nums[endi - 1] + nums[endi]的结果，
+ * starti 和endi数组索引都是 从 0 开始 的。
  * 你可以任意排列 nums中的数字，请你返回所有查询结果之和的最大值。
- *
  * 由于答案可能会很大，请你将它对109 + 7取余后返回。
  *
- *
- *
  * 示例 1：
- *
  * 输入：nums = [1,2,3,4,5], requests = [[1,3],[0,1]]
  * 输出：19
  * 解释：一个可行的 nums 排列为 [2,1,3,4,5]，并有如下结果：
@@ -23,20 +20,19 @@ import java.util.Arrays;
  * requests[0] -> nums[1] + nums[2] + nums[3] = 5 + 4 + 2 = 11
  * requests[1] -> nums[0] + nums[1] = 3 + 5  = 8
  * 总和为： 11 + 8 = 19，这个方案是所有排列中查询之和最大的结果。
- * 示例 2：
  *
+ * 示例 2：
  * 输入：nums = [1,2,3,4,5,6], requests = [[0,1]]
  * 输出：11
  * 解释：一个总和最大的排列为 [6,5,4,3,2,1] ，查询和为 [11]。
- * 示例 3：
  *
+ * 示例 3：
  * 输入：nums = [1,2,3,4,5,10], requests = [[0,2],[1,3],[1,1]]
  * 输出：47
  * 解释：一个和最大的排列为 [4,10,5,3,2,1] ，查询结果分别为 [19,18,10]。
  *
  *
  * 提示：
- *
  * n == nums.length
  * 1 <= n <= 105
  * 0 <= nums[i]<= 105
@@ -51,8 +47,9 @@ import java.util.Arrays;
  */
 public class HardQ5505_MaximumSumObtainedofAnyPermutation {
     public int maxSumRangeQuery(int[] nums, int[][] requests) {
-        // TODO：设times[i]表示第i个航班预订的座位数。
-        //  先用times[i]表示第i个位置出现的次数与第i-1个位置出现的次数的差值，即times[i] = tiems[i] - times[i - 1]。
+        // TODO：
+        //  先用times[i]表示第i个位置出现的次数与第i-1个位置出现的次数的差值，
+        //      即times[i] = times[i] - times[i - 1]。
         //  在计算每个位置上具体出现的次数
         int[] times = new int[nums.length];
         for(int i = 0; i < requests.length; i++) {
