@@ -42,7 +42,7 @@ import java.io.InputStreamReader;
  *
  * https://www.acwing.com/problem/content/156/
  */
-public class HardA154_MoveWindow {
+public class HardA154_MaxNumberInSlidingWindow {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

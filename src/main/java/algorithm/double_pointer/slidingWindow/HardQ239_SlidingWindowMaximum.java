@@ -1,4 +1,4 @@
-package dataStructure.stack.monotonousStack;
+package algorithm.double_pointer.slidingWindow;
 
 /**
  * 给定一个数组 nums，有一个大小为k的滑动窗口从数组的最左侧移动到数组的最右侧。
@@ -32,9 +32,21 @@ package dataStructure.stack.monotonousStack;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ239_SlidingWindowMaximum {
+    /**
+     * 1 当滑动窗口向右移动时，我们需要把一个新的元素放入队列中。
+     *      为了保持队列的性质，我们会不断地将新的元素与队尾的元素相比较，
+     *      如果前者大于等于后者，那么队尾的元素就可以被永久地移除，我们将其弹出队列。
+     * 2 我们需要不断地进行此项操作，直到队列为空或者新的元素小于队尾的元素。
+     * 3 由于队列中下标对应的元素是严格单调递减的，因此此时队首下标对应的元素就是滑动窗口中的最大值。
+     *      此时的最大值可能在滑动窗口左边界的左侧，并且随着窗口向右移动，它永远不可能出现在滑动窗口中了。
+     *      因此我们还需要不断从队首弹出元素，直到队首元素在窗口中为止。
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
     public int[] maxSlidingWindow(int[] nums, int k) {
         if(nums == null || nums.length == 0) return new int[0];
-
         int n = nums.length;
         int[] res = new int[n - k + 1];
 
@@ -43,7 +55,7 @@ public class HardQ239_SlidingWindowMaximum {
         int[] queue = new int[n];
         int front = 0, rear = -1;
         for(int i = 0; i < n; i++) {
-            // TODO：i - k + 1 是窗口的左边界，和队列没有关系，如果存的是数组元素的话，就没有办法判断什么时候出队了
+            // TODO：i - k + 1 是当前窗口的左边界，和队列没有关系，如果存的是数组元素的话，就没有办法判断什么时候出队了
             if(front <= rear && queue[front] < i - k + 1) front++;
             while(front <= rear && nums[queue[rear]] <= nums[i]) rear--;
             queue[++rear] = i;

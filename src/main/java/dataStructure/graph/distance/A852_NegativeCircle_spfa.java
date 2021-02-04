@@ -59,9 +59,9 @@ public class A852_NegativeCircle_spfa {
     //  方法 1：统计每个点入队的次数，如果某个点入队n次，则说明存在负环
     //  方法 2：统计当前每个点的最短路中所包含的边数，如果某点的最短路所包含的边数大于等于n，则也说明存在环
     public static boolean spfa() {
-        int[] dist = new int[n  + 1];
+        int[] dist = new int[n + 1];
         Arrays.fill(dist, INF);
-        int[] count = new int[n  + 1]; // 记录从源点到该点的 最短路的边数
+        int[] count = new int[n + 1]; // 记录从源点到该点的 最短路的边数
         boolean[] st = new boolean[n + 1];
 
         // TODO: 为什不没有设置dist[i] = 0 ? 这样每个dist[i]不都是大于INF的吗？？？

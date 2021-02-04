@@ -1,5 +1,6 @@
-package algorithm.double_pointer;
+package algorithm.double_pointer.slidingWindow;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -29,7 +30,26 @@ import java.util.Scanner;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q3_LongestSubstringWithoutRepeatingCharacters {
-    public int lengthOfLongestSubstring(String s) {
+
+    public int lengthOfLongestSubstring1(String str) {
+        char[] s = str.toCharArray();
+        int maxLen = 0;
+        int left = 0, right = 0;
+        int[] count = new int[128];
+        while(right < s.length) {
+            count[s[right]]++;
+            while(count[s[right]] > 1) {
+                count[s[left]]--;
+                left++;
+            }
+            maxLen = Math.max(maxLen, right - left + 1);
+            right++;
+        }
+        return maxLen;
+    }
+
+
+    public int lengthOfLongestSubstring2(String s) {
         Map<Character, Integer> count = new HashMap<>();
 
         int ans = 0;
@@ -42,5 +62,22 @@ public class Q3_LongestSubstringWithoutRepeatingCharacters {
             ans = Math.max(fast - slow + 1, ans);
         }
         return ans;
+    }
+
+    // TODO: 针对滑动窗口的优化，map记录每个字母出现的位置
+    public int lengthOfLongestSubstring(String str) {
+        char[] s = str.toCharArray();
+        int left = 0, right = 0, maxLen = 0;
+        int[] map = new int[128];
+        Arrays.fill(map, -1);
+        while(right < s.length) {
+            if(map[s[right]] != -1) { // 检查left左端点是否更新
+                left = Math.max(left, map[s[right]] + 1);
+            }
+            map[s[right]] = right;
+            maxLen = Math.max(maxLen, right - left + 1);
+            right++;
+        }
+        return maxLen;
     }
 }
