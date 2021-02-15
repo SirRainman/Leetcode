@@ -19,7 +19,7 @@ import dataStructure.ListNode;
  * 链接：https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class HardQ19_RemoveNthNodeFromEndofList {
+public class Q19_RemoveNthNodeFromEndofList {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         // TODO：为什么要设头节点啊！！！！
         //  1.因为要找的是待删除结点的前一个节点，而当删除头节点时，头结点没有前一个节点，所以设置了一个虚拟节点

@@ -27,7 +27,7 @@ package algorithm.double_pointer.slidingWindow;
  * 链接：https://leetcode-cn.com/problems/max-consecutive-ones-iii
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q1004_MaxConsecutiveOnes3 {
+public class HardQ1004_MaxConsecutiveOnes3 {
     // TODO: 看Q424题，想一想为什么滑动窗口为什么可以窗口不用变小？？？
     public int longestOnes(int[] A, int K) {
         int n = A.length;

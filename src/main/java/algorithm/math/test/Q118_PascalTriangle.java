@@ -1,4 +1,4 @@
-package dataStructure.array;
+package algorithm.math.test;
 
 import java.util.ArrayList;
 import java.util.List;

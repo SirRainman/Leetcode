@@ -24,66 +24,50 @@ package algorithm.sort.algo;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q912_HeapSort {
-    public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        heapSort(nums);
+        return nums[nums.length - k];
+    }
 
-        public int[] sortArray(int[] nums) {
-            heapSort(nums);
-            return nums;
+    private void heapSort(int[] nums) {
+        int n = nums.length;
+        build(nums);
+        for(int i = n - 1; i > 0; i--) {
+            swap(nums, 0, i);
+            heapify(nums, 0, i - 1);
         }
+    }
 
-        public void heapSort(int[] nums) {
-            int len = nums.length;
-            // 将数组整理成堆
-            heapify(nums);
-
-            // 循环不变量：区间 [0, i] 堆有序
-            for (int i = len - 1; i >= 1; ) {
-                // 把堆顶元素（当前最大）交换到数组末尾
-                swap(nums, 0, i);
-                // 逐步减少堆有序的部分
-                i--;
-                // 下标 0 位置下沉操作，使得区间 [0, i] 堆有序
-                siftDown(nums, 0, i);
-            }
+    /**
+     * 建立一个大根堆
+     * @param nums
+     */
+    private void build(int[] nums) {
+        int n = nums.length;
+        for(int i = (n >> 1) - 1; i >= 0; i--) {
+            heapify(nums, i, n - 1);
         }
+    }
 
-        /**
-         * 将数组整理成堆（堆有序）
-         *
-         * @param nums
-         */
-        private void heapify(int[] nums) {
-            int len = nums.length;
-            // 只需要从 i = (len - 1) / 2 这个位置开始逐层下移
-            for (int i = (len - 1) / 2; i >= 0; i--) {
-                siftDown(nums, i, len - 1);
-            }
+    /**
+     * 更新堆
+     * @param nums
+     * @param i
+     * @param end 更新堆数据范围
+     */
+    private void heapify(int[] nums, int i, int end) {
+        int parent = i, child = 2 * parent + 1;
+        while(child <= end) {
+            if(child + 1 <= end && nums[child + 1] > nums[child]) child++;
+            if(nums[child] > nums[parent]) swap(nums, child, parent);
+            parent = child;
+            child = 2 * child + 1;
         }
+    }
 
-        /**
-         * @param nums
-         * @param k    当前下沉元素的下标
-         * @param end  [0, end] 是 nums 的有效部分
-         */
-        private void siftDown(int[] nums, int k, int end) {
-            while (2 * k + 1 <= end) {
-                int j = 2 * k + 1;
-                if (j + 1 <= end && nums[j + 1] > nums[j]) {
-                    j++;
-                }
-                if (nums[j] > nums[k]) {
-                    swap(nums, j, k);
-                } else {
-                    break;
-                }
-                k = j;
-            }
-        }
-
-        private void swap(int[] nums, int index1, int index2) {
-            int temp = nums[index1];
-            nums[index1] = nums[index2];
-            nums[index2] = temp;
-        }
+    private void swap(int[] nums, int i, int j) {
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
     }
 }
