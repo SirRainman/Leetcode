@@ -78,4 +78,34 @@ public class A801_Bit {
     // 原码  x       = 1010...1000
     //      x - 1   = 1010...0111
     // x & (x - 1)  = 1010...0000
+
+    // TODO: 其他的二进制操作
+    public void bitOperation() {
+        //集合A、B，元素c --> int A,B   c = 0 ~ 31
+        int A = 0, B = 0, c = 0;
+
+        //A中插入c
+        A |= (1 << c);
+
+        //A中去除c
+        A &= ~(1 << c);
+        A ^= (1 << c);
+
+        //A B 合并
+        int merge = A | B;
+
+        //判断B是不是A的子集
+        boolean isSub = (A & B) == B;
+
+        //判断c在不在A里
+        int isContain = A & (1 << c);
+
+        //lowbit
+        int lowbit = c & (-c);
+
+        //枚举A的全部子集
+        for (int i = A; i > 0; i = (i - 1) & A) {
+            //do something
+        }
+    }
 }
