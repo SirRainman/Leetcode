@@ -19,7 +19,7 @@ package dataStructure.array;
  * 链接：https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class QOffer56_NumberCount2 {
+public class QOffer56_SingleNumber2 {
     public int singleNumber(int[] nums) {
         int[] counts = new int[32];
         for(int x : nums) {

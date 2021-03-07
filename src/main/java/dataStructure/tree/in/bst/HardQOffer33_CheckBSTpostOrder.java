@@ -33,6 +33,7 @@ public class HardQOffer33_CheckBSTpostOrder {
         return check(postorder, 0, postorder.length - 1);
     }
 
+    // TODO: 根据二叉树的性质，先判断左子树，再判断右子树
     public boolean check(int[] postorder, int i, int j) {
         if(i >= j) return true;
         // 从左向右找，找到左子树的分界点

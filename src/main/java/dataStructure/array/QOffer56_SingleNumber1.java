@@ -1,7 +1,9 @@
 package dataStructure.array;
 
 /**
- * 一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。
+ * 一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。
+ * 请写程序找出这两个只出现一次的数字。
+ * 要求时间复杂度是O(n)，空间复杂度是O(1)。
  *
  * 示例 1：
  * 输入：nums = [4,1,4,6]
@@ -15,7 +17,7 @@ package dataStructure.array;
  * 链接：https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class QOffer56_NumberCount {
+public class QOffer56_SingleNumber1 {
     // TODO：
     //  x ^ x = 0
     //  x ^ 0 = x
