@@ -5,10 +5,7 @@ import java.util.List;
 
 /**
  * 数字 n代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
- *
- *
  * 示例：
- *
  * 输入：n = 3
  * 输出：[
  *        "((()))",
@@ -25,23 +22,23 @@ import java.util.List;
  */
 public class HardQ22_GenerateParentheses {
     public List<String> generateParenthesis(int n) {
-        List<String> ans = new ArrayList<>();
-        backtrack(ans, n, n, new StringBuffer());
-        return ans;
+        List<String> res = new ArrayList<>();
+        backtrack(res, n, n, new StringBuffer());
+        return res;
     }
 
-    public void backtrack(List<String> ans, int left, int right, StringBuffer path) {
-        if(left == 0 && right == 0) {
-            ans.add(path.toString());
-        }
-        if(left > 0) {
+    // TODO: 从树的角度来进行剪枝
+    //  回溯算法事实上就是在一个树形问题上做深度优先遍历，因此 首先需要把问题转换为树形问题。
+    public void backtrack(List<String> res, int open, int close, StringBuffer path) {
+        if(open == 0 && close == 0) res.add(path.toString());
+        if(open > 0) {
             path.append("(");
-            backtrack(ans, left-1, right, path);
+            backtrack(res, open - 1, close, path);
             path.deleteCharAt(path.length() - 1);
         }
-        if(right > left) {
+        if(close > open) {
             path.append(")");
-            backtrack(ans, left, right-1, path);
+            backtrack(res, open, close - 1, path);
             path.deleteCharAt(path.length() - 1);
         }
     }

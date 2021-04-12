@@ -44,6 +44,7 @@ public class Q120_TrianglePathSum {
         return res;
     }
 
+    // TODO：倒着走可以省一些力气
     public int minimumTotal2(List<List<Integer>> triangle) {
         if (triangle == null || triangle.size() == 0) return 0;
 
@@ -60,6 +61,7 @@ public class Q120_TrianglePathSum {
         return dp[0][0];
     }
 
+    // TODO：空间优化，只用到了上一层的数据
     public int minimumTotal(List<List<Integer>> triangle) {
         if (triangle == null || triangle.size() == 0) return 0;
 
@@ -69,7 +71,7 @@ public class Q120_TrianglePathSum {
         int[] dp = new int[n + 1];
 
         for(int i = n - 1; i >= 0; i--) {
-            for(int j = 0; j <= i; j++) {
+            for(int j = 0; j <= i; j++) { // 只用到了上一层的数据，所以正着走
                 dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i).get(j);
             }
         }

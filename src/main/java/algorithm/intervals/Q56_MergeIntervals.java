@@ -30,32 +30,17 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q56_MergeIntervals {
+
     public int[][] merge(int[][] intervals) {
-        if (intervals.length == 0) {
-            return new int[0][2];
-        }
-
-        // 根据每个区间的起始点进行排序
-        Arrays.sort(intervals, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] interval1, int[] interval2) {
-                // TODO : 这里可以根据优先级进行相应的排序
-                return interval1[0] - interval2[0];
-            }
-        });
-
-        // 合并区间
-        List<int[]> mergedIntervals = new ArrayList<>();
-        for(int i = 0; i < intervals.length; i++) {
-            int start = intervals[i][0], end = intervals[i][1];
-            int currentSize = mergedIntervals.size();
-            if(currentSize == 0 || mergedIntervals.get(currentSize - 1)[1] < start) { // 没有交集
-                mergedIntervals.add(new int[]{start, end});
+        List<int[]> merged = new ArrayList<>();
+        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]); // 根据每个区间的起始点进行排序
+        for(int[] in : intervals) {
+            if(merged.isEmpty() || merged.get(merged.size() - 1)[1] < in[0]) { // 没有交集
+                merged.add(in);
             } else { // 更新最远端点
-                mergedIntervals.get(currentSize - 1)[1] = Math.max(end, mergedIntervals.get(currentSize - 1)[1]);
+                merged.get(merged.size() - 1)[1] = Math.max(merged.get(merged.size() - 1)[1], in[1]);
             }
         }
-
-        return mergedIntervals.toArray(new int[mergedIntervals.size()][]);
+        return merged.toArray(new int[merged.size()][]);
     }
 }

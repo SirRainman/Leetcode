@@ -40,10 +40,6 @@ public class HardQ239_SlidingWindowMaximum {
      * 3 由于队列中下标对应的元素是严格单调递减的，因此此时队首下标对应的元素就是滑动窗口中的最大值。
      *      此时的最大值可能在滑动窗口左边界的左侧，并且随着窗口向右移动，它永远不可能出现在滑动窗口中了。
      *      因此我们还需要不断从队首弹出元素，直到队首元素在窗口中为止。
-     *
-     * @param nums
-     * @param k
-     * @return
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
         if(nums == null || nums.length == 0) return new int[0];

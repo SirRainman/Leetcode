@@ -52,7 +52,7 @@ public class HardQ152_MaximumProductSubarray {
 
         int dpMax = nums[0], dpMin = nums[0];
         for(int i = 1; i < n; i++) {
-            // 滚动数组
+            // TODO：注意这个滚动数组
             int mx = dpMax, mn = dpMin;
             // 如果当前位置是一个正数的话，我们更希望以它前一个位置结尾的某个段的积也是个正数，并且希望它尽可能地大。
             dpMax = Math.max(mx * nums[i], Math.max(nums[i], nums[i] * mn));

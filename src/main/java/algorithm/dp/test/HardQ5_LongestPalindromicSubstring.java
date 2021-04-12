@@ -1,15 +1,16 @@
 package algorithm.dp.test;
 
+import java.util.Arrays;
+
 /**
  * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设s 的最大长度为 1000。
  * 
  * 示例 1：
- * 
  * 输入: "babad"
  * 输出: "bab"
  * 注意: "aba" 也是一个有效答案。
+ *
  * 示例 2：
- * 
  * 输入: "cbbd"
  * 输出: "bb"
  * 
@@ -20,31 +21,59 @@ package algorithm.dp.test;
  */
 public class HardQ5_LongestPalindromicSubstring {
 
-    // TODO:状态转移方程
+
+    // TODO: 注意：在状态转移方程中，我们是从长度较短的字符串向长度较长的字符串进行转移的，因此一定要注意动态规划的循环顺序。
+    public String longestPalindrome3(String s) {
+        int longest = 0;
+        char[] str = s.toCharArray();
+        int n = str.length;
+        boolean[][] st = new boolean[n][n];
+        for(int i = 0; i < n; i++) Arrays.fill(st[i], true);
+
+        int left = 0, right = 0;
+        // TODO: 注意i j的遍历顺序
+        for(int i = n - 1; i >= 0; i--) {
+            for(int j = i + 1; j < n; j++) {
+                if(str[i] == str[j] && st[i + 1][j - 1]) {
+                    st[i][j] = true;
+                    if(j - i + 1 > longest) {
+                        longest = j - i + 1;
+                        left = i;
+                        right = j;
+                    }
+                } else {
+                    st[i][j] = false;
+                }
+            }
+        }
+        return s.substring(left, right + 1);
+    }
+
+
+    // TODO: 区间dp
+    //  状态转移方程
     //  dp[i][i]    = true
     //  dp[i][i+1]  = s[i] == s[i+1]
     //  dp[i][j]    = dp[i+1][j-1] && s[i] == s[j]
     public String longestPalindrome(String s) {
-        int len = s.length();
-        if (s == null || len <= 1) return s;
-        String ans = "";
-        boolean[][] dp = new boolean[len][len];
-        for (int step = 0; step < len; step++) {
-            for (int i = 0; i + step < len; i++) {
+        char[] str = s.toCharArray();
+        int n = str.length;
+        boolean[][] dp = new boolean[n][n];
+        String res = "";
+        for(int step = 0; step < n; step++) {
+            for(int i = 0; i + step < n; i++) {
                 int j = i + step;
-                if (step == 0) {
+                if(step == 0) {
                     dp[i][j] = true;
-                } else if (step == 1) {
-                    dp[i][j] = s.charAt(i) == s.charAt(j);
-                } else if (dp[i + 1][j - 1] == true) {
-                    dp[i][j] = s.charAt(i) == s.charAt(j);
+                } else if(step == 1) {
+                    dp[i][j] = str[i] == str[j];
+                } else {
+                    dp[i][j] = str[i] == str[j] && dp[i + 1][j - 1];
                 }
-                if (dp[i][j] && ans.length() <= step) {
-                    ans = s.substring(i, j + 1);
-                }
+                if(dp[i][j] && step >= res.length()) res = s.substring(i, j + 1);
             }
         }
-        return ans;
+        return res;
     }
 
     public String longestPalindrome2(String s) {

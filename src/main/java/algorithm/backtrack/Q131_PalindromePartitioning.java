@@ -64,3 +64,40 @@ public class Q131_PalindromePartitioning {
         }
     }
 }
+
+class Solution {
+    int[][] mem;
+    char[] str;
+    String s;
+    int n;
+    List<List<String>> res = new ArrayList<>();
+    List<String> path = new ArrayList<>();
+    void dfs(int index){
+        if(index >= n){
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for(int i = index; i < n; i++){
+            if(isPalindrome(index, i) == 1){
+                path.add(s.substring(index, i + 1));
+                dfs(i + 1);
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+    public List<List<String>> partition(String s) {
+        this.s = s;
+        str = s.toCharArray();
+        n = str.length;
+        mem = new int[n][n];
+        dfs(0);
+        return res;
+    }
+    public int isPalindrome(int i, int j){
+        if(mem[i][j] != 0) return mem[i][j];
+        if(i >= j) mem[i][j] = 1;
+        else if(str[i] == str[j]) mem[i][j] = isPalindrome(i + 1, j - 1);
+        else mem[i][j] = -1;
+        return mem[i][j];
+    }
+}

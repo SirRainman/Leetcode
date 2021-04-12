@@ -33,7 +33,8 @@ public class Q567_PermutationInString {
         int left = 0, right = 0;
         while(right < n2) {
             map2[str2[right] - 'a']++;
-            if(right - left + 1 > n1) { // 向右前进一步
+            // TODO: 窗口固定大小时，窗口向前一步走的方法
+            if(right - left + 1 > n1) {
                 map2[str2[left] - 'a']--;
                 left++;
             }

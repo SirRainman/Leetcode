@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * 有n头牛，第i头牛的重量为wi，强壮值为si，一头牛的危险系数定义为这头牛上边的重量之和减去这头牛的强壮值，求一种顺序，使得 n头牛最大的危险系数最小
+ * 有n头牛，第i头牛的重量为wi，强壮值为si，
+ * n头牛叠在一起
+ * 一头牛的危险系数定义为这头牛上边的重量之和减去这头牛的强壮值，
+ * 求一种顺序，使得 n头牛最大的危险系数最小
  *
  * https://www.acwing.com/problem/content/127/
  */

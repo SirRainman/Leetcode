@@ -151,3 +151,54 @@
 9. [A874 1...n欧拉函数之和](https://www.acwing.com/problem/content/876/)
 10. [A875 快速幂](https://www.acwing.com/problem/content/877/)
 11. [A876 逆元](https://www.acwing.com/problem/content/878/)
+
+
+
+---
+
+# Leetcode
+
+## 回溯算法思想
+
+1. leetcode 112 号算法题：路径总和
+2. leetcode 113 号算法题：路径总和 II
+3. leetcode 46 号算法题：全排列
+4. leetcode 47 号算法题：全排列 II
+5. leetcode 77 号算法题：组合
+6. leetcode 39 号算法题：组合总和
+7. leetcode 40 号算法题：组合总和 Ⅱ
+8. leetcode 216 号算法题：组合总和 Ⅲ
+9. leetcode 78 号算法题：子集
+10. leetcode 90 号算法题：子集Ⅱ
+11. leetcode 17 号算法题：电话号码的字母组合
+12. leetcode 93 号算法题：复原 IP 地址
+13. leetcode 22 号算法题：括号生成
+14. leetcode 51 号算法题：N 皇后
+15. leetcode 37 号算法题：数独问题
+
+## 贪心算法思想
+
+1. leetcode 455 号算法题：分发饼干
+2. leetcode 322 号算法题：零钱兑换
+3. leetcode 45 号算法题：跳跃游戏 Ⅱ
+4. leetcode 1578 号算法题：避免重复字母的最小删除成本
+5. leetcode 402 号算法题：移掉K位数字
+
+## 动态规划算法思想
+
+1. leetcode 509 号算法题：斐波那契数
+2. leetcode 322 号算法题：零钱兑换
+3. leetcode 64 号算法题：最小路径和
+4. leetcode 53 号算法题：最大子数组之和
+5. leetcode 647 号算法题：回文子串
+6. leetcode 5 号算法题：最长回文串
+7. leetcode 131 号算法题：分割回文串
+8. leetcode 516 号算法题：最长回文子序列
+9. leetcode 300 号算法题：最长上升子序列
+10. leetcode 1143 号算法题：最长公共子序列
+11. leetcode 72 号算法题：编辑距离
+12. leetcode 44 号算法题：通配符匹配
+13. leetcode 10 号算法题：正则表达式匹配
+14. leetcode 486 号算法题：预测赢家
+15. leetcode 877 号算法题：石子游戏
+

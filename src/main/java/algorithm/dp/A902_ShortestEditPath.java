@@ -30,6 +30,7 @@ import java.util.Scanner;
  * 4
  *
  * https://www.acwing.com/problem/content/904/
+ * https://leetcode-cn.com/problems/edit-distance/
  */
 public class A902_ShortestEditPath {
     static int la, lb;
@@ -51,9 +52,11 @@ public class A902_ShortestEditPath {
 
         for(int i = 1; i <= la; i++) {
             for(int j = 1; j <= lb; j++) {
-                dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + 1; // 删除or增加 第i位的最少操作数
-                if(a[i - 1] == b[j - 1]) dp[i][j] = Math.min(dp[i][j], dp[i - 1][j - 1]); // 不修改
-                else dp[i][j] = Math.min(dp[i][j], dp[i - 1][j - 1] + 1);   // 修改
+                if(a[i - 1] == b[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1]; // 不修改
+                } else {
+                    dp[i][j] = Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i][j - 1] )) + 1;   // 修改 or 删除 or 增加
+                }
             }
         }
         return dp[la][lb];

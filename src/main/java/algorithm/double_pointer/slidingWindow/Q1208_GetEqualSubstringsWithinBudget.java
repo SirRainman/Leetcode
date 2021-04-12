@@ -3,7 +3,8 @@ package algorithm.double_pointer.slidingWindow;
 /**
  * 给你两个长度相同的字符串，s 和 t。
  * 将 s中的第i个字符变到t中的第 i 个字符需要|s[i] - t[i]|的开销（开销可能为 0），也就是两个字符的 ASCII 码值的差的绝对值。
- * 用于变更字符串的最大预算是maxCost。在转化字符串时，总开销应当小于等于该预算，这也意味着字符串的转化可能是不完全的。
+ * 用于变更字符串的最大预算是maxCost。
+ * 在转化字符串时，总开销应当小于等于该预算，这也意味着字符串的转化可能是不完全的。
  * 如果你可以将 s 的子字符串转化为它在 t 中对应的子字符串，则返回可以转化的最大长度。
  * 如果 s 中没有子字符串可以转化成 t 中对应的子字符串，则返回 0。
  *
@@ -34,64 +35,51 @@ package algorithm.double_pointer.slidingWindow;
  */
 public class Q1208_GetEqualSubstringsWithinBudget {
 
-
-    // TODO: 创建数组 diff 之后，问题转化成计算数组 diff 的元素和不超过 maxCost 的最长子数组的长度。
-    //  有两种方法可以解决，第一种方法是前缀和 + 二分查找，
-    //  第二种方法是双指针。
-    public int equalSubstring1(String s, String t, int maxCost) {
-        char[] str = s.toCharArray();
-        char[] tar = t.toCharArray();
-
-        int[] diff = new int[str.length];
-        for(int i = 0; i < str.length; i++) {
-            diff[i] = Math.abs(str[i] - tar[i]);
-        }
-
-        int left = 0, right = 0, cost = 0, maxLen = 0;
-        while(right < str.length) {
-            cost += diff[right];
-            while(left < str.length && cost > maxCost) {
-                cost -= diff[left];
+    // TODO: 滑动窗口
+    public int equalSubstring1(String str, String tar, int maxCost) {
+        char[] s = str.toCharArray();
+        char[] t = tar.toCharArray();
+        int n = t.length;
+        int left = 0, right = 0;
+        int cost = 0, maxLen = 0;
+        while(right < n) {
+            cost += Math.abs(s[right] - t[right]);
+            while(cost > maxCost) {
+                cost -= Math.abs(s[left] - t[left]);
                 left++;
             }
-            if(cost <= maxCost) maxLen = Math.max(maxLen, right - left + 1);
+            maxLen = Math.max(maxLen, right - left + 1);
             right++;
         }
-
         return maxLen;
     }
 
-    // TODO: 因为前缀和是单调递增的，所有考虑用二分去搜索
-    public int equalSubstring(String s, String t, int maxCost) {
-        char[] str = s.toCharArray();
-        char[] tar = t.toCharArray();
+    // TODO: 前缀和 + 二分查找
+    //  因为前缀和是单调递增的，所有考虑用二分去搜索
+    public int equalSubstring(String str, String tar, int maxCost) {
+        char[] s = str.toCharArray();
+        char[] t = tar.toCharArray();
+        int n = s.length;
 
-        int[] diff = new int[str.length];
-        for(int i = 0; i < str.length; i++) {
-            diff[i] = Math.abs(str[i] - tar[i]);
-        }
-        int[] prefixSum = new int[str.length + 1];
-        for(int i = 1; i < str.length; i++) {
-            prefixSum[i] = prefixSum[i - 1] + diff[i - 1];
-        }
+        int[] diff = new int[n];
+        for(int i = 0; i < n; i++) diff[i] = Math.abs(s[i] - t[i]);
+        int[] prefix = new int[n + 1];
+        for(int i = 1; i <= n; i++) prefix[i] += diff[i - 1] + prefix[i - 1];
 
         int maxLen = 0;
-        for(int i = 1; i <= str.length; i++) {
-            int left = binarySearch(prefixSum, prefixSum[i] - maxCost, i);
+        for(int i = 1; i <= n; i++) {
+            int left = binarySearch(prefix, prefix[i] - maxCost, i);
             maxLen = Math.max(maxLen, i - left);
         }
         return maxLen;
     }
 
-    public int binarySearch(int[] prefixSum, int target, int right) {
+    public int binarySearch(int[] prefix, int target, int right) {
         int left = 0;
         while(left < right) {
             int mid = left + right >> 1;
-            if(prefixSum[mid] < target) { // 注意搜索的方向是向左还是向右
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
+            if(prefix[mid] < target) left = mid + 1;
+            else right = mid;
         }
         return left;
     }

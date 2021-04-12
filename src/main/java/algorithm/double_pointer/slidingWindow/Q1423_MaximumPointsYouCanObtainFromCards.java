@@ -9,7 +9,9 @@ package algorithm.double_pointer.slidingWindow;
  * 示例 1：
  * 输入：cardPoints = [1,2,3,4,5,6,1], k = 3
  * 输出：12
- * 解释：第一次行动，不管拿哪张牌，你的点数总是 1 。但是，先拿最右边的卡牌将会最大化你的可获得点数。最优策略是拿右边的三张牌，最终点数为 1 + 6 + 5 = 12 。
+ * 解释：第一次行动，不管拿哪张牌，你的点数总是 1 。
+ * 但是，先拿最右边的卡牌将会最大化你的可获得点数。
+ * 最优策略是拿右边的三张牌，最终点数为 1 + 6 + 5 = 12 。
  *
  * 示例 2：
  * 输入：cardPoints = [2,2,2], k = 2
@@ -42,30 +44,17 @@ package algorithm.double_pointer.slidingWindow;
 public class Q1423_MaximumPointsYouCanObtainFromCards {
     // TODO: 记数组cardPoints的长度为n，由于只能从开头和末尾拿k张卡牌，所以最后剩下的必然是连续的 n-k张卡牌。
     //  可以通过求出剩余卡牌点数之和的最小值，来求出拿走卡牌点数之和的最大
-    public int maxScore1(int[] cardPoints, int k) {
-        int size = cardPoints.length - k;
-        int left = 0, right = 0, sum = 0, preSum = 0;
-        for(right = 0; right < size; right++) sum += cardPoints[right];
-        int minSum = sum;
-        while(right < cardPoints.length) {
-            sum += cardPoints[right];
-            preSum += cardPoints[right - size];
-            minSum = Math.min(minSum, sum - preSum);
-            right++;
-        }
-        return sum - minSum;
-    }
-
     public int maxScore(int[] cardPoints, int k) {
-        int size = cardPoints.length - k;
-        int left = 0, right = 0, sum = 0, preSum = 0, minSum = Integer.MAX_VALUE;
-        while(right < cardPoints.length) {
+        int n = cardPoints.length;
+        int left = 0, right = 0;
+        int sum = 0, preSum = 0, minSum = Integer.MAX_VALUE;
+        while(right < n) {
             sum += cardPoints[right];
-            if(left < right - size + 1) {
+            if(right - left + 1 > n - k) {
                 preSum += cardPoints[left];
                 left++;
             }
-            if(left == right - size + 1) minSum = Math.min(minSum, sum - preSum);
+            if(right - left + 1 == n - k) minSum = Math.min(minSum, sum - preSum);
             right++;
         }
         return sum - minSum;

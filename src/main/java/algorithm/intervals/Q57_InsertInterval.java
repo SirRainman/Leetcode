@@ -24,37 +24,26 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q57_InsertInterval {
-    class Solution {
-        public int[][] insert(int[][] intervals, int[] newInterval) {
-            int left = newInterval[0];
-            int right = newInterval[1];
-            boolean placed = false;
-            List<int[]> ansList = new ArrayList<int[]>();
-            for (int[] interval : intervals) {
-                if (interval[0] > right) {
-                    // 在插入区间的右侧且无交集
-                    if (!placed) {
-                        ansList.add(new int[]{left, right});
-                        placed = true;
-                    }
-                    ansList.add(interval);
-                } else if (interval[1] < left) {
-                    // 在插入区间的左侧且无交集
-                    ansList.add(interval);
-                } else {
-                    // 与插入区间有交集，计算它们的并集
-                    left = Math.min(left, interval[0]);
-                    right = Math.max(right, interval[1]);
+
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> merged = new ArrayList<>();
+        int left = newInterval[0], right = newInterval[1];
+        boolean isInserted = false;
+        for(int[] in : intervals) {
+            if(right < in[0]) { // 没交集, [left, right] 在in区间的左侧
+                if(!isInserted) {
+                    merged.add(new int[]{left, right});
+                    isInserted = true;
                 }
+                merged.add(in);
+            } else if(in[1] < left){ // 没交集, [left, right] 在in区间的右侧
+                merged.add(in);
+            } else { // 有交集，求并集
+                left = Math.min(left, in[0]);
+                right = Math.max(right, in[1]);
             }
-            if (!placed) {
-                ansList.add(new int[]{left, right});
-            }
-            int[][] ans = new int[ansList.size()][2];
-            for (int i = 0; i < ansList.size(); ++i) {
-                ans[i] = ansList.get(i);
-            }
-            return ans;
         }
+        if(!isInserted) merged.add(new int[]{left, right});
+        return merged.toArray(new int[merged.size()][]);
     }
 }

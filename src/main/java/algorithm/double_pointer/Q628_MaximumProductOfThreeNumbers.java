@@ -20,6 +20,7 @@ package algorithm.double_pointer;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q628_MaximumProductOfThreeNumbers {
+    // TODO: 求出数组中最大的三个数以及最小的两个数
     public int maximumProduct(int[] nums) {
         int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
         int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;

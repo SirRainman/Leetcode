@@ -36,7 +36,7 @@ public class Q487_MaxConsecutiveOnes2 {
     public int findMaxConsecutiveOnes1(int[] nums) {
         int n = nums.length;
         int left = 0, right = 0, maxLen = 0, chance = 1;
-        int[] count = new int[2];
+        int[] count = new int[2]; // 记录0 1 出现的次数
         while(right < n) {
             count[nums[right]]++;
             if(count[0] > chance) {

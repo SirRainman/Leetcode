@@ -16,6 +16,7 @@ import java.util.LinkedList;
  **/
 public class HardQ84_LargestRectangleInHistogram {
 
+    // TODO: 求左右两侧最近的高度小于 h 的柱子
     public int largestRectangleArea1(int[] heights) {
         int n = heights.length;
         int[] left = new int[n]; // 左边边界
@@ -46,6 +47,7 @@ public class HardQ84_LargestRectangleInHistogram {
         return largest;
     }
 
+    // TODO：优化 - 力的作用是相互的
     public int largestRectangleArea(int[] heights) {
         int n = heights.length;
         int[] left = new int[n];

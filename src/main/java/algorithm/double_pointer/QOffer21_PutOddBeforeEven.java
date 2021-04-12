@@ -8,7 +8,6 @@ package algorithm.double_pointer;
  * 输出：[1,3,2,4] 
  * 注：[3,1,2,4] 也是正确的答案之一。
  * 
- *
  * 提示：
  * 1 <= nums.length <= 50000
  * 1 <= nums[i] <= 10000
@@ -27,6 +26,21 @@ public class QOffer21_PutOddBeforeEven {
             nums[left] = nums[right];
             nums[right] = temp;
         }
+        return nums;
+    }
+
+    public int[] exchange2(int[] nums) {
+        if(nums == null || nums.length == 0) return nums;
+        int n = nums.length;
+        int left = 0, right = n - 1;
+        int t = nums[left];
+        while(left < right) {
+            while(left < right && (nums[right] & 1) == 0) right--;
+            nums[left] = nums[right];
+            while(left < right && (nums[left] & 1) == 1) left++;
+            nums[right] = nums[left];
+        }
+        nums[left] = t;
         return nums;
     }
 

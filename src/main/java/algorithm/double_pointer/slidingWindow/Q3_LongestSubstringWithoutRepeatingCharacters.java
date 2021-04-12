@@ -9,17 +9,16 @@ import java.util.Scanner;
  * 给定一个字符串，请你找出其中不含有重复字符的最长子串的长度。
  *
  * 示例1:
- *
  * 输入: "abcabcbb"
  * 输出: 3 
  * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
- * 示例 2:
  *
+ * 示例 2:
  * 输入: "bbbbb"
  * 输出: 1
  * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
- * 示例 3:
  *
+ * 示例 3:
  * 输入: "pwwkew"
  * 输出: 3
  * 解释: 因为无重复字符的最长子串是"wke"，所以其长度为 3。
@@ -48,23 +47,8 @@ public class Q3_LongestSubstringWithoutRepeatingCharacters {
         return maxLen;
     }
 
-
-    public int lengthOfLongestSubstring2(String s) {
-        Map<Character, Integer> count = new HashMap<>();
-
-        int ans = 0;
-        for(int fast = 0, slow = 0; fast < s.length(); fast++) {
-            count.put(s.charAt(fast), count.getOrDefault(s.charAt(fast), 0) + 1);
-            while(count.get(s.charAt(fast)) > 1) {
-                count.put(s.charAt(slow), count.get(s.charAt(slow)) - 1);
-                slow++;
-            }
-            ans = Math.max(fast - slow + 1, ans);
-        }
-        return ans;
-    }
-
-    // TODO: 针对滑动窗口的优化，map记录每个字母出现的位置
+    // TODO: 针对滑动窗口的优化
+    //  map记录每个字母在最右边出现的位置
     public int lengthOfLongestSubstring(String str) {
         char[] s = str.toCharArray();
         int left = 0, right = 0, maxLen = 0;
@@ -79,5 +63,20 @@ public class Q3_LongestSubstringWithoutRepeatingCharacters {
             right++;
         }
         return maxLen;
+    }
+
+    public int lengthOfLongestSubstring2(String s) {
+        Map<Character, Integer> count = new HashMap<>();
+
+        int ans = 0;
+        for(int fast = 0, slow = 0; fast < s.length(); fast++) {
+            count.put(s.charAt(fast), count.getOrDefault(s.charAt(fast), 0) + 1);
+            while(count.get(s.charAt(fast)) > 1) {
+                count.put(s.charAt(slow), count.get(s.charAt(slow)) - 1);
+                slow++;
+            }
+            ans = Math.max(fast - slow + 1, ans);
+        }
+        return ans;
     }
 }

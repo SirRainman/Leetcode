@@ -27,6 +27,7 @@ public class A900_SplitNumber {
     static int n ;
     static int M = (int) (1e9 + 7);
 
+    // TODO：注意完全背包的化简公式
     public static int getMaxSplitMethods1() {
         int[][] dp = new int[n + 1][n + 1];
         dp[0][0] = 1;

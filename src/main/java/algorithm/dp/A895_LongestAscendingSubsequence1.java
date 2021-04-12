@@ -7,7 +7,6 @@ import java.util.Scanner;
  *
  * 输入格式
  * 第一行包含整数N。
- *
  * 第二行包含N个整数，表示完整序列。
  *
  * 输出格式
@@ -71,7 +70,7 @@ public class A895_LongestAscendingSubsequence1 {
     }
 
     // TODO:
-    //  1.集合划分：所有以i为结尾的上升子序列
+    //  1.集合划分：所有以i为结尾的上升子序列的长度
     //  2.属性：max
     //  3.状态计算: max(dp[0], dp[1] .... dp[i - 1])
     public static int getLongestSubSet2() {

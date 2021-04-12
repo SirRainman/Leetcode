@@ -31,6 +31,7 @@ import java.util.*;
  * https://www.acwing.com/problem/content/805/
  */
 public class A803_MergeIntervals {
+    // TODO；以区间左端点排序
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int len = in.nextInt();
@@ -42,8 +43,12 @@ public class A803_MergeIntervals {
 
         Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
 
+        System.out.println(cal2(len, intervals));
+    }
+
+    public static int cal1(int n, int[][] intervals) {
         List<int[]> mergedIntervals = new ArrayList<>();
-        for(int i = 0; i < len; i++) {
+        for(int i = 0; i < n; i++) {
             int start = intervals[i][0], end = intervals[i][1];
             int currentSize = mergedIntervals.size();
             if(currentSize == 0 || mergedIntervals.get(currentSize - 1)[1] < start) { // 没有交集
@@ -52,7 +57,18 @@ public class A803_MergeIntervals {
                 mergedIntervals.get(currentSize - 1)[1] = Math.max(end, mergedIntervals.get(currentSize - 1)[1]);
             }
         }
+        return mergedIntervals.size();
+    }
 
-        System.out.print(mergedIntervals.size());
+    public static int cal2(int n, int[][] intervals) {
+        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
+        int lastRight = Integer.MIN_VALUE, res = 0;
+        for(int[] in : intervals) {
+            if(lastRight < in[0]) {
+                res++;
+            }
+            lastRight = Math.max(lastRight, in[1]);
+        }
+        return res;
     }
 }

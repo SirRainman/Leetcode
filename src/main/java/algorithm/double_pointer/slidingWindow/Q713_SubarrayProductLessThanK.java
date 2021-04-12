@@ -30,6 +30,7 @@ public class Q713_SubarrayProductLessThanK {
                 multi /= nums[left];
                 left++;
             }
+            // TODO: 注意求出来一个窗口以后，有效的子数组是以最右端为终点的连续子数组
             res += right - left + 1;
             right++;
         }

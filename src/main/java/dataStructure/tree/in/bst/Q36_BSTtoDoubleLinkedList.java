@@ -1,8 +1,10 @@
 package dataStructure.tree.in.bst;
 
+import dataStructure.TreeNode;
+
 public class Q36_BSTtoDoubleLinkedList {
-    Node head, pre;
-    public Node treeToDoublyList(Node root) {
+    TreeNode head, pre;
+    public TreeNode treeToDoublyList(TreeNode root) {
         if(root == null) return null;
         dfs(root);
         head.left = pre;
@@ -10,7 +12,7 @@ public class Q36_BSTtoDoubleLinkedList {
         return head;
     }
 
-    public void dfs(Node root) {
+    public void dfs(TreeNode root) {
         if(root == null) return ;
         dfs(root.left);
         root.left = pre;
@@ -20,21 +22,3 @@ public class Q36_BSTtoDoubleLinkedList {
         dfs(root.right);
     }
 }
-
-class Node {
-    public int val;
-    public Node left;
-    public Node right;
-
-    public Node() {}
-
-    public Node(int _val) {
-        val = _val;
-    }
-
-    public Node(int _val,Node _left,Node _right) {
-        val = _val;
-        left = _left;
-        right = _right;
-    }
-};

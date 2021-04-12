@@ -81,32 +81,6 @@ public class Q146_LRU {
         return node.value;
     }
 
-    public void put(int key, int value) {
-        Node node = cache.get(key);
-
-        if(node == null) { // 缓存中没有该节点
-            node = new Node(key, value);
-            addToHead(node);
-            if(cache.size() == capacity) {
-                cache.remove(tail.prev.key);
-                removeTail();
-            }
-        } else { // 如果缓存中有该节点，则刷新缓存，并删除调该节点
-            // cache.remove(node.key); // 从缓存中删除
-            node.value = value;
-            moveToHead(node);
-        }
-        cache.put(node.key, node);
-    }
-
-    private void addToHead(Node node) {
-        node.next = head.next;
-        head.next.prev = node;
-
-        head.next = node;
-        node.prev = head;
-    }
-
     private void moveToHead(Node node) {
         removeNode(node);
         addToHead(node);
@@ -118,10 +92,31 @@ public class Q146_LRU {
         node = null;
     }
 
+    private void addToHead(Node node) {
+        node.next = head.next;
+        head.next = node;
+        node.prev = head;
+        node.next.prev = node;
+    }
+
+    public void put(int key, int value) {
+        Node node = cache.get(key);
+
+        if(node == null) { // 缓存中没有该节点
+            node = new Node(key, value);
+            addToHead(node);
+            if(cache.size() == capacity) {
+                cache.remove(tail.prev.key);
+                removeTail();
+            }
+        } else { // 如果缓存中有该节点，则刷新缓存，并删除调该节点
+            node.value = value;
+            moveToHead(node);
+        }
+        cache.put(node.key, node);
+    }
+
     private void removeTail() {
-        Node node = tail.prev;
-        // node.next.prev = node.prev;
-        // node.prev.next = node.next;
-        removeNode(node);
+        removeNode(tail.prev);
     }
 }

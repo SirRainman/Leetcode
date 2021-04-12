@@ -21,10 +21,11 @@ package algorithm.dp.test;
  **/
 public class Q221_MaximalSquare {
 
-    // 状态表示：dp(i,j) 表示以 (i,j) 为右下角，且只包含 1 的正方形的边长最大值。
+    // TODO:
+    //  状态表示：dp(i,j) 表示以 (i,j) 为右下角，且只包含 1 的正方形的边长最大值。
     //      如果我们能计算出所有 dp(i,j) 的值，那么其中的最大值即为矩阵中只包含 1 的正方形的边长最大值
-    // 属性：max
-    // 状态计算：dp[i][j] = max(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1])
+    //  属性：max
+    //  状态计算：dp[i][j] = max(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1])
     public int maximalSquare(char[][] matrix) {
         int row = matrix.length, col = matrix[0].length;
         int[][] dp = new int[row + 1][col + 1];

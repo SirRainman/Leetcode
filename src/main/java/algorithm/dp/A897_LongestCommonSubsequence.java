@@ -27,6 +27,7 @@ import java.util.Scanner;
  * 3
  *
  * https://www.acwing.com/problem/content/899/
+ * https://leetcode-cn.com/problems/longest-common-subsequence/submissions/
  */
 public class A897_LongestCommonSubsequence {
 

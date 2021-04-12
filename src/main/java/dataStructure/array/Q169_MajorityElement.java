@@ -78,6 +78,7 @@ public class Q169_MajorityElement {
     }
 
     // TODO: 摩尔投票法
+    //  出现 n / 3 怎么办？
     public int majorityElement3(int[] nums) {
         int card = 0, votes = 0;
         for(int x : nums) {
