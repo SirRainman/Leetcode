@@ -25,28 +25,27 @@ package algorithm.dp.test;
 public class HardQ312_BurstBalloons {
     // TODO：判读能不能用动态规划解决问题，就是必须存在最优子结构
     //  集合划分：dp[i][j] 戳破i - j之间的气球的所有方案所获得的硬币数量
-    //  属性max
+    //  属性：max
     //  状态计算：
     //      dp[i][j] = max(dp[i][j], dp[i][k - 1] + dp[k + 1][j] + cost),
+    //      设 k 是区间内最后一个被戳破的气球
     //      cost = nums[i - 1] * nums[k] * nums[j + 1] 注意cost的计算，当把i - j的气球都戳爆时，相邻的气球是 [i - 1] 和 [j + 1]
-    public int maxCoins(int[] nums) {
+    public int maxCoins1(int[] nums) {
         int n = nums.length;
-        int[][] dp = new int[n + 2][n + 2];
-
-        int[] temp = new int[n + 2];
-        temp[0] = temp[n + 1] = 1;
-        for(int i = 1; i <= n; i++) temp[i] = nums[i - 1];
-
-        // TODO：len为什么是从1开始的？
+        int[][] dp = new int[n + 2][n + 2]; // dp[i][j]戳破 [i, j] 之间的气球后，可以获得的最多的硬币数
+        int[] coins = new int[n + 2];
+        coins[0] = coins[n + 1] = 1;
+        for(int i = 1; i <= n; i++) coins[i] = nums[i - 1];
         for(int len = 1; len <= n; len++) {
             for(int i = 1; i + len - 1 <= n; i++) {
                 int j = i + len - 1;
-                for(int k = i; k <= j; k++) { // 枚举区间中每一个被消除的点，则这个点将这个区间分为两个不相干的部分
-                    dp[i][j] = Math.max(dp[i][j], dp[i][k - 1] + dp[k + 1][j] + temp[i - 1] * temp[k] * temp[j + 1]);
+                for(int k = i; k <= j; k++) { // 枚举 [i, j] 之间可以被戳破的气球，k是区间内最后一个被戳破的气球，计算可以获得的最多的硬币的数量
+                    // 因为k是区间内最后一个被戳破的气球，所以要先戳破[i, k - 1] [k + 1, j]这两个区间的气球后，再戳破气球k
+                    // 这时，气球k的两边的气球是i - 1 和 j + 1
+                    dp[i][j] = Math.max(dp[i][j], dp[i][k - 1] + dp[k + 1][j] + coins[i - 1] * coins[k] * coins[j + 1]);
                 }
             }
         }
-
         return dp[1][n];
     }
 }

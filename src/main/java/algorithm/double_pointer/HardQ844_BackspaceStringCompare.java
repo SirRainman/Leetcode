@@ -37,7 +37,7 @@ package algorithm.double_pointer;
  * 链接：https://leetcode-cn.com/problems/backspace-string-compare
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q844_BackspaceStringCompare {
+public class HardQ844_BackspaceStringCompare {
     public boolean backspaceCompare1(String S, String T) {
         return build(S).equals(build(T));
     }

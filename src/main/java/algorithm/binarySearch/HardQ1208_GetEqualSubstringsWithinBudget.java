@@ -33,7 +33,7 @@ package algorithm.binarySearch;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * 
  */
-public class Q1208_GetEqualSubstringsWithinBudget {
+public class HardQ1208_GetEqualSubstringsWithinBudget {
 
     // TODO: 前缀和 + 二分查找
     //  因为前缀和是单调递增的，所有考虑用二分去搜索

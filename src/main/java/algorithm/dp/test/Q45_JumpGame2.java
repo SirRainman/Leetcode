@@ -40,14 +40,15 @@ public class Q45_JumpGame2 {
     // TODO: 如果我们「贪心」地进行正向查找，每次找到可到达的最远位置，就可以在线性时间内得到最少的跳跃次数。
     public int jump1(int[] nums) {
         int n = nums.length;
-        int last = 0, farthest = 0, step = 0;
+        int res = 0, farthest = 0, last = 0;
         for(int i = 0; i < n - 1; i++) {
             farthest = Math.max(farthest, i + nums[i]);
+            if(last >= n - 1) break;
             if(i == last) {
-                step++;
                 last = farthest;
+                res++;
             }
         }
-        return step;
+        return res;
     }
 }

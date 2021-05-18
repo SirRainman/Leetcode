@@ -25,24 +25,20 @@ public class HardQ33_81_SearchInRotatedSortedArray2 {
     // TODO: 和Q33相比，重复元素意味着什么？？
     public boolean search(int[] nums, int target) {
         int n = nums.length;
-        if(n == 0) return false;
-        if(n == 1) return nums[0] == target;
-
         int left = 0, right = n - 1;
-        while(left <= right) {
+        while(left < right) {
             int mid = left + right >> 1;
             if(nums[mid] == target) return true;
-            if(nums[left] == nums[mid]) {
-                left++;
-            } else if(nums[left] < nums[mid]) {
-                if(nums[left] <= target && target < nums[mid]) right = mid ;
-                else left = mid + 1;
-            } else {
+            if(nums[mid] == nums[right]) {
+                right--;
+            } else if(nums[mid] < nums[right]) { // 说明mid在已旋转的数组中, [mid, right] 有序
                 if(nums[mid] < target && target <= nums[right]) left = mid + 1;
                 else right = mid;
+            } else { // 说明在未旋转的数组中, [left, mid] 有序
+                if(nums[left] <= target && target <= nums[mid]) right = mid;
+                else left = mid + 1;
             }
         }
-
-        return false;
+        return nums[left] == target;
     }
 }

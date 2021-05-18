@@ -26,29 +26,29 @@ public class Q54_SpiralMatrix {
         if(matrix == null || matrix.length == 0) return new int[]{};
         int row = matrix.length, col = matrix[0].length;
         int left = 0, right = col - 1, up = 0, down = row - 1;
-        int length = row * col;
-        int[] res = new int[length];
-        int index = 0;
+        int size = row * col;
+        int[] res = new int[size];
+        int idx = 0;
 
-        while(index < length) {
+        while(idx < size) {
             for(int j = left; j <= right; j++) {
-                res[index++] = matrix[up][j];
-                if(index == length) return res;
+                res[idx++] = matrix[up][j];
+                if(idx == size) return res;
             }
             up++;
             for(int i = up; i <= down; i++) {
-                res[index++] = matrix[i][right];
-                if(index == length) return res;
+                res[idx++] = matrix[i][right];
+                if(idx == size) return res;
             }
             right--;
             for(int j = right; j >= left; j--) {
-                res[index++] = matrix[down][j];
-                if(index == length) return res;
+                res[idx++] = matrix[down][j];
+                if(idx == size) return res;
             }
             down--;
             for(int i = down; i >= up; i--) {
-                res[index++] = matrix[i][left];
-                if(index == length) return res;
+                res[idx++] = matrix[i][left];
+                if(idx == size) return res;
             }
             left++;
         }

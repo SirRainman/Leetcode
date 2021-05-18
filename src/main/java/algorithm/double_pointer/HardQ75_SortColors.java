@@ -21,7 +21,7 @@ package algorithm.double_pointer;
  * 链接：https://leetcode-cn.com/problems/sort-colors
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q75_SortColors {
+public class HardQ75_SortColors {
     // TODO: p0 p1
     public void sortColors1(int[] nums) {
         int n = nums.length;

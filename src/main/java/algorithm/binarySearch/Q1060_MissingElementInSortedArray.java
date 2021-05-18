@@ -38,34 +38,32 @@ package algorithm.binarySearch;
  **/
 public class Q1060_MissingElementInSortedArray {
 
-    // TODO：截止到idx，已经错过了多少到数字了
-    private int missing(int idx, int[] nums) {
-        return nums[idx] - nums[0] - idx;
-    }
-
     public int missingElement1(int[] nums, int k) {
         int n = nums.length;
-        if(missing(n - 1, nums) < k) return nums[n - 1] - missing(n - 1, nums) + k;
+        if(missingCount(nums, n - 1) < k) return nums[n - 1] + k - missingCount(nums, n - 1);
 
         int idx = 1;
-        while(missing(idx, nums) < k) idx++;
+        while(missingCount(nums, idx) < k) idx++;
 
-        return nums[idx - 1] - missing(idx - 1, nums) + k;
+        return nums[idx - 1] - missingCount(nums, idx) + k;
     }
 
+    // TODO: 找到第一个missingCount大于等于k的数组下标
     public int missingElement(int[] nums, int k) {
         int n = nums.length;
-        if(missing(n - 1, nums) < k) return nums[n - 1] - missing(n - 1, nums) + k;
-
+        if(missingCount(nums, n - 1) < k) return nums[n - 1] + k - missingCount(nums, n - 1);
         int left = 0, right = n - 1;
         while(left < right) {
             int mid = left + right >> 1;
-            if(missing(mid, nums) < k) {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
+            if(missingCount(nums, mid) < k) left = mid + 1;
+            else right = mid;
         }
-        return nums[left - 1] + k - missing(left - 1, nums);
+        System.out.println(left);
+        return nums[left - 1] + k - missingCount(nums, left - 1);
+    }
+
+    // 返回缺失了多少的数
+    public int missingCount(int[] nums, int i) {
+        return nums[i] - nums[0] - i;
     }
 }

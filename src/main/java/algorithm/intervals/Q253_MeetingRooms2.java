@@ -30,11 +30,11 @@ import java.util.PriorityQueue;
 public class Q253_MeetingRooms2 {
     // TODO: 贪心的使用会议室
     public int minMeetingRooms(int[][] intervals) {
+        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
         PriorityQueue<Integer> heap = new PriorityQueue<>();
-        Arrays.sort(intervals, ((o1, o2) -> o1[0] - o2[0]));
-        for(int i = 0; i < intervals.length; i++) {
-            if(!heap.isEmpty() && intervals[i][0] >= heap.peek()) heap.poll();
-            heap.offer(intervals[i][1]);
+        for(int[] in : intervals) {
+            if(!heap.isEmpty() && in[0] >= heap.peek()) heap.poll();
+            heap.offer(in[1]);
         }
         return heap.size();
     }

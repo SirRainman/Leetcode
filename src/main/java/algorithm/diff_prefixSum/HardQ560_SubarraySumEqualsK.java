@@ -63,4 +63,23 @@ public class HardQ560_SubarraySumEqualsK {
         }
         return res;
     }
+
+    // TODO: 注意下面的这个做法是错误的
+    //  为什么这题不可以用双指针/滑动窗口?
+    //  因为nums[i]可以小于0，也就是说右指针i向后移1位不能保证区间会增大，左指针j向后移1位也不能保证区间和会减小。
+    //  给定j，i的位置没有二段性，vice versa。
+    public int subarraySum3(int[] nums, int k) {
+        int n = nums.length;
+        int res = 0, sum = 0, left = 0, right = 0;
+        while(right < n) {
+            sum += nums[right];
+            while(left < right && sum > k) {
+                sum -= nums[left];
+                left++;
+            }
+            if(sum == k) res++;
+            right++;
+        }
+        return res;
+    }
 }

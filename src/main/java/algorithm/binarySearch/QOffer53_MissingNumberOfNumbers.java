@@ -23,15 +23,11 @@ package algorithm.binarySearch;
 public class QOffer53_MissingNumberOfNumbers {
     public int missingNumber(int[] nums) {
         int n = nums.length;
-        if(nums[n - 1] == n - 1) return n;
-        int left = 0, right = n;
+        int left = 0, right = n; // 注意这个right的取值范围
         while(left < right) {
             int mid = left + right >> 1;
-            if(nums[mid] > mid ){
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
+            if(nums[mid] <= mid) left = mid + 1;
+            else right = mid;
         }
         return left;
     }

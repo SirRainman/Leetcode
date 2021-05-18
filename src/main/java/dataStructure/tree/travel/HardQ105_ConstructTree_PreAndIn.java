@@ -29,22 +29,22 @@ import java.util.Map;
  */
 public class HardQ105_ConstructTree_PreAndIn {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        Map<Integer, Integer> indexOfInorder = new HashMap<>();
-        int len = inorder.length;
-        for (int i = 0; i < len; i++) {
-            indexOfInorder.put(inorder[i], i);
+        int n = preorder.length;
+        Map<Integer, Integer> indexOfInOrder = new HashMap<>();
+        for(int i = 0; i < n; i++) {
+            indexOfInOrder.put(inorder[i], i);
         }
-        return constructTreeByPreAndIn(preorder, inorder, 0, len - 1, 0, len - 1, indexOfInorder);
+        return constructTree(preorder, inorder, 0, n - 1, 0, n - 1, indexOfInOrder);
     }
 
     // TODO:注意下标
-    public TreeNode constructTreeByPreAndIn(int[] preorder, int[] inorder, int preLeft, int preRight, int inLeft, int inRight, Map<Integer, Integer> indexOfInorder) {
-        if (inLeft > inRight || preLeft > preRight) return null;
-        TreeNode root = new TreeNode(preorder[preLeft]);
-        int rootIndex = indexOfInorder.get(root.val);
-        int leftCount = rootIndex - inLeft;
-        root.left = constructTreeByPreAndIn(preorder, inorder, preLeft + 1, preLeft + leftCount, inLeft, rootIndex - 1, indexOfInorder);
-        root.right = constructTreeByPreAndIn(preorder, inorder, preLeft + leftCount + 1, preRight, rootIndex + 1, inRight, indexOfInorder);
+    private TreeNode constructTree(int[] pre, int[] in, int preLeft, int preRight, int inLeft, int inRight, Map<Integer, Integer> indexOfInOrder) {
+        if(preLeft > preRight || inLeft > inRight) return null;
+        TreeNode root = new TreeNode(pre[preLeft]);
+        int i = indexOfInOrder.get(pre[preLeft]);
+        int leftCount = i - inLeft;
+        root.left = constructTree(pre, in, preLeft + 1, preLeft + leftCount, inLeft, i - 1, indexOfInOrder);
+        root.right = constructTree(pre, in, preLeft + leftCount + 1, preRight, i + 1, inRight, indexOfInOrder);
         return root;
     }
 

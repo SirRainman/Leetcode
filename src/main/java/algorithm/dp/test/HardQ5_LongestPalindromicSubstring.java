@@ -13,14 +13,12 @@ import java.util.Arrays;
  * 示例 2：
  * 输入: "cbbd"
  * 输出: "bb"
- * 
- * 
+ *
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/longest-palindromic-substring
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ5_LongestPalindromicSubstring {
-
 
     // TODO: 注意：在状态转移方程中，我们是从长度较短的字符串向长度较长的字符串进行转移的，因此一定要注意动态规划的循环顺序。
     public String longestPalindrome3(String s) {
@@ -60,22 +58,23 @@ public class HardQ5_LongestPalindromicSubstring {
         int n = str.length;
         boolean[][] dp = new boolean[n][n];
         String res = "";
-        for(int step = 0; step < n; step++) {
-            for(int i = 0; i + step < n; i++) {
-                int j = i + step;
-                if(step == 0) {
+        for(int len = 0; len < n; len++) {
+            for(int i = 0; i + len < n; i++) {
+                int j = i + len;
+                if(len == 0) {
                     dp[i][j] = true;
-                } else if(step == 1) {
+                } else if(len == 1) {
                     dp[i][j] = str[i] == str[j];
                 } else {
                     dp[i][j] = str[i] == str[j] && dp[i + 1][j - 1];
                 }
-                if(dp[i][j] && step >= res.length()) res = s.substring(i, j + 1);
+                if(dp[i][j] && len >= res.length()) res = s.substring(i, j + 1);
             }
         }
         return res;
     }
 
+    // TODO: 二分法
     public String longestPalindrome2(String s) {
         if (s == null || s.length() <= 1) {
             return s;

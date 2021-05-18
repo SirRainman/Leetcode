@@ -44,6 +44,7 @@ public class HardQ152_MaximumProductSubarray {
         return maxMulti;
     }
 
+    // TODO：空间优化
     public int maxProduct(int[] nums) {
         int n = nums.length;
         if(nums == null || n == 0) return 0;

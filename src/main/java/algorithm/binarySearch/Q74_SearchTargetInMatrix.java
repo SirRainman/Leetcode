@@ -3,8 +3,7 @@ package algorithm.binarySearch;
 /**
  * @program: Leetcode
  * @description:
- * 
- * 编写一个高效的算法来判断m x n矩阵中，是否存在一个目标值。
+ * 编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。
  *
  * 该矩阵具有如下特性：
  * 每行中的整数从左到右按升序排列。
@@ -21,25 +20,18 @@ public class Q74_SearchTargetInMatrix {
     public boolean searchMatrix(int[][] matrix, int target) {
         int row = matrix.length, col = matrix[0].length;
         int up = 0, down = row - 1;
+        // TODO: 注意相等时，应该怎么走
         while(up < down) {
             int mid = up + down + 1 >> 1;
-            if(matrix[mid][0] <= target) {
-                up = mid;
-            } else {
-                down = mid - 1;
-            }
+            if(target >= matrix[mid][0]) up = mid;
+            else down = mid - 1;
         }
-
         int left = 0, right = col - 1;
         while(left < right) {
-            int mid = left + right + 1 >> 1;
-            if(matrix[up][mid] <= target) {
-                left = mid;
-            } else {
-                right = mid - 1;
-            }
+            int mid = left + right >> 1;
+            if(target <= matrix[up][mid]) right = mid;
+            else left = mid + 1;
         }
-
         return matrix[up][left] == target;
     }
 }

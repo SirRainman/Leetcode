@@ -3,17 +3,14 @@ package algorithm.binarySearch;
 /**
  * 统计一个数字在排序数组中出现的次数。
  * 示例 1:
- *
  * 输入: nums = [5,7,7,8,8,10], target = 8
  * 输出: 2
- * 示例2:
  *
+ * 示例2:
  * 输入: nums = [5,7,7,8,8,10], target = 6
  * 输出: 0
  * 
- *
  * 限制：
- *
  * 0 <= 数组长度 <= 50000
  *
  * 注意：本题与主站 34 题相同（仅返回值不同）：
@@ -34,15 +31,13 @@ public class QOffer53_FindNum {
         return right - left;
     }
 
-    public int binarySearch(int[] nums, int target) {
-        int left = 0, right = nums.length;
+    // TODO: 在数组中找到第一个大于target的数的下标
+    private int binarySearch(int[] nums, int target) {
+        int left = 0, right = nums.length; // 注意right的取值
         while(left < right) {
             int mid = left + right >> 1;
-            if(nums[mid] <= target) {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
+            if(nums[mid] <= target) left = mid + 1; // 注意left的变化
+            else right = mid;
         }
         return left;
     }

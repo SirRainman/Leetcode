@@ -20,47 +20,26 @@ import java.util.Scanner;
  * 链接：https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class UnresolvedQ34_FindFirstAndLastPositionInSortedArray {
-    /**
-     * 注意！！！
-     * 
-     * 1.mid 的取值，为何是 low + ((high - low) >> 1) 或者 low + (high - low) / 2 而不是 (high + low) / 2 ？
-     * 因为 int 类型最大表示范围是 2147483647 ，那么对于两个都接近 2147483647 的数字而言，它们相加的结果将会溢出，变成负数。
-     * 2.mid 的取值为什么有时是 low + high >> 1 有时是 low + high + 1 >> 1
-     * 如果希望在左边找 low + high >> 1
-     * 如果希望在右边找 low + high + 1 >> 1
-     * 
-     * 3.while 循环的条件到底是 <= 还是 < ？
-     * high 初始值不同，两个可能出现在不同功能的二分查找中。主要区别:
-     * 前者相当于两端都是闭区间 [low, high] ，high = numsSize - 1 。
-     * 后者相当于左闭右开区间 [low, high) ，high = numsSize。
-     * https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/solution/da-jia-bu-yao-kan-labuladong-de-jie-fa-fei-chang-2/
-     */
-    public int[] searchRange(int[] nums, int target) {
-        if (nums == null || nums.length == 0 || nums[0] > target || nums[nums.length - 1] < target) {
-            return new int[]{-1, -1};
-        }
-        int[] range = new int[]{-1, -1};
-        range[0] = binarySearch(nums, target - 1);
-        range[1] = binarySearch(nums, target) - 1;
-        //System.out.println(range[0] + " " + range[1]);
-        if (range[0] == nums.length || nums[range[0]] != target) return new int[]{-1, -1};
-        return range;
-    }
-
-    public int binarySearch(int[] nums, int target) {
-        // TODO: 为什么 right = nums.length???
-        //  当right = nums.length - 1;时，为什么不对？？？
-        int left = 0, right = nums.length;
-        while (left < right) {
+public class Q34_FindFirstAndLastPositionInSortedArray {
+    // TODO: 找到数组中第一个大于target的元素下标
+    private int binarySearch(int[] nums, int target) {
+        int n = nums.length;
+        int left = 0, right = n;
+        while(left < right) {
             int mid = left + right >> 1;
-            if (nums[mid] <= target) {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
+            if(nums[mid] <= target) left = mid + 1;
+            else right = mid;
         }
         return left;
+    }
+
+    public int[] searchRange(int[] nums, int target) {
+        int n = nums.length;
+        if(n <= 0 || nums[0] > target || nums[n - 1] < target) return new int[]{-1, -1};
+        int left = binarySearch(nums, target - 1);
+        if(left == n || nums[left] != target) return new int[]{-1, -1};
+        int right = binarySearch(nums, target);
+        return new int[]{left, right - 1};
     }
 
     // TODO: 上面的那个做法有点邪乎，以下面这个为主！！！

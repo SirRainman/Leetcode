@@ -36,14 +36,14 @@ public class Q153_FindMinimumInRotatedSortedArray2 {
     //              4. 此时，执行right-- 后虽然丢失了旋转点 x ，
     //                  但之后区间 [left, right] 只包含左排序数组，二分下去返回的一定是本轮的 nums[left] ，
     //                  而nums[left] 与 nums[x] 相等。
-    public int minArray(int[] numbers) {
-        int left = 0, right = numbers.length - 1;
+    public int findMin(int[] nums) {
+        int left = 0, right = nums.length - 1;
         while(left < right) {
             int mid = left + right >> 1;
-            if(numbers[mid] > numbers[right]) left = mid + 1;
-            else if(numbers[mid] < numbers[right]) right = mid;
+            if(nums[mid] < nums[right]) right = mid;
+            else if(nums[mid] > nums[right]) left = mid + 1;
             else right--;
         }
-        return numbers[left];
+        return nums[left];
     }
 }

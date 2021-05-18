@@ -24,59 +24,10 @@ import java.util.Arrays;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ322_CoinChange {
-    // TODO:没有记忆话搜索，所以会超时
-    public int coinChange1(int[] coins, int amount) {
-        if (amount == 0) return 0;
-        if (amount < 0) return -1;
-
-        int means = Integer.MAX_VALUE;
-        for (int i = 0; i < coins.length; i++) {
-            int supProblem = coinChange1(coins, amount - coins[i]);
-            if (supProblem < 0) continue;
-            means = Math.min(means, supProblem + 1);
-        }
-        return means == Integer.MAX_VALUE ? -1 : means;
-    }
-
-    // TODO: 递归
-    public int coinChange2(int[] coins, int amount) {
-        if (coins == null || coins.length == 0) return -1;
-        int[] searched = new int[amount + 1];
-        return subChange(coins, amount, searched);
-    }
-
-    public int subChange(int[] coins, int amount, int[] searched) {
-        if (amount == 0) return 0;
-        else if (amount < 0) return -1;
-        else if (searched[amount] != 0) return searched[amount];
-        int means = Integer.MAX_VALUE;
-        for (int i = 0; i < coins.length; i++) {
-            int sub = subChange(coins, amount - coins[i], searched);
-            if (sub < 0) continue;
-            means = Math.min(sub + 1, means);
-        }
-        searched[amount] = means == Integer.MAX_VALUE ? -1 : means;
-        return searched[amount];
-    }
-
-    // TODO：迭代
-    public int coinChange3(int[] coins, int amount) {
-        if (coins == null || coins.length == 0) return -1;
-        int[] searched = new int[amount + 1];
-        for (int i = 0; i <= amount; i++) searched[i] = amount + 1;
-        searched[0] = 0;
-        for (int money = 1; money <= amount; money++) {
-            for (int i = 0; i < coins.length; i++) {
-                if (money < coins[i]) continue;
-                searched[money] = Math.min(searched[money - coins[i]] + 1, searched[money]);
-            }
-        }
-        if (searched[amount] > amount) searched[amount] = -1;
-        return searched[amount];
-    }
-
-
     // TODO: 动态规划 完全背包问题
+    //  集合划分：dp[i][j] 在前i个硬币中选择出兑换金额为j的硬币数
+    //  属性：min
+    //  状态转移：dp[i][j] = Math.min(dp[i][j], dp[i - 1][j - k * coins[i - 1]] + k);
     public int coinChange4(int[] coins, int amount) {
         int n = coins.length;
         int INF = 100010;
@@ -128,6 +79,57 @@ public class HardQ322_CoinChange {
             }
         }
         return dp[amount] != INF ? dp[amount] : -1;
+    }
+
+    // TODO:没有记忆话搜索，所以会超时
+    public int coinChange1(int[] coins, int amount) {
+        if (amount == 0) return 0;
+        if (amount < 0) return -1;
+
+        int means = Integer.MAX_VALUE;
+        for (int i = 0; i < coins.length; i++) {
+            int supProblem = coinChange1(coins, amount - coins[i]);
+            if (supProblem < 0) continue;
+            means = Math.min(means, supProblem + 1);
+        }
+        return means == Integer.MAX_VALUE ? -1 : means;
+    }
+
+    // TODO: 递归
+    public int coinChange2(int[] coins, int amount) {
+        if (coins == null || coins.length == 0) return -1;
+        int[] searched = new int[amount + 1];
+        return subChange(coins, amount, searched);
+    }
+
+    public int subChange(int[] coins, int amount, int[] searched) {
+        if (amount == 0) return 0;
+        else if (amount < 0) return -1;
+        else if (searched[amount] != 0) return searched[amount];
+        int means = Integer.MAX_VALUE;
+        for (int i = 0; i < coins.length; i++) {
+            int sub = subChange(coins, amount - coins[i], searched);
+            if (sub < 0) continue;
+            means = Math.min(sub + 1, means);
+        }
+        searched[amount] = means == Integer.MAX_VALUE ? -1 : means;
+        return searched[amount];
+    }
+
+    // TODO：迭代
+    public int coinChange3(int[] coins, int amount) {
+        if (coins == null || coins.length == 0) return -1;
+        int[] searched = new int[amount + 1];
+        for (int i = 0; i <= amount; i++) searched[i] = amount + 1;
+        searched[0] = 0;
+        for (int money = 1; money <= amount; money++) {
+            for (int i = 0; i < coins.length; i++) {
+                if (money < coins[i]) continue;
+                searched[money] = Math.min(searched[money - coins[i]] + 1, searched[money]);
+            }
+        }
+        if (searched[amount] > amount) searched[amount] = -1;
+        return searched[amount];
     }
 
 }

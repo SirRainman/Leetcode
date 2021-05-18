@@ -15,7 +15,7 @@ package algorithm.dp.test;
  * 链接：https://leetcode-cn.com/problems/maximum-subarray
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class UnresolvedQ53_MaximumSubarray {
+public class Q53_MaximumSubarray {
 
     // TODO:
     //  集合划分：dp[i] 所有以i为结尾的连续子数组的和
@@ -26,13 +26,13 @@ public class UnresolvedQ53_MaximumSubarray {
         int[] dp = new int[n + 1];
         int maxSum = Integer.MIN_VALUE;
         for(int i = 1; i <= n; i++) {
-            int cur = nums[i - 1];
-            dp[i] = Math.max(dp[i - 1] + cur, cur);
+            dp[i] = Math.max(dp[i - 1] + nums[i - 1], nums[i - 1]);
             maxSum = Math.max(maxSum, dp[i]);
         }
         return maxSum;
     }
 
+    // TODO: 空间优化
     public int maxSubArray(int[] nums) {
         int n = nums.length;
         int maxSum = Integer.MIN_VALUE;

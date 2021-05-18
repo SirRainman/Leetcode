@@ -46,9 +46,9 @@ public class HardQ279_PerfectSquares {
         }
 
         for(int i = 1; i <= n; i++) {
-            for(int s = 1; s < max_square_index; s++) {
-                if(i < squareNums[s]) break;
-                dp[i] = Math.min(dp[i], dp[i - squareNums[s]] + 1);
+            for(int j = 1; j < max_square_index; j++) {
+                if(i < squareNums[j]) break;
+                dp[i] = Math.min(dp[i], dp[i - squareNums[j]] + 1);
             }
         }
         return dp[n];

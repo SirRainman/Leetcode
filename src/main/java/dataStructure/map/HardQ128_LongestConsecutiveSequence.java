@@ -1,7 +1,9 @@
-package algorithm.dp.test;
+package dataStructure.map;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
@@ -26,6 +28,7 @@ import java.util.Map;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ128_LongestConsecutiveSequence {
+    // TODO：map
     public int longestConsecutive(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>(); // <key, value> key所在的最长连续子区间的长度
         int maxLen = 0;
@@ -36,6 +39,8 @@ public class HardQ128_LongestConsecutiveSequence {
             int rightLen = map.getOrDefault(x + 1, 0);
             int len = leftLen + rightLen + 1; // 将左右两个区间连接到了一起
 
+            maxLen = Math.max(maxLen, len);
+
             // TODO:
             //  核心思想：
             //      拿当前数字去找与其左右相连的数字集合看看能否组成一个更大的集合
@@ -44,10 +49,26 @@ public class HardQ128_LongestConsecutiveSequence {
             map.put(x, len); // 更新 x 所在的连续子区间的长度
             map.put(x - leftLen, len);
             map.put(x + rightLen, len);
-
-            maxLen = Math.max(maxLen, len);
         }
         return maxLen;
+    }
+
+    // TODO：set
+    public int longestConsecutive2(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for(int num : nums)
+            set.add(num);
+        int res = 0;
+        for(int num : nums){
+            if(set.contains(num - 1)) continue;
+            else {
+                //len记录以num为左边界的连续序列的长度
+                int len = 0;
+                while(set.contains(num++)) len++;
+                res = Math.max(res, len);
+            }
+        }
+        return res;
     }
 
     // TODO: 并查集
@@ -74,7 +95,7 @@ public class HardQ128_LongestConsecutiveSequence {
         }
     }
 
-    public int longestConsecutive2(int[] nums) {
+    public int longestConsecutive3(int[] nums) {
         if(nums == null || nums.length == 0) return 0;
         UnionFind uf = new UnionFind(nums);
         for(int x : nums) {

@@ -55,4 +55,16 @@ public class Q1150_CheckMajorityElementInSortedArray {
         }
         return left;
     }
+
+    // TODO：找到target出现在数组中的最左边的位置，并判断他的区间的右边是否是target
+    public boolean isMajorityElement1(int[] nums, int target) {
+        int n = nums.length;
+        int left = 0, right = n - 1;
+        while(left < right) {
+            int mid = left + right >> 1;
+            if(nums[mid] >= target) right = mid;
+            else left = mid + 1;
+        }
+        return nums[left] == target && left + n / 2 < n && nums[left + n / 2] == target;
+    }
 }

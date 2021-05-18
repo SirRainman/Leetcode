@@ -31,16 +31,6 @@ package algorithm.binarySearch;
  * @create: 2021-03-12 13:11
  **/
 public class Q162_FindPeakElement {
-    public int findPeakElement1(int[] nums) {
-        int n = nums.length;
-        for(int i = 0; i + 1 < n; i++) {
-            if(nums[i] > nums[i + 1]) {
-                return i;
-            }
-        }
-        return n - 1;
-    }
-
     // TODO: 将数组看成一个交替上升或下降的数组，输出其中的一个山峰就行
     public int findPeakElement2(int[] nums) {
         int n = nums.length;

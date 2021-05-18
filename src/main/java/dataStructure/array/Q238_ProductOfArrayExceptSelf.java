@@ -20,24 +20,24 @@ package dataStructure.array;
 public class Q238_ProductOfArrayExceptSelf {
     public int[] productExceptSelf1(int[] nums) {
         int n = nums.length;
-        int[] foward = new int[n];
+        int[] forward = new int[n];
         int[] backward = new int[n];
-        foward[0] = backward[n - 1] = 1;
+        forward[0] = backward[n - 1] = 1;
         for(int i = 1; i < n; i++) {
-            foward[i] = foward[i - 1] * nums[i - 1];
+            forward[i] = forward[i - 1] * nums[i - 1];
             backward[n - i - 1] = backward[n - i] * nums[n - i];
         }
-        for(int i = 0; i < n; i++) nums[i] = foward[i] * backward[i];
+        for(int i = 0; i < n; i++) nums[i] = forward[i] * backward[i];
         return nums;
     }
 
     public int[] productExceptSelf(int[] nums) {
         int n = nums.length;
         int[] res = new int[n];
-        int foward = 1;
+        int forward = 1;
         for(int i = 0; i < n; i++) {
-            res[i] = foward;
-            foward *= nums[i];
+            res[i] = forward;
+            forward *= nums[i];
         }
         int backward = 1;
         for(int i = n - 1; i >= 0; i--) {

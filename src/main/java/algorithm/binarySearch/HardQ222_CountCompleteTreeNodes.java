@@ -6,16 +6,16 @@ import dataStructure.TreeNode;
  * 给出一个完全二叉树，求出该树的节点个数。
  *
  * 说明：
- *
- * 完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 h 层，则该层包含 1~2h个节点。
+ * 完全二叉树的定义如下：
+ * 在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。
+ * 若最底层为第 h 层，则该层包含 1~2h个节点。
  *
  * 示例:
- *
  * 输入:
- * 1
- * / \
- * 2   3
- * / \  /
+ *     1
+ *    / \
+ *   2   3
+ *  / \  /
  * 4  5 6
  *
  * 输出: 6
@@ -25,18 +25,8 @@ import dataStructure.TreeNode;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ222_CountCompleteTreeNodes {
-    /**
-     * Definition for a binary tree node.
-     * public class TreeNode {
-     * int val;
-     * TreeNode left;
-     * TreeNode right;
-     * TreeNode(int x) { val = x; }
-     * }
-     */
 
     int count = 0;
-
     public int depth(TreeNode root) {
         int depth = 0;
         TreeNode cur = root;
@@ -48,7 +38,6 @@ public class HardQ222_CountCompleteTreeNodes {
     }
 
     public int countNodes2(TreeNode root) {
-
         TreeNode cur = root;
         while (cur != null) {
             int leftDepth = depth(cur.left);
@@ -63,34 +52,6 @@ public class HardQ222_CountCompleteTreeNodes {
             //System.out.println(leftDepth + " " + rightDepth);
         }
         return count;
-    }
-
-
-
-
-
-
-
-
-
-
-    // TODO：判断第d层是否存在第idx个节点
-    public boolean isExist(TreeNode root, int d, int idx) {
-        int left = 0, right = (int) Math.pow(2, d) - 1;
-        int pivot = 0;
-        TreeNode cur = root;
-        while (d-- > 0) {
-            pivot = left + (right - left) / 2;
-            // 判断idx在左右哪一个半区
-            if (idx <= pivot) {
-                right = pivot;
-                cur = cur.left;
-            } else {
-                left = pivot + 1;
-                cur = cur.right;
-            }
-        }
-        return cur != null;
     }
 
     public int countNodes(TreeNode root) {
@@ -117,4 +78,23 @@ public class HardQ222_CountCompleteTreeNodes {
         return (int) Math.pow(2, d) - 1 + left;
     }
 
+
+    // TODO：判断第d层是否存在第idx个节点
+    public boolean isExist(TreeNode root, int d, int idx) {
+        int left = 0, right = (int) Math.pow(2, d) - 1;
+        int pivot = 0;
+        TreeNode cur = root;
+        while (d-- > 0) {
+            pivot = left + (right - left) / 2;
+            // 判断idx在左右哪一个半区
+            if (idx <= pivot) {
+                right = pivot;
+                cur = cur.left;
+            } else {
+                left = pivot + 1;
+                cur = cur.right;
+            }
+        }
+        return cur != null;
+    }
 }

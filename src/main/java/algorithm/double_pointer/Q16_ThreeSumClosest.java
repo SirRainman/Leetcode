@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  * @program: Leetcode
  * @description:
+ * 在数组中到找最接近target的三数之和
  * @author: Rain
  * @create: 2021-03-29 15:50
  **/

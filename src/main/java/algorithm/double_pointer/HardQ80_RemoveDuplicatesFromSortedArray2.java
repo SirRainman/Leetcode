@@ -23,7 +23,7 @@ package algorithm.double_pointer;
  * @author: Rain
  * @create: 2021-03-11 21:44
  **/
-public class Q80_RemoveDuplicatesFromSortedArray2 {
+public class HardQ80_RemoveDuplicatesFromSortedArray2 {
     public int removeDuplicates1(int[] nums) {
         int slow = 0, fast = 1, count = 0;
         while(fast < nums.length) {

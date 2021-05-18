@@ -20,13 +20,10 @@ package algorithm.double_pointer;
  */
 public class Q26_RemoveDuplicatesFromSortedArray {
     public int removeDuplicates(int[] nums) {
-        int len = 0, n = nums.length;
-        int fast = 1, slow = 0;
-        while(fast < n) {
-            if(nums[fast] != nums[slow]) {
-                nums[++slow] = nums[fast];
-            }
-            fast++;
+        int n = nums.length;
+        int slow = 0;
+        for(int i = 1; i < n; i++) {
+            if(nums[i] > nums[slow]) nums[++slow] = nums[i];
         }
         return ++slow;
     }

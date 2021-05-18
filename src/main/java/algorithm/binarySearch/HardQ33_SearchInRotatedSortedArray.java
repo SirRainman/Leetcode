@@ -48,6 +48,7 @@ public class HardQ33_SearchInRotatedSortedArray {
         return nums[left] == target ? left : -1;
     }
 
+    // TODO：先把旋转点找出来，然后再在两个有序数组中进行查找
     public int search1(int[] nums, int target) {
         int rotated = findRotatedIndex(nums);
         int left = findTarget(nums, 0, rotated - 1, target);
@@ -65,12 +66,12 @@ public class HardQ33_SearchInRotatedSortedArray {
         while(left < right) {
             int mid = left + right >> 1;
             if(nums[mid] == target) return mid;
-            if(nums[left] <= nums[mid]) { // [left, mid] 区间内是有序数组
-                if(nums[left] <= target && target < nums[mid]) right = mid;
-                else left = mid + 1;
-            } else { // [mid, right] 区间内是有序数组
+            if(nums[mid] < nums[right]) { // 说明mid在已旋转的数组中，[mid, right] 之间有序
                 if(nums[mid] < target && target <= nums[right]) left = mid + 1;
                 else right = mid;
+            } else { // 说明在未旋转的数组中，[left, mid] 之间有序
+                if(nums[left] <= target && target <= nums[mid]) right = mid;
+                else left = mid + 1;
             }
         }
         return nums[left] == target ? left : -1;
