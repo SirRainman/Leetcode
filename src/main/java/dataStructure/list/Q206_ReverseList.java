@@ -34,8 +34,7 @@ public class Q206_ReverseList {
             pre = cur;
             cur = next;
         }
-        head = pre;
-        return head;
+        return pre;
     }
 
     // TODO: 递归版本没看懂

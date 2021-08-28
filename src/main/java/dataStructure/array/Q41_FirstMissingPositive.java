@@ -21,7 +21,7 @@ package dataStructure.array;
  *
  * 提示：
  * 0 <= nums.length <= 300
- * -231 <= nums[i] <= 231 - 1
+ * -2^31 <= nums[i] <= 2^31 - 1
  *
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/first-missing-positive
@@ -33,6 +33,7 @@ public class Q41_FirstMissingPositive {
     public int firstMissingPositive(int[] nums) {
         int n = nums.length;
         for(int i = 0; i < n; i++) {
+            // TODO：如果有负数肯定，res肯定介于[1, n]之间
             while(nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {
                 // TODO：注意交换的顺序
                 int t = nums[nums[i] - 1];

@@ -27,11 +27,10 @@ public class QOffer14_CutRope1 {
     // TODO:
     //  1 状态集合划分：dp[i] 长度为i的绳子，剪成若干段的小绳子后的乘积
     //  2 属性：max
-    //  3 状态计算
+    //  3 状态计算: dp[i] = max(dp[i], max(j * (i - j), j * dp[i - j]))
     //      不剪 dp[i]
     //      剪两段 j * (i - j)
     //      剪多段 j * dp[i - j]
-    //      dp[i] = max(dp[i], max(j * (i - j), j * dp[i - j]))
     public int cuttingRope1(int n) {
         int[] dp = new int[n + 1];
         dp[2] = 1;
@@ -48,7 +47,6 @@ public class QOffer14_CutRope1 {
     public int cuttingRope(int n) {
         if(n <= 3) return n - 1;
         int[] dp = new int[n + 1];
-        dp[1] = 1;
         dp[2] = 2;
         dp[3] = 3;
         for(int i = 4; i <= n; i++) {

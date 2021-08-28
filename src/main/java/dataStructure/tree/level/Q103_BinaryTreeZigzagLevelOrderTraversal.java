@@ -44,8 +44,10 @@ public class Q103_BinaryTreeZigzagLevelOrderTraversal {
                 // TODO:
                 //  add 在末尾添加
                 //  push 在开头添加
-                if(level % 2 == 1) levelNodes.add(p.val);
-                else levelNodes.push(p.val);
+                // if(level % 2 == 1) levelNodes.add(p.val);
+                // else levelNodes.push(p.val);
+                if(level % 2 == 1) levelNodes.addLast(p.val);
+                else levelNodes.addFirst(p.val);
 
                 if(p.left != null) queue.offer(p.left);
                 if(p.right != null) queue.offer(p.right);

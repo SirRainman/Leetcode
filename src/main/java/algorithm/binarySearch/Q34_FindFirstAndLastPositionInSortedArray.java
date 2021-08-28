@@ -21,24 +21,22 @@ import java.util.Scanner;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Q34_FindFirstAndLastPositionInSortedArray {
-    // TODO: 找到数组中第一个大于target的元素下标
+    // TODO: 在数组中找到第一个大于target的数的下标，如果没有返回nums.length
     private int binarySearch(int[] nums, int target) {
-        int n = nums.length;
-        int left = 0, right = n;
+        int left = 0, right = nums.length;
         while(left < right) {
             int mid = left + right >> 1;
-            if(nums[mid] <= target) left = mid + 1;
+            if(nums[mid] < target) left = mid + 1;
             else right = mid;
         }
         return left;
     }
 
     public int[] searchRange(int[] nums, int target) {
-        int n = nums.length;
-        if(n <= 0 || nums[0] > target || nums[n - 1] < target) return new int[]{-1, -1};
-        int left = binarySearch(nums, target - 1);
-        if(left == n || nums[left] != target) return new int[]{-1, -1};
-        int right = binarySearch(nums, target);
+        if(nums.length == 0 || nums[0] > target || nums[nums.length - 1] < target) return new int[]{-1, -1};
+        int left = binarySearch(nums, target);
+        if(nums[left] != target) return new int[]{-1, -1};
+        int right = binarySearch(nums, target + 1);
         return new int[]{left, right - 1};
     }
 

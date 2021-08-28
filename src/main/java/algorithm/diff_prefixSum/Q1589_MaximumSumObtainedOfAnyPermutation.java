@@ -45,33 +45,30 @@ import java.util.Arrays;
  * 链接：https://leetcode-cn.com/problems/maximum-sum-obtained-of-any-permutation
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class HardQ5505_MaximumSumObtainedofAnyPermutation {
+public class Q1589_MaximumSumObtainedOfAnyPermutation {
     public int maxSumRangeQuery(int[] nums, int[][] requests) {
         // TODO：
         //  先用times[i]表示第i个位置出现的次数与第i-1个位置出现的次数的差值，
         //      即times[i] = times[i] - times[i - 1]。
         //  在计算每个位置上具体出现的次数
-        int[] times = new int[nums.length];
-        for(int i = 0; i < requests.length; i++) {
+        int n = nums.length;
+        int[] times = new int[n]; // 存储每个位置查询过的次数
+        for(int[] req : requests) {
             // TODO：O(m*n)解法中关键一点，内层循环我们一直重复的在[i, j]之间加上k，怎么将这循环变成O(1)，成为问题的关键！
-            int start = requests[i][0], end = requests[i][1];
-            times[start] += 1;
-            if(end < nums.length-1) {
-                times[end+1] -= 1;
-            }
+            times[req[0]]++;
+            if(req[1] + 1 < n) times[req[1] + 1]--;
         }
-        // 再计算每个元素的值
-        for(int i = 1; i < nums.length; i++) {
-            times[i] += times[i - 1];
+        for(int i = 0; i < n; i++) {
+            if(i > 0) times[i] += times[i - 1];
         }
-
         Arrays.sort(times);
         Arrays.sort(nums);
-        int sum = 0;
-        for(int i = 0; i < nums.length; i++) {
-            sum += times[i] * nums[i];
-            sum %= 1000000000 + 7;
+
+        long res = 0, mod = (int) 1e9 + 7;
+        for(int i = 0; i < n; i++) {
+            res += (long) times[i] * nums[i];
+            res %= mod;
         }
-        return sum;
+        return (int)res;
     }
 }

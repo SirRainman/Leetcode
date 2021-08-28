@@ -29,14 +29,15 @@ package algorithm.dp.test;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ1049_LastStoneWeight2 {
+    // TODO：转化为01背包
+    //  有一堆石头，分成两堆，如何分才能使两堆石头之间的重量差距最小
+    //  石头总和为sum.则问题转换成了背包最多装sum / 2的石头,stones数组里有一大堆石头。
     public int lastStoneWeightII1(int[] stones) {
         int n = stones.length;
         int sum = 0;
         for(int x : stones) sum += x;
         int[][] dp = new int[n + 1][sum / 2 + 1]; // TODO: 状态表示 f(i,j)表示当遇到第i个物品时，背包容量为j时，能获得的最大价值
 
-        // TODO：转化为01背包
-        //  有一堆石头，分成两堆，如何分才能使两堆石头之间的重量差距最小
         for(int i = 1; i <= n; i++) {
             for(int j = 1; j <= sum / 2; j++) {
                 if(stones[i - 1] > j) {

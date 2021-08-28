@@ -29,14 +29,15 @@ package algorithm.dp.test;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ474_OnesAndZeroes {
+    // TODO: 01 背包问题
     public int findMaxForm(String[] strs, int m, int n) {
         int[][] dp = new int[m + 1][n + 1]; // dp[i][j] 表示使用i个0，j个1，最多能表示strs字串的个数
         // dp[i][j] = max(dp[i][j], dp[i - zero][j - one] + 1)
-        for(String str : strs) {
-            int zero = 0, one = 0;
-            for(char c : str.toCharArray()) {
-                if (c == '0') zero++;
-                else if(c == '1') one++;
+        for(String s : strs) {
+            int one = 0, zero = 0;
+            for(int i = 0; i < s.length(); i++) {
+                if(s.charAt(i) == '0') zero++;
+                else one++;
             }
             for(int i = m; i >= zero; i--) {
                 for(int j = n; j >= one; j--) {

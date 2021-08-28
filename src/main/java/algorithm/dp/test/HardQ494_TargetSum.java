@@ -28,10 +28,34 @@ package algorithm.dp.test;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HardQ494_TargetSum {
+    // TODO: 01背包
+    //  从数字里选出neg 使得 (sum - neg) - neg = target
+    //  则 neg = (sum - target) / 2
+    public int findTargetSumWays3(int[] nums, int target) {
+        int n = nums.length, sum = 0;
+        for(int x : nums) sum += x;
+        int diff = sum - target;
+        if(diff < 0 || diff % 2 != 0) return 0;
+        int neg = diff / 2;
+        int[][] dp = new int[n + 1][neg + 1]; // dp[i][j] 表示用数组中的前 i 个元素，组成和为 j 的方案数。
+        dp[0][0] = 1;
+        for(int i = 1; i <= n; i++) {
+            for(int j = 0; j <= neg; j++) {
+                if(j >= nums[i - 1]) {
+                    dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i - 1]];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+        return dp[n][neg];
+    }
+
+
     // TODO：在【416.分割等和子集】这道题中，要求的输出结果就是boolean值，因此我们定义的dp数组只需要记录T/F即可，
     //  但是这道题要求返回结果是方法数，那么我们dp数组需要记录的数据就是具体的方法数。
-    //  dp[ i ][ j ]定义为从数组nums中 0 - i 的元素进行加减可以得到 j 的方法数量。
-    //  dp[ i ][ j ] = dp[ i - 1 ][ j - nums[ i ] ] + dp[ i - 1 ][ j + nums[ i ] ]
+    //  dp[i][j]定义为从数组nums中 0 - i 的元素进行加减可以得到 j 的方法数量。
+    //  dp[i][j] = dp[i - 1][j - nums[i]] + dp[i - 1][j + nums[i]]
     public int findTargetSumWays1(int[] nums, int S) {
         int n = nums.length;
         int[][] dp = new int[n][2010]; // dp[i][j] 表示用数组中的前 i 个元素，组成和为 j 的方案数。

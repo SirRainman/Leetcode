@@ -17,6 +17,19 @@ package algorithm.dp.test;
  */
 public class Q53_MaximumSubarray {
 
+    // TODO:前缀和
+    public int maxSubArray2(int[] nums) {
+        int n = nums.length, preSum = 0, preMin = 0, res = Integer.MIN_VALUE;
+        for(int i = 0; i < n; i++) {
+            // 记录前缀和中最小的
+            preMin = Math.min(preMin, preSum);
+            // 现有的前缀和
+            preSum += nums[i];
+            res = Math.max(res, preSum - preMin);
+        }
+        return res;
+    }
+
     // TODO:
     //  集合划分：dp[i] 所有以i为结尾的连续子数组的和
     //  属性：max
@@ -34,7 +47,6 @@ public class Q53_MaximumSubarray {
 
     // TODO: 空间优化
     public int maxSubArray(int[] nums) {
-        int n = nums.length;
         int maxSum = Integer.MIN_VALUE;
         int lastSum = 0;
         for(int x : nums) {

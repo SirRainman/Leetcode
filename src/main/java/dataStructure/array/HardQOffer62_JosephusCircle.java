@@ -26,14 +26,12 @@ import java.util.List;
 public class HardQOffer62_JosephusCircle {
     // TODO: 约瑟夫环问题
     public int lastRemaining1(int n, int m) {
-        List<Integer> nums = new ArrayList<>();
+        ArrayList<Integer> nums = new ArrayList<>(n);
         for(int i = 0; i < n; i++) nums.add(i);
-
-        int idx = 0;
-        while(n > 1) {
-            idx = (idx + m - 1) % n;
-            nums.remove(idx);
-            n--;
+        int next = 0;
+        while(n-- > 1) {
+            next = (next + m - 1) % nums.size();
+            nums.remove(next);
         }
         return nums.get(0);
     }

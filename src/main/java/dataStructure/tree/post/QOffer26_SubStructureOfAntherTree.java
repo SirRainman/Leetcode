@@ -43,7 +43,7 @@ public class QOffer26_SubStructureOfAntherTree {
         return isSame(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);
     }
 
-    public boolean isSame(TreeNode p, TreeNode q) {
+    private boolean isSame(TreeNode p, TreeNode q) {
         if(q == null) return true;
         if(p == null) return false;
         return p.val == q.val && isSame(p.left, q.left) && isSame(p.right, q.right);

@@ -67,6 +67,7 @@ public class A801_Bit {
     //  补码 ~x + 1    = 0101...1000
     //  x & ( ~x + 1) = 0000...1000
     //  java中 -x = (~x + 1)
+    //  保留最右边的一位1
     public static int lowbit(int x) {
         // TODO：
         //  1想一想什么是源码、反码、补码？

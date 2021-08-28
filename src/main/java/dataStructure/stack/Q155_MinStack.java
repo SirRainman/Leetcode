@@ -1,6 +1,7 @@
 package dataStructure.stack;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * 设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
@@ -17,29 +18,25 @@ import java.util.Stack;
 
 public class Q155_MinStack {
 
-    Stack<Integer> stack = new Stack<Integer>();
-    Stack<Integer> minStack = new Stack<Integer>();
+    Deque<Integer> stack, minStack;
 
-    /**
-     * initialize your data structure here.
-     */
+    /** initialize your data structure here. */
     public Q155_MinStack() {
-
+        stack = new LinkedList<>();
+        minStack = new LinkedList<>();
     }
 
     public void push(int x) {
         stack.push(x);
-        if (minStack.isEmpty() || minStack.peek() >= x) {
+        if(minStack.isEmpty() || minStack.peek() >= x) {
             minStack.push(x);
         }
     }
 
     public void pop() {
-        if (stack.isEmpty() == false) {
-            int top = stack.pop();
-            if (top == minStack.peek()) {
-                minStack.pop();
-            }
+        if(!stack.isEmpty()) {
+            int x = stack.pop();
+            if(x == minStack.peek()) minStack.pop();
         }
     }
 

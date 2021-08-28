@@ -19,7 +19,8 @@ import dataStructure.TreeNode;
  *  / \   \
  * 3  -2   1
  *
- * 返回 3。和等于 8 的路径有:
+ * 返回 3。
+ * 和等于 8 的路径有:
  *
  * 1.  5 -> 3
  * 2.  5 -> 2 -> 1
@@ -32,16 +33,15 @@ import dataStructure.TreeNode;
 public class UnresolvedQ112_PathSum3 {
 
     // TODO：回溯思想，选择该元素，或者不选该元素
-    public int pathSum(TreeNode root, int sum) {
-        if (root == null) return 0;
-        return pathSumWithRoot(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+    public int pathSum(TreeNode root, int targetSum) {
+        if(root == null) return 0;
+        return startFromThere(root, targetSum) + pathSum(root.left, targetSum) + pathSum(root.right, targetSum);
     }
 
-    public int pathSumWithRoot(TreeNode root, int sum) {
+    private int startFromThere(TreeNode root, int sum) {
         if(root == null) return 0;
-        int isValid = sum == root.val ? 1 : 0;
-        return isValid + pathSumWithRoot(root.left, sum - root.val)
-                + pathSumWithRoot(root.right, sum - root.val);
+        int isEqual = root.val == sum ? 1 : 0;
+        return isEqual + startFromThere(root.left, sum - root.val) + startFromThere(root.right, sum - root.val);
     }
 
     // TODO:前缀和

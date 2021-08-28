@@ -2,9 +2,8 @@ package dataStructure.tree.level;
 
 
 import dataStructure.TreeNode;
-
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * 给定一个二叉树，检查它是否是镜像对称的。
@@ -37,15 +36,9 @@ import java.util.Queue;
  */
 public class MediumQ101_SymmetricTree {
 
-    public boolean compare(TreeNode left, TreeNode right) {
-        if(left == null) return right == null; // 都为空
-        if(right == null) return left == null; // 只要有一个不为空
-        return left.val == right.val && compare(left.left, right.right) && compare(left.right, right.left);
-    }
-
     // TODO: 层次遍历判断二叉树是否对称
     public boolean compare2(TreeNode u, TreeNode v) {
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        Deque<TreeNode> queue = new LinkedList<TreeNode>();
         queue.offer(u);
         queue.offer(v);
         TreeNode p, q;
@@ -71,6 +64,12 @@ public class MediumQ101_SymmetricTree {
     }
 
     public boolean isSymmetric(TreeNode root) {
-        return compare(root, root);
+        return isSame(root, root);
+    }
+
+    private boolean isSame(TreeNode p, TreeNode q) {
+        if(p == null) return q == null;
+        if(q == null) return p == null;
+        return p.val == q.val && isSame(p.left, q.right) && isSame(p.right, q.left);
     }
 }

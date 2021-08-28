@@ -19,12 +19,19 @@ public class QOffer65_BitAdd {
     // TODO:
     //  101010
     //  101111
-    public int add(int a, int b) {
+    public int add1(int a, int b) {
         while(b != 0) {
             int carry = (a & b) << 1;
             a = a ^ b;
             b = carry;
         }
         return a;
+    }
+
+    public int add(int a, int b) {
+        if(b == 0) return a;
+        if(a == 0) return b;
+        int carry = a & b, res = a ^ b;
+        return add(res, carry << 1);
     }
 }

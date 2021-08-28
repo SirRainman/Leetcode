@@ -3,11 +3,11 @@ package dataStructure.tree.pre;
 import dataStructure.TreeNode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * 给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。
- *
  * 说明:叶子节点是指没有子节点的节点。
  *
  * 示例:
@@ -31,25 +31,20 @@ import java.util.List;
  * 链接：https://leetcode-cn.com/problems/path-sum-ii
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Q112_PathSum2 {
-    List<Integer> path = new ArrayList<>();
-    List<List<Integer>> res = new ArrayList<>();
-
-    public void dfs(TreeNode root, int sum) {
-        if(root == null) return;
-
-        path.add(root.val);
-        if(root.left == null && root.right == null && sum == root.val) {
-            res.add(new ArrayList(path));
-        }
-        dfs(root.left, sum - root.val);
-        dfs(root.right, sum - root.val);
-        path.remove(path.size() - 1);
+public class Q113_PathSum2 {
+    private List<List<Integer>> res = new LinkedList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+        dfs(root, target, 0, new LinkedList<>());
+        return res;
     }
 
-    public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        if(root == null) return res;
-        dfs(root, sum);
-        return res;
+    private void dfs(TreeNode root, int target, int sum, List<Integer> path) {
+        if(root == null) return;
+        path.add(root.val);
+        sum += root.val;
+        if(root.left == null && root.right == null && sum == target) res.add(new LinkedList<>(path));
+        dfs(root.left, target, sum, path);
+        dfs(root.right, target, sum, path);
+        path.remove(path.size() - 1);
     }
 }

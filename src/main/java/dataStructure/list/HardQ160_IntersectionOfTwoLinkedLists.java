@@ -23,6 +23,7 @@ public class HardQ160_IntersectionOfTwoLinkedLists {
     //      如果没有公共节点，同时走过 A + B 后都为null
     //  当 node1 到达链表 headA 的末尾时，重新定位到链表 headB 的头结点；
     //  当 node2 到达链表 headB 的末尾时，重新定位到链表 headA 的头结点。
+    //  a + c + b = b + c + a
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if(headB == null || headA == null) return null;
         ListNode p = headA, q = headB;
@@ -32,6 +33,5 @@ public class HardQ160_IntersectionOfTwoLinkedLists {
         }
         return p;
     }
-
     // TODO：想一想能不能利用栈的先进后出的特点解决问题？？？
 }

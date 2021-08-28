@@ -36,17 +36,16 @@ public class Q297_SerializeAndDeserializeBinaryTree {
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         StringBuffer sb = new StringBuffer();
-        TreeNode cur = root;
         Deque<TreeNode> queue = new LinkedList<>();
-        queue.offer(cur);
+        queue.offer(root);
+        TreeNode cur = null;
         while(!queue.isEmpty()) {
             cur = queue.poll();
-            if(cur != null) {
+            if(cur == null) sb.append("#,");
+            else {
                 sb.append(cur.val + ",");
                 queue.offer(cur.left);
                 queue.offer(cur.right);
-            } else {
-                sb.append("#,");
             }
         }
         sb.deleteCharAt(sb.length() - 1);
@@ -57,8 +56,8 @@ public class Q297_SerializeAndDeserializeBinaryTree {
     public TreeNode deserialize(String data) {
         if(data.equals("#")) return null;
         String[] s = data.split(",");
-        TreeNode root = new TreeNode(Integer.parseInt(s[0]));
         Deque<TreeNode> queue = new LinkedList<>();
+        TreeNode root = new TreeNode(Integer.parseInt(s[0]));
         queue.offer(root);
         for(int i = 1; i < s.length; i++) {
             TreeNode cur = queue.poll();

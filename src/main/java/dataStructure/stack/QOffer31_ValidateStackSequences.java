@@ -31,12 +31,12 @@ import java.util.LinkedList;
 public class QOffer31_ValidateStackSequences {
     public boolean validateStackSequences(int[] pushed, int[] popped) {
         Deque<Integer> stack = new LinkedList<>();
-        int j = 0;
+        int i = 0;
         for(int x : pushed) {
             stack.push(x);
-            while(!stack.isEmpty() && stack.peek() == popped[j]) {
-                j++;
+            while(!stack.isEmpty() && stack.peek() == popped[i]) {
                 stack.pop();
+                i++;
             }
         }
         return stack.isEmpty();

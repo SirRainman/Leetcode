@@ -23,6 +23,8 @@ package algorithm.binarySearch;
  */
 public class HardQ33_81_SearchInRotatedSortedArray2 {
     // TODO: 和Q33相比，重复元素意味着什么？？
+    //  对于数组中有重复元素的情况，二分查找时可能会有 a[l] = a[mid] = a[r]，
+    //  此时无法判断区间 [l, mid] 和 区间 [mid + 1, r] 哪个是有序的。
     public boolean search(int[] nums, int target) {
         int n = nums.length;
         int left = 0, right = n - 1;

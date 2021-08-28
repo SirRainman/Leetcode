@@ -29,21 +29,19 @@ public class QOffer18_DeleteNode {
     public ListNode deleteNode1(ListNode head, int val) {
         // TODO: 想一想为什么要设置头节点？
         //  操作方便:如果删除的是第一个节点怎么办？
-        ListNode empHead = new ListNode(-1);
-        empHead.next = head;
-        ListNode cur = head, pre = empHead;
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode pre = dummy, cur = head;
         while(cur != null) {
-            if(cur.val == val) {
-                pre.next = cur.next;
-                break;
-            }
+            if(cur.val == val) pre.next = cur.next;
             pre = cur;
             cur = cur.next;
         }
-        return empHead.next;
+        return dummy.next;
     }
 
-    // TODO: 注意这种递归解法
+    // TODO: 递归解法
+    //  注意递归解法删除的是第一个val节点
     public ListNode deleteNode(ListNode head, int val) {
         if(head == null) return null;
         if(head.val == val) return head.next;

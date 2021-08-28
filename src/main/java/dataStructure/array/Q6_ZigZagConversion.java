@@ -42,22 +42,23 @@ public class Q6_ZigZagConversion {
         matrix[x][y] = t;
     }
 
-    // TODO: 每个i表示一个圈，不论len是奇是偶都是一共有len/2个圈要进行旋转，从外圈向内依次旋转，直到中心点或者最内圈
+    // TODO: 找规律
+    //  行 0 中的字符位于索引 k(2*numRows−2) 处;
+    //  行 numRows−1 中的字符位于索引 k(2*numRows−2) + numRows−1 处;
+    //  内部的 行 i 中的字符位于索引 k(2*numRows−2)+i 以及 (k+1)(2*numRows−2)−i 处;
     public String convert(String s, int numRows) {
-        if(numRows == 1 || numRows >= s.length()) return s;
-        StringBuffer[] rows = new StringBuffer[numRows];
-        char[] str = s.toCharArray();
-        int index = 0;
-        for(int i = 0; i < str.length; i++) {
-            if(index < numRows && rows[index] == null) rows[index] = new StringBuffer();
-            if(index < numRows) rows[index].append(str[i]);
-            else rows[2 * numRows - 2 - index].append(str[i]);
-            index = (index + 1) % (2 * numRows - 2);
+        if(numRows == 1) return s;
+        int n = s.length();
+        StringBuffer sb = new StringBuffer();
+        int cycleLen = 2 * numRows - 2;
+        for(int i = 0; i < numRows; i++) {
+            for(int j = 0; j + i < n; j += cycleLen) {
+                sb.append(s.charAt(j + i));
+                if(i != 0 && i != numRows - 1 && j + cycleLen - i < n) {
+                    sb.append(j + cycleLen - i);
+                }
+            }
         }
-        StringBuffer res = new StringBuffer();
-        for(StringBuffer sb : rows) {
-            res.append(sb);
-        }
-        return res.toString();
+        return sb.toString();
     }
 }
