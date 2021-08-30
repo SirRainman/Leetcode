@@ -40,36 +40,42 @@ import java.util.Scanner;
  */
 public class A836_MergeSet {
 
-    static int[] parent;
-
-    public static int find(int x) {
-        // TODO: 返回x的父节点 + 并查集优化 路径压缩
-        if (parent[x] != x) parent[x] = find(parent[x]);
-        return parent[x];
-    }
-
-    // TODO:想一想为什么这样做不好？？？
-    public static int find2(int x) {
-        while(parent[x] != x) {
-            x = parent[x];
-        }
-        return x;
-    }
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int n = in.nextInt(), times = in.nextInt();
-        parent = new int[n + 1];
-        for(int i = 1; i <= n; i++) parent[i] = i;
-
-        while(times-- > 0) {
+        int n = in.nextInt(), m = in.nextInt();
+        UnionFind uf = new UnionFind(n);
+        for(int i = 0; i < m; i++) {
             String op = in.next();
             int a = in.nextInt(), b = in.nextInt();
-            if(op.compareTo("M") == 0) {
-                parent[find(a)] = find(b);
-            } else {
-                System.out.println(find(a) == find(b) ? "Yes" : "No");
+            if(op.equals("M")) uf.union(a, b);
+            else System.out.println(uf.find(a) == uf.find(b) ? "Yes" : "No");
+        }
+    }
+
+    public static class UnionFind {
+        private int[] parent;
+        public UnionFind(int n) {
+            parent = new int[n + 1];
+            for(int i = 1; i <= n; i++) parent[i] = i;
+        }
+
+        public int find(int a) {
+            if(parent[a] != a) parent[a] = find(parent[a]);
+            return parent[a];
+        }
+
+        // TODO:想一想为什么这样做不好？？？
+        public int find2(int x) {
+            while(parent[x] != x) {
+                x = parent[x];
             }
+            return x;
+        }
+
+        public void union(int a, int b) {
+            int pa = find(a), pb = find(b);
+            if(pa == pb) return ;
+            parent[pa] = pb;
         }
     }
 }
