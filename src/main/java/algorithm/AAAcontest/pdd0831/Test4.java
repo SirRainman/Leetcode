@@ -12,11 +12,8 @@ import java.util.Scanner;
 public class Test4 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int T = in.nextInt();
-        for(int i = 0; i < T; i++) {
-            int n = in.nextInt();
-            Random random = new Random();
-            System.out.println(random.nextInt(n));
-        }
+        long L = in.nextLong();
+        long res = 2L;
+        System.out.println(res);
     }
 }

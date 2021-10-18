@@ -32,6 +32,8 @@ import java.util.LinkedList;
  * @create: 2021-03-26 15:56
  **/
 public class HardQ32_LongestValidParentheses {
+
+
     public int longestValidParentheses1(String s) {
         char[] str = s.toCharArray();
         int n = str.length;
@@ -88,6 +90,39 @@ public class HardQ32_LongestValidParentheses {
         return maxLen;
     }
 
+    // TODO: 变种题
+    //  输入一个包含 0 1 2 3 四种符号的字符串
+    //      01可消除
+    //      23可消除
+    //  例如：
+    //      010101 -> 3
+    //      0123 -> 4
+    //      011331 -> 0
+    //  输出：最长可消除的字符串长度为多少？
+    public int longestValidParentheses2(String s) {
+        int maxans = 0;
+        Deque<Integer> stack = new LinkedList<>();
+        stack.push(-1);
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '0' || c == '2') {
+                stack.push(i);
+            } else {
+                int t = stack.pop();
+                if (t == -1) stack.push(i);
+                else if ((c == '1' && s.charAt(t) == '0') || (c == '3' && s.charAt(t) == '2')) {
+                    if (stack.isEmpty()) {
+                        stack.push(i);
+                    } else {
+                        maxans = Math.max(maxans, i - stack.peek());
+                    }
+                } else {
+                    stack.push(i);
+                }
+            }
+        }
+        return maxans;
+    }
 
     /**
      * @author S.T., Tang
@@ -146,7 +181,7 @@ public class HardQ32_LongestValidParentheses {
     public static void main(String[] args) {
         int[] nums = {-3, -2, 1, 0, 8, 7, 1};
         int M = 3;
-        for(int x : nums) System.out.println(((x % M) + M) % M) ;
+        for (int x : nums) System.out.println(((x % M) + M) % M);
     }
 
 

@@ -41,12 +41,11 @@ public class A803_MergeIntervals {
             intervals[i][1] = in.nextInt();
         }
 
-        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
-
         System.out.println(cal2(len, intervals));
     }
 
     public static int cal1(int n, int[][] intervals) {
+        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
         List<int[]> mergedIntervals = new ArrayList<>();
         for(int i = 0; i < n; i++) {
             int start = intervals[i][0], end = intervals[i][1];

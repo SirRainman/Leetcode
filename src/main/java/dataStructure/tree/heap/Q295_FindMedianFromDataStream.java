@@ -50,7 +50,7 @@ public class Q295_FindMedianFromDataStream {
 
         public double findMedian() {
             if(bigHeap.size() < smallHeap.size()) return smallHeap.peek();
-            else return (double) (smallHeap.peek() + bigHeap.peek()) / 2;
+            else return smallHeap.peek() + bigHeap.peek() / 2.0;
         }
     }
 }

@@ -37,7 +37,7 @@ public class Q206_ReverseList {
         return pre;
     }
 
-    // TODO: 递归版本没看懂
+    // TODO:
     //  关键在于反向工作：假设列表的其余部分已经被反转，现在我们应该如何反转它前面的部分？
     public ListNode reverseList(ListNode head) {
         if(head == null || head.next == null) return head;
