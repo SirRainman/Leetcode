@@ -2,6 +2,7 @@ package dataStructure.stack;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 使用队列实现栈的下列操作：
@@ -50,5 +51,38 @@ public class Q225_ImplementStackusingQueues {
     /** Returns whether the dataStructure.stack is empty. */
     public boolean empty() {
         return queue.isEmpty();
+    }
+}
+
+class MyStack {
+    private Queue<Integer> in;//输入队列
+    private Queue<Integer> out;//输出队列
+
+    public MyStack() {
+        in = new LinkedList<>();
+        out = new LinkedList<>();
+    }
+
+    public void push(int x) {
+        in.offer(x);
+        // 将out队列中元素全部转给in队列
+        while(!out.isEmpty())
+            in.offer(out.poll());
+        // 交换in和out,使得in队列没有在push()的时候始终为空队列
+        Queue temp = in;
+        in = out;
+        out = temp;
+    }
+
+    public int pop() {
+        return out.poll();
+    }
+
+    public int top() {
+        return out.peek();
+    }
+
+    public boolean empty() {
+        return out.isEmpty();
     }
 }

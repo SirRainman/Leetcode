@@ -32,6 +32,7 @@ public class A908_FindMostUnmeetIntervals {
     static int[][] intervals;
 
     // TODO: 将每个区间按照右端点从小到大进行排序
+    //  想一下问什么要右端点排序？？
     public static int getCount() {
         int count = 0;
         Arrays.sort(intervals, (o1, o2) -> o1[1] - o2[1]);

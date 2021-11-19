@@ -37,10 +37,10 @@ public class A847_GraphDistance {
     static int idx;
     static int[] e, head, next;
 
-    public static void add(int u, int v) {
-        e[idx] = v;
-        next[idx] = head[u];
-        head[u] = idx++;
+    public static void add(int a, int b) {
+        e[idx] = b;
+        next[idx] = head[a];
+        head[a] = idx++;
     }
 
     public static int bfs() {
@@ -50,12 +50,12 @@ public class A847_GraphDistance {
         queue.offer(1);
         dist[1] = 0;
         while(!queue.isEmpty()) {
-            int u = queue.poll();
-            for(int i = head[u]; i != -1; i = next[i]) {
-                int v = e[i];
-                if(dist[v] == INF) {
-                    dist[v] = dist[u] + 1;
-                    queue.offer(v);
+            int a = queue.poll();
+            for(int i = head[a]; i != -1; i = next[i]) {
+                int b = e[i];
+                if(dist[b] == INF) {
+                    dist[b] = dist[a] + 1;
+                    queue.offer(b);
                 }
             }
         }
@@ -70,8 +70,8 @@ public class A847_GraphDistance {
         head = new int[n + 1];
         Arrays.fill(head, -1);
         for(int i = 0; i < m; i++) {
-            int u = in.nextInt(), v = in.nextInt();
-            add(u, v);
+            int a = in.nextInt(), b = in.nextInt();
+            add(a, b);
         }
         System.out.print(bfs());
     }
