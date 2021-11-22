@@ -78,6 +78,7 @@ public class Q23_MergeKSortedLists {
     }
 
     // TODO: 优先队列解决
+    //  注意：小内存排大数据的情况
     public ListNode mergeKLists2(ListNode[] lists) {
         PriorityQueue<ListNode> heap = new PriorityQueue<>((n1, n2) -> n1.val - n2.val);
         for(ListNode node : lists) {
